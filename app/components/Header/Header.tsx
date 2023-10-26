@@ -28,6 +28,7 @@ const Header = () => {
     "Preserve the Future of LEGO Collectibles with Preorders.",
   ];
   const [currentInfoIndex, setCurrentInfoIndex] = useState<number>(0);
+  const [mobileSize, setMobileSize] = useState<boolean>(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,6 +64,11 @@ const Header = () => {
       if (window.innerWidth > 767) {
         closeNavbar();
         setIsNavigationClosing(false);
+        setMobileSize(false);
+        console.log(false);
+      } else {
+        setMobileSize(true);
+        console.log("true");
       }
     };
 
@@ -79,54 +85,76 @@ const Header = () => {
     <header>
       <div className="header-change-info">
         <p>{infoTexts[currentInfoIndex]}</p>
-
-        <div className="login-link-container">
-          <img src="/icons/login-icon.svg" alt="login" />
-          <p>Login</p>
-        </div>
       </div>
       <div className="header-subcontainer">
-        <Link href="/" className="header-logo-container">
-          <h2 className="header-logo-title">
-            Limited Edition
-            <br />
-            Bricks Hub
-          </h2>
-        </Link>
-        <nav
-          className={`${isNavigationOpen ? "navigation-open" : ""} ${
-            isNavigationClosing ? "navigation-closing" : ""
-          }`}
-        >
-          <ul>
-            {navLinks.map((navLink) => {
-              const isActive = currentRoute === navLink.link;
-              return (
-                <li key={navLink.id}>
-                  <Link
-                    href={navLink.link}
-                    className={`navigation-link ${isActive ? "active" : ""}`}
-                    onClick={closeNavbar}
-                  >
-                    {navLink.name}
-                  </Link>
-                  <div className="navigation-link-star">
-                    <img src="/icons/star-icon.svg" alt="small star" />
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-          <button
-            className="navigation-menu-button navigation-menu-button-close"
-            onClick={closeNavbar}
+        <div className="left-part-header">
+          <Link href="/" className="header-logo-container">
+            <h2 className="header-logo-title">
+              Limited Edition
+              <br />
+              Bricks Hub
+            </h2>
+          </Link>
+          <nav
+            className={`${isNavigationOpen ? "navigation-open" : ""} ${
+              isNavigationClosing ? "navigation-closing" : ""
+            }`}
           >
-            <FaTimes className="navigation-menu-button-icon-close" />
+            <ul>
+              {navLinks.map((navLink) => {
+                const isActive = currentRoute === navLink.link;
+                return (
+                  <li key={navLink.id}>
+                    <Link
+                      href={navLink.link}
+                      className={`navigation-link ${isActive ? "active" : ""}`}
+                      onClick={closeNavbar}
+                    >
+                      {navLink.name}
+                    </Link>
+                    <div className="navigation-link-star">
+                      <img src="/icons/star-icon.svg" alt="small star" />
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <button
+              className="navigation-menu-button navigation-menu-button-close"
+              onClick={closeNavbar}
+            >
+              <FaTimes className="navigation-menu-button-icon-close" />
+            </button>
+          </nav>
+
+          <button className="navigation-menu-button" onClick={showNavbar}>
+            <FaBars className="navigation-menu-button-icon" />
           </button>
-        </nav>
-        <button className="navigation-menu-button" onClick={showNavbar}>
-          <FaBars className="navigation-menu-button-icon" />
-        </button>
+        </div>
+        <div className="header-icons-container">
+          <form className="search">
+            <input
+              type="text"
+              id="search"
+              className="search__input text-white"
+              placeholder="Search...."
+            />
+            <button type="button" className="search__button">
+              <img src="/icons/magnifying-glass-icon.svg" alt="search" />
+            </button>
+          </form>
+          <div className="login-link-container">
+            <img src="/icons/login-icon.svg" alt="login" />
+            <p className={mobileSize ? "hidden" : ""}>Login</p>
+          </div>
+          <div className="wishlist-header-icon">
+            <img src="/icons/empty-heart-icon.svg" alt="wishlist" />
+          </div>
+          <div className="cart-header-icon">
+            <img src="/icons/cart-icon.svg" alt="cart" />
+            <p>(0)</p>
+          </div>
+        </div>
       </div>
     </header>
   );
