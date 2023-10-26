@@ -73,10 +73,17 @@ const Header = () => {
     };
   }, []);
 
+  //TODO: on login click - to check if user is logged in, if yes => open account page, if not - open modal window => sign in or register
+
   return (
     <header>
       <div className="header-change-info">
         <p>{infoTexts[currentInfoIndex]}</p>
+
+        <div className="login-link-container">
+          <img src="/icons/login-icon.svg" alt="login" />
+          <p>Login</p>
+        </div>
       </div>
       <div className="header-subcontainer">
         <Link href="/" className="header-logo-container">
