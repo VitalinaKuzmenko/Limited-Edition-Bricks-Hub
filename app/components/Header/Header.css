@@ -144,12 +144,11 @@ header nav li {
   height: 20px;
 }
 
-.search-input-icon img {
-  margin: 0 5px;
+.search img {
   transition: all ease-in-out 200ms;
 }
 
-.search-input-icon:hover img {
+.search:hover img {
   /* white */
   filter: invert(99%) sepia(87%) saturate(0%) hue-rotate(358deg)
     brightness(105%) contrast(101%);
