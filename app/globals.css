@@ -19,3 +19,7 @@ body {
   overflow-x: hidden;
   font-family: var(--font);
 }
+
+.home-page {
+  max-width: 1600px;
+}

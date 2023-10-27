@@ -1,0 +1,98 @@
+.home-hero-section {
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.slide-container {
+  position: relative;
+}
+
+/* cloud with text */
+.carousel-cloud-container {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  width: 60%;
+}
+
+/* Shop now button */
+.carousel-shop-button {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  padding: 12px 40px;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  font-family: var(--font);
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* sliders */
+.slide-image-container {
+  height: 350px;
+}
+
+.slick-list {
+  width: 100vw;
+}
+
+.slick-prev,
+.slick-next {
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  color: hsl(0, 0%, 100%, 0.7);
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  /* this shouldn't be 0px but there is some alignment issue */
+  right: 0px;
+}
+
+.slick-next:focus,
+.slick-next:hover,
+.slick-prev:focus,
+.slick-prev:hover {
+  color: var(--blue);
+}
+
+.slick-slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.slick-dots {
+  bottom: 10px;
+}
+
+.slick-dots li button:before {
+  opacity: 0.8;
+  font-size: 14px;
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: var(--blue);
+}
+
+@media screen and (min-width: 480px) {
+  .carousel-cloud-container {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-cloud-container {
+    width: 30%;
+  }
+}
