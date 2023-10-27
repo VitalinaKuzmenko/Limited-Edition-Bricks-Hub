@@ -50,6 +50,7 @@ header nav li {
 }
 
 .header-subcontainer {
+  position: relative;
   max-width: 1600px;
   padding: 0 15px 0 5px;
   display: flex;
@@ -145,7 +146,7 @@ header nav li {
 }
 
 .search {
-  margin: 20px;
+  margin: 5px;
   display: inline-flex;
   align-items: center;
   background-color: var(--yellow);
@@ -155,7 +156,7 @@ header nav li {
 }
 
 .search img {
-  transition: all ease-in-out 200ms;
+  /* transition: all ease-in-out 200ms; */
 }
 
 .search:hover img {
@@ -171,6 +172,43 @@ header nav li {
   background: transparent;
   outline: none;
   font-size: 14px;
+}
+
+.search__input {
+  width: 0;
+}
+
+.mobile-search .search__input {
+  width: 100%;
+}
+
+.mobile-search {
+  box-shadow: 0 0 0 9999px #000000b0;
+}
+
+.search__button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.search__button:hover {
+  color: #e3e3e3;
+}
+
+.mobile-search {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::placeholder {
+  font: inherit;
+  color: var(--blue);
 }
 
 .login-link-container {
@@ -304,6 +342,16 @@ header nav li {
     width: 25px;
     height: 25px;
   }
+
+  .search__button {
+    width: 25px;
+    height: 25px;
+  }
+
+  .search__button img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -320,25 +368,7 @@ header nav li {
     transition: width 0.5s;
   }
 
-  .search__button {
-    display: grid;
-    place-items: center;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    transition: color 0.25s;
-  }
-
-  .search__button:hover {
-    color: #e3e3e3;
-  }
-
   .search:focus-within input {
     width: 180px;
-  }
-
-  ::placeholder {
-    font: inherit;
-    color: var(--blue);
   }
 }

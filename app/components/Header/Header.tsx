@@ -1,6 +1,6 @@
 "use client";
 import "./Header.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,20 +29,45 @@ const Header = () => {
   ];
   const [currentInfoIndex, setCurrentInfoIndex] = useState<number>(0);
   const [mobileSize, setMobileSize] = useState<boolean>(false);
+  const [mobileSearchSize, setMobileSearchSize] = useState<boolean>(false);
+  const [mobileSearchExpanded, setMobileSearchExpanded] =
+    useState<boolean>(false);
+  const searchFormRef = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Increment the current index, looping back to 0 when it reaches the end
-      setCurrentInfoIndex((prevIndex) =>
-        prevIndex === infoTexts.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
+    console.log("mobileSearchExpanded", mobileSearchExpanded);
+  }, [mobileSearchExpanded]);
 
-    return () => {
-      // Clean up the interval on unmount
-      clearInterval(interval);
-    };
-  }, [infoTexts]);
+  const handleSearchClick = () => {
+    const form = document.querySelector(".search");
+    const searchInput = document.querySelector(".search__input");
+    const mobileForm = document.querySelector(".mobile-search");
+    const mobileSearchInput = document.querySelector(".mobile-search-input");
+    if (mobileSearchSize && !mobileSearchExpanded) {
+      setMobileSearchExpanded(true);
+      if (form && searchInput) {
+        form.classList.add("mobile-search");
+        searchInput.classList.add("mobile-search-input");
+      }
+    } else if (mobileSize && mobileSearchExpanded) {
+      setMobileSearchExpanded(false);
+      if (mobileForm) {
+        mobileForm.classList.remove("mobile-search");
+        setMobileSearchExpanded(false);
+      }
+      if (mobileSearchInput) {
+        mobileSearchInput.classList.remove("mobile-search-input");
+      }
+    } else {
+      if (mobileForm) {
+        mobileForm.classList.remove("mobile-search");
+        setMobileSearchExpanded(false);
+      }
+      if (mobileSearchInput) {
+        mobileSearchInput.classList.remove("mobile-search-input");
+      }
+    }
+  };
 
   const showNavbar = () => {
     setIsNavigationOpen(true);
@@ -60,13 +85,88 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const handleSearchClickOutside = (event: MouseEvent) => {
+      const target = event.target;
+      const mobileForm = document.querySelector(".mobile-search");
+      const mobileSearchInput = document.querySelector(".mobile-search-input");
+      const searchIcon = document.getElementById("search-icon");
+
+      if (
+        target !== mobileForm &&
+        target !== mobileSearchInput &&
+        target !== searchIcon
+      ) {
+        // Click occurred outside the form, so remove classes
+        if (mobileForm) {
+          mobileForm.classList.remove("mobile-search");
+        }
+
+        if (mobileSearchInput) {
+          mobileSearchInput.classList.remove("mobile-search-input");
+        }
+
+        setMobileSearchExpanded(false);
+      }
+    };
+
+    document.addEventListener("click", handleSearchClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleSearchClickOutside);
+    };
+  }, []);
+
+  //handle header text animation change
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Increment the current index, looping back to 0 when it reaches the end
+      setCurrentInfoIndex((prevIndex) =>
+        prevIndex === infoTexts.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => {
+      // Clean up the interval on unmount
+      clearInterval(interval);
+    };
+  }, [infoTexts]);
+
+  //define which size of screen is now
+  useEffect(() => {
+    const newMobileSize = window.innerWidth <= 767;
+    const newMobileSearchSize = newMobileSize || window.innerWidth <= 1024;
+
+    if (newMobileSize !== mobileSize) {
+      setMobileSize(newMobileSize);
+    }
+
+    if (newMobileSearchSize !== mobileSearchSize) {
+      setMobileSearchSize(newMobileSearchSize);
+    }
+
+    if (newMobileSize) {
+      closeNavbar();
+      setIsNavigationClosing(false);
+    }
+  }, []);
+
+  //handle resize of screen
+  useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 767) {
+      const newMobileSize = window.innerWidth <= 767;
+      const newMobileSearchSize = newMobileSize || window.innerWidth <= 1024;
+
+      if (newMobileSize !== mobileSize) {
+        setMobileSize(newMobileSize);
+      }
+
+      if (newMobileSearchSize !== mobileSearchSize) {
+        setMobileSearchSize(newMobileSearchSize);
+      }
+
+      if (newMobileSize) {
         closeNavbar();
         setIsNavigationClosing(false);
-        setMobileSize(false);
-      } else {
-        setMobileSize(true);
       }
     };
 
@@ -130,15 +230,23 @@ const Header = () => {
           </button>
         </div>
         <div className="header-icons-container">
-          <form className="search">
+          <form className="search" ref={searchFormRef}>
             <input
               type="text"
               id="search"
               className="search__input text-white"
               placeholder="Search...."
             />
-            <button type="button" className="search__button">
-              <img src="/icons/magnifying-glass-icon.svg" alt="search" />
+            <button
+              type="button"
+              className="search__button"
+              onClick={handleSearchClick}
+            >
+              <img
+                id="search-icon"
+                src="/icons/magnifying-glass-icon.svg"
+                alt="search"
+              />
             </button>
           </form>
           <div className="login-link-container">
