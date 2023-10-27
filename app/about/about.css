@@ -1,0 +1,68 @@
+.about-page {
+  background-image: url("/other/about-background.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 25px;
+}
+
+.about-page-section {
+  background-color: var(--yellow);
+  padding: 30px;
+  border-radius: 5px;
+  color: var(--blue);
+}
+
+.about-page-section h2 {
+  color: var(--orange);
+  font-size: 28px;
+}
+
+.about-page-section p {
+  padding-top: 20px;
+}
+
+/* button */
+.about-pre-order-button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 200px;
+  padding: 8px 40px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.about-pre-order-button:hover {
+  background-color: var(--orange);
+  color: var(--blue);
+}
+
+@media only screen and (min-width: 480px) {
+  .about-pre-order-button {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .about-page {
+    padding: 40px 100px;
+  }
+
+  .about-page-section h2 {
+    font-size: 34px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .about-page {
+    padding: 40px 200px;
+  }
+}
