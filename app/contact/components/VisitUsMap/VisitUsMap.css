@@ -1,10 +1,7 @@
 .visit-us-map-container {
-  /* display: block;
-  margin: 0 auto; */
   display: flex;
   justify-content: center;
   grid-area: visit-us-map-container;
-
   width: 230px;
   height: 300px;
   border: 2px solid var(--blue);
