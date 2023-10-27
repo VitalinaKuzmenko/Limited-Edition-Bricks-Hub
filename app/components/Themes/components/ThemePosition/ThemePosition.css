@@ -16,6 +16,10 @@
   width: 150px;
 }
 
+.big-container {
+  width: 180px !important;
+}
+
 @media only screen and (min-width: 430px) {
   .theme-container {
     height: 240px;
