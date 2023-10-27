@@ -1,0 +1,27 @@
+.visit-us-map-container {
+  /* display: block;
+  margin: 0 auto; */
+  display: flex;
+  justify-content: center;
+  grid-area: visit-us-map-container;
+
+  width: 230px;
+  height: 300px;
+  border: 2px solid var(--blue);
+  margin-left: -50px;
+}
+
+@media screen and (min-width: 480px) {
+  .visit-us-map-container {
+    width: 340px;
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .visit-us-map-container {
+    width: 100%;
+    height: auto;
+    margin-left: 10px;
+  }
+}

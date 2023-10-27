@@ -1,0 +1,89 @@
+.visit-us-section {
+  padding: 20px 70px 70px 70px;
+  background-color: var(--yellow);
+  margin: 0 25px;
+  border-radius: 5px;
+  color: var(--blue);
+}
+
+.visit-us-section > h2 {
+  text-align: center;
+  color: var(--orange);
+}
+
+.visit-us-container {
+  display: grid;
+  row-gap: 30px;
+  grid-template-areas:
+    "visit-us-address-container"
+    "visit-us-map-container"
+    "visit-us-contacts-container";
+}
+
+.visit-us-contacts-container a {
+  text-decoration: none;
+  list-style: none;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.visit-us-contacts-container a:hover {
+  color: var(--yellow-logo);
+}
+
+.contact-us-contacts-list {
+  list-style-type: none;
+}
+
+.visit-us-address-container,
+.visit-us-contacts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 30px;
+}
+
+.visit-us-address-container {
+  grid-area: visit-us-address-container;
+}
+
+.visit-us-contacts-container {
+  grid-area: visit-us-contacts-container;
+}
+
+.visit-us-address-container > h3,
+.visit-us-contacts-container > h3 {
+  font-weight: 600;
+  color: var(--orange);
+}
+
+.visit-us-address-container > p,
+.visit-us-contacts-container > p {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.visit-us-address-container > p > span,
+.visit-us-contacts-container > p > span {
+  font-size: inherit;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .visit-us-container {
+    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-areas:
+      "visit-us-address-container visit-us-map-container"
+      "visit-us-contacts-container visit-us-map-container";
+  }
+
+  .visit-us-address-container,
+  .visit-us-contacts-container {
+    margin-left: 0;
+  }
+
+  .visit-us-line {
+    width: 80%;
+  }
+}

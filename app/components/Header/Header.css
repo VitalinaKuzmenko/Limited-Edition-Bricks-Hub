@@ -208,6 +208,7 @@ header nav li {
 ::placeholder {
   font: inherit;
   color: var(--blue);
+  opacity: 0.5;
 }
 
 .login-link-container {

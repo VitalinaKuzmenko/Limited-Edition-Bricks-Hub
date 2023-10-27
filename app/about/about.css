@@ -23,6 +23,10 @@
   padding-top: 20px;
 }
 
+.about-page-section a {
+  text-decoration: none;
+}
+
 /* button */
 .about-pre-order-button {
   display: block;

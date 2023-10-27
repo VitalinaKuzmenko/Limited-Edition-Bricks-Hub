@@ -1,0 +1,23 @@
+.contact-us-page {
+  padding: 20px 0;
+  background-image: url("/other/about-background.jpg");
+  color: var(--blue);
+}
+
+@media screen and (min-width: 768px) {
+  .contact-us-page {
+    padding: 40px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .contact-us-page {
+    padding: 40px 100px;
+  }
+}
+
+@media screen and (min-width: 1230px) {
+  .contact-us-page {
+    padding: 40px 200px;
+  }
+}

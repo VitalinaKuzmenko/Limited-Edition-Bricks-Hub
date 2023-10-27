@@ -1,4 +1,5 @@
 import "./about.css";
+import Link from "next/link";
 
 const AboutPage = () => {
   return (
@@ -33,8 +34,9 @@ const AboutPage = () => {
           next masterpiece today. Thank you for choosing LimitedEdition Bricks
           Hub to be a part of your LEGO adventure.
         </p>
-
-        <button className="about-pre-order-button">Pre-order now</button>
+        <Link href="/shop">
+          <button className="about-pre-order-button">Pre-order now</button>
+        </Link>
       </section>
     </div>
   );

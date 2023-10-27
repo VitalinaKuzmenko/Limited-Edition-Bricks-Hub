@@ -1,0 +1,18 @@
+.contact-us-section {
+  margin-bottom: 70px;
+  padding: 0 25px;
+  background-color: var(--yellow);
+  padding: 25px;
+  border-radius: 5px;
+  margin: 0 25px 25px 25px;
+}
+
+.contact-us-title {
+  color: var(--orange);
+}
+
+@media screen and (min-width: 768px) {
+  .contact-us-line {
+    width: 90%;
+  }
+}
