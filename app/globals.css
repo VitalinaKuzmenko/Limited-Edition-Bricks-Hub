@@ -21,5 +21,7 @@ body {
 }
 
 .home-page {
-  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

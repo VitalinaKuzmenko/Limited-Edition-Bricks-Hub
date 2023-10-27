@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "imagePath": "./shop-items/dog_1.jpeg",
+    "alternativeText": "dog",
+    "name": "Dog",
+    "price": "32.45",
+    "stars": 5,
+    "age": 5,
+    "pieces": 3
+  },
+  {
+    "id": 2,
+    "imagePath": "./shop-items/parrot_1.jpg",
+    "alternativeText": "parrot",
+    "name": "Parrot",
+    "price": "22.35",
+    "stars": 5,
+    "age": 5,
+    "pieces": 3
+  },
+  {
+    "id": 3,
+    "imagePath": "./shop-items/robot_1.jpg",
+    "alternativeText": "robot",
+    "name": "Robot",
+    "price": "44.05",
+    "stars": 5,
+    "age": 3,
+    "pieces": 5
+  }
+]

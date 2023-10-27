@@ -1,0 +1,27 @@
+.featured-items {
+  font-family: var(--font);
+  color: var(--blue);
+  padding: 25px;
+  max-width: 1600px;
+  width: 100%;
+}
+
+.featured-items h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.featured-items-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font);
+}
+
+@media only screen and (min-width: 1024px) {
+  .featured-items-container {
+    justify-content: space-evenly;
+  }
+}

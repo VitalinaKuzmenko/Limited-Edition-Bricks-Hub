@@ -1,0 +1,6 @@
+.line {
+  height: 2px;
+  margin: 5px auto 10px auto;
+  border-bottom: 2px solid var(--blue);
+  max-width: 1600px;
+}

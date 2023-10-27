@@ -29,6 +29,13 @@
   font-family: var(--font);
   color: var(--blue);
   font-weight: 600;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.carousel-shop-button:hover {
+  color: var(--orange);
+  background-color: var(--blue);
 }
 
 /* sliders */
