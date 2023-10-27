@@ -39,7 +39,9 @@ const Carousel = () => {
                     <img src={imageLink} alt={`Carousel image ${index}`} />
                   </div>
                   <Link href="/shop">
-                    <button className="carousel-shop-button">Shop now</button>
+                    <button className="carousel-shop-button">
+                      Pre-order now
+                    </button>
                   </Link>
                 </div>
               );

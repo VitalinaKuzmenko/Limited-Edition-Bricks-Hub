@@ -1,0 +1,53 @@
+.themes-container {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1600px;
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 100px,
+      #472603 -100px
+    ),
+    url("/other/theme-background_2.png");
+  background-position: top 0 right 0, top 0 right 0;
+  background-repeat: no-repeat;
+  background-size: 100vw 100px, cover;
+  min-height: 550px;
+}
+
+.themes-flex-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 300px;
+}
+
+.theme-container {
+  padding: 15px;
+  flex: 1;
+  opacity: 1;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+.theme-container:hover {
+  opacity: 1; /* When hovering, set opacity to 1 for the hovered item */
+}
+
+.themes-flex-container:hover .theme-container:not(:hover) {
+  opacity: 0.5; /* When hovering on the container, set opacity to 0.5 for all other items except the hovered one */
+}
+
+@media only screen and (min-width: 480px) {
+  .themes-flex-container {
+    margin-bottom: 200px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .themes-flex-container {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}

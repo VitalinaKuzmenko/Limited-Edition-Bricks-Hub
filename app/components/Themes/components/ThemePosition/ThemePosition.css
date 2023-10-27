@@ -1,0 +1,23 @@
+.theme-container {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.theme-container p {
+  color: white;
+  font-size: 20px;
+}
+
+.theme-container img {
+  width: 150px;
+}
+
+@media only screen and (min-width: 430px) {
+  .theme-container {
+    height: 240px;
+  }
+}
