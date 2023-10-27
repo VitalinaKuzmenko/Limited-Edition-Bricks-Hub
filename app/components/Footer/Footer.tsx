@@ -31,10 +31,10 @@ const Footer = () => {
           <img src="/icons/pinterest-icon.svg" alt="pinterest-icon" />
         </div>
         <div className="footer-extra-nav">
-          <p>Shipping & Returns</p>
-          <p>Store Policy</p>
-          <p>Payment Methods</p>
-          <p>Returns</p>
+          <Link href="/">shipping & returns</Link>
+          <Link href="/">store policy</Link>
+          <Link href="/">payment methods</Link>
+          <Link href="/">returns</Link>
         </div>
       </div>
 
