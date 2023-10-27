@@ -1,0 +1,146 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 0 auto;
+  padding: 0 25px;
+  color: white;
+  font-weight: 200;
+  background: linear-gradient(180deg, #002d73 0%, #002d73 66.15%, #fb6e15 100%);
+}
+
+h4 {
+  font-size: 26px;
+  width: 200px;
+  color: var(--orange);
+  margin-top: 50px;
+}
+
+.footer-columns-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.footer-columns-container div {
+  width: 150px;
+}
+
+.footer-nav,
+.footer-extra-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-nav a,
+.footer-extra-nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-nav a:hover,
+.footer-extra-nav a:hover {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.footer-icons img {
+  padding: 0 10px;
+  cursor: pointer;
+  /* orange */
+  filter: invert(48%) sepia(62%) saturate(3352%) hue-rotate(353deg)
+    brightness(107%) contrast(97%);
+  transition: all ease-in-out 200ms;
+}
+
+.footer-icons img:hover {
+  /* yellow*/
+  filter: invert(81%) sepia(99%) saturate(3930%) hue-rotate(331deg)
+    brightness(98%) contrast(101%);
+}
+
+/* subscribe section */
+.footer-subscribe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-subscribe-container label {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.footer-input-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-input-button input {
+  width: 250px;
+  background: transparent;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.footer-input-button input::placeholder {
+  color: white;
+  font-weight: 200;
+}
+
+.subscribe-button {
+  margin-left: 10px;
+  font-size: 20px;
+  color: var(--blue);
+  border: none;
+  background-color: var(--orange);
+  border-radius: 25px;
+  padding: 5px 20px;
+  transition: all ease-in-out 250ms;
+}
+
+.subscribe-button:hover {
+  background-color: var(--yellow);
+}
+
+.footer-bottom-text {
+  margin: 25px 0;
+  text-align: center;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 500px) {
+  .footer-input-button {
+    flex-direction: row;
+  }
+
+  .footer-subscribe-container {
+    gap: 25px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  footer {
+    gap: 50px;
+  }
+
+  .footer-columns-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}
