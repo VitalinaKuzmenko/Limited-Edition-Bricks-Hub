@@ -48,6 +48,18 @@
   font-weight: 600;
 }
 
+.shop-items-details .stars {
+  display: flex;
+}
+
+.shop-items-details .stars img {
+  width: 20px;
+  height: 20px;
+  /* yellow */
+  filter: invert(81%) sepia(99%) saturate(3930%) hue-rotate(331deg)
+    brightness(98%) contrast(101%);
+}
+
 .shop-items-details .small-container {
   display: flex;
   gap: 15px;

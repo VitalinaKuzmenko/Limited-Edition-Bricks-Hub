@@ -335,6 +335,9 @@ header nav li {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* white */
+    filter: invert(99%) sepia(87%) saturate(0%) hue-rotate(358deg)
+      brightness(105%) contrast(101%);
   }
 
   .header-icons-container img {

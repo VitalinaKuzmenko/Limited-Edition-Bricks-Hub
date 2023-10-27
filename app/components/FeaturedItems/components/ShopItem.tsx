@@ -8,6 +8,19 @@ interface ShopItemProps {
 const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
   const { name, price, stars, age, pieces, imagePath, alternativeText } =
     shopItem;
+
+  const starsArray = [];
+
+  for (let i = 0; i < 5; i++) {
+    if (i < stars) {
+      starsArray.push(<img src="/icons/star-icon.svg" alt="Full Star" />);
+    } else {
+      starsArray.push(
+        <img src="/icons/empty-star-icon.svg" alt="Empty Star" />
+      );
+    }
+  }
+
   return (
     <div className="shop-item-container">
       <div className="image-container">
@@ -21,7 +34,11 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
       <div className="shop-items-details">
         <h2 className="name">{name}</h2>
         <p className="price">£{price}</p>
-        <p className="stars">{stars}</p>
+
+        <div className="stars">
+          {starsArray.length > 0 && starsArray.map((star) => star)}
+        </div>
+
         <div className="small-container">
           <div className="age-container">
             <img src="/icons/cake-icon.svg" alt="cake" />
