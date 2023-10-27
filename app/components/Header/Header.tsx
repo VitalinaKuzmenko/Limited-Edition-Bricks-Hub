@@ -65,10 +65,8 @@ const Header = () => {
         closeNavbar();
         setIsNavigationClosing(false);
         setMobileSize(false);
-        console.log(false);
       } else {
         setMobileSize(true);
-        console.log("true");
       }
     };
 

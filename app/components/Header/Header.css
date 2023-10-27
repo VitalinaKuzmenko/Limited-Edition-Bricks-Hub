@@ -144,6 +144,16 @@ header nav li {
   height: 20px;
 }
 
+.search {
+  margin: 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--yellow);
+  color: var(--blue);
+  padding: 8px;
+  border-radius: 40px;
+}
+
 .search img {
   transition: all ease-in-out 200ms;
 }
@@ -153,6 +163,14 @@ header nav li {
   filter: invert(99%) sepia(87%) saturate(0%) hue-rotate(358deg)
     brightness(105%) contrast(101%);
   cursor: pointer;
+}
+
+.search :is(input, button) {
+  color: inherit;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
 }
 
 .login-link-container {
@@ -295,24 +313,6 @@ header nav li {
 
   .header-logo-title {
     font-size: 24px;
-  }
-
-  .search {
-    margin: 20px;
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--yellow);
-    color: var(--blue);
-    padding: 8px;
-    border-radius: 40px;
-  }
-
-  .search :is(input, button) {
-    color: inherit;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 14px;
   }
 
   .search__input {
