@@ -17,7 +17,7 @@ export interface ShopItemObject {
 const FeaturedItems = () => {
   const fakeShopItems: ShopItemObject[] = fakeShopData;
   return (
-    <div className="featured-items">
+    <section className="featured-items">
       <h2>Featured items</h2>
       <Line />
       <div className="featured-items-container">
@@ -26,7 +26,7 @@ const FeaturedItems = () => {
             <ShopItem key={shopItem.id} shopItem={shopItem} />
           ))}
       </div>
-    </div>
+    </section>
   );
 };
 

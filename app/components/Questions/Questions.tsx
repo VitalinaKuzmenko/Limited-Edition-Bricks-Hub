@@ -38,7 +38,7 @@ const Questions = () => {
   };
 
   return (
-    <div className="faq-container">
+    <section className="faq-container">
       {questionsAndAnswers.map((item, index) => (
         <>
           <div className="faq-item" onClick={() => toggleItem(index)}>
@@ -63,7 +63,7 @@ const Questions = () => {
           </div>
         </>
       ))}
-    </div>
+    </section>
   );
 };
 
