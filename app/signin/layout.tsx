@@ -1,7 +1,3 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import "./globals.css";
-
 export const metadata = {
   title: "Limited Edition Bricks Hub",
   description: "A website for preordering Limited Edition Bricks",
@@ -15,9 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );
