@@ -7,7 +7,8 @@
     "price": "32.45",
     "stars": 5,
     "age": 5,
-    "pieces": 3
+    "pieces": 3,
+    "category": "Animals"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "price": "22.35",
     "stars": 5,
     "age": 5,
-    "pieces": 3
+    "pieces": 3,
+    "category": "Birds"
   },
   {
     "id": 3,
@@ -27,6 +29,7 @@
     "price": "44.05",
     "stars": 5,
     "age": 3,
-    "pieces": 5
+    "pieces": 5,
+    "category": "Other"
   }
 ]

@@ -31,7 +31,8 @@
   left: 10px;
 }
 
-.image-container .like-icon:hover {
+.image-container .like-icon:hover,
+.image-container .like-icon:focus {
   /* white */
   filter: invert(99%) sepia(87%) saturate(0%) hue-rotate(358deg)
     brightness(105%) contrast(101%);
@@ -78,6 +79,17 @@
   height: 15px;
 }
 
+.shop-items-details .category-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.shop-items-details .category-container img {
+  width: 15px;
+  height: 15px;
+}
+
 /* button */
 .add-to-bag-button {
   width: 240px;
@@ -92,7 +104,8 @@
   transition: all ease-in-out 200ms;
 }
 
-.add-to-bag-button:hover {
+.add-to-bag-button:hover,
+.add-to-bag-button:focus {
   color: var(--orange);
   background-color: var(--yellow);
 }

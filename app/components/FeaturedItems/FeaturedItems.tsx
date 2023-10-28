@@ -12,6 +12,7 @@ export interface ShopItemObject {
   stars: number;
   age: number;
   pieces: number;
+  category: string;
 }
 
 const FeaturedItems = () => {

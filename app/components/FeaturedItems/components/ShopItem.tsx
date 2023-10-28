@@ -6,8 +6,16 @@ interface ShopItemProps {
 }
 
 const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
-  const { name, price, stars, age, pieces, imagePath, alternativeText } =
-    shopItem;
+  const {
+    name,
+    price,
+    stars,
+    age,
+    pieces,
+    imagePath,
+    alternativeText,
+    category,
+  } = shopItem;
 
   const starsArray = [];
 
@@ -47,6 +55,10 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
           <div className="pieces-container">
             <img src="/icons/puzzle-icon.svg" alt="puzzle" />
             <p>{pieces}</p>
+          </div>
+          <div className="category-container">
+            <img src="/icons/category-icon.svg" alt="category" />
+            <p>{category}</p>
           </div>
         </div>
       </div>
