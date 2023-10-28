@@ -114,6 +114,7 @@ h4 {
   border-radius: 5px;
   padding: 5px 20px;
   transition: all ease-in-out 250ms;
+  cursor: pointer;
 }
 
 .subscribe-button:hover,
