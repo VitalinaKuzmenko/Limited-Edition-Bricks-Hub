@@ -183,6 +183,7 @@ header nav li {
 
 .mobile-search {
   box-shadow: 0 0 0 9999px #000000b0;
+  z-index: 2;
 }
 
 .search__button {
