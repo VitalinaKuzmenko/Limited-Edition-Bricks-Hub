@@ -105,6 +105,25 @@
   font-size: 13px;
 }
 
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.password-toggle-button:hover,
+.password-toggle-button:focus {
+  color: var(--orange);
+}
+
 @media only screen and (min-width: 768px) {
   .singin-form,
   .register-section,

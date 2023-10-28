@@ -50,6 +50,11 @@ const RegisterPage = () => {
     "India",
     "Other",
   ];
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const validateForm = (data: typeof formData) => {
     const errors: any = {};
@@ -185,14 +190,22 @@ const RegisterPage = () => {
 
             <div>
               <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                placeholder="********"
-                onChange={handleChange}
-              />
+              <div className="password-input-container">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  placeholder="********"
+                  onChange={handleChange}
+                />
+                <p
+                  onClick={handleTogglePasswordVisibility}
+                  className="password-toggle-button"
+                >
+                  {passwordVisible ? "Hide" : "Show"}
+                </p>
+              </div>
               {errorMessages.password && (
                 <div className="error">{errorMessages.password}</div>
               )}

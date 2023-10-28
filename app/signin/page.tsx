@@ -7,6 +7,7 @@ import Link from "next/link";
 const SigninPage = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -14,6 +15,10 @@ const SigninPage = () => {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   const handleSignIn = () => {
@@ -45,13 +50,21 @@ const SigninPage = () => {
         </div>
         <div>
           <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            placeholder="password"
-            onChange={handlePasswordChange}
-          />
+          <div className="password-input-container">
+            <input
+              type={passwordVisible ? "text" : "password"}
+              id="password"
+              value={password}
+              placeholder="password"
+              onChange={handlePasswordChange}
+            />
+            <p
+              onClick={handleTogglePasswordVisibility}
+              className="password-toggle-button"
+            >
+              {passwordVisible ? "Hide" : "Show"}
+            </p>
+          </div>
         </div>
         <button type="submit">Sign In</button>
       </form>
