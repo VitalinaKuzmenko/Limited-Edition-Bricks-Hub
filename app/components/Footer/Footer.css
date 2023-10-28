@@ -96,6 +96,10 @@ h4 {
   border-radius: 5px;
 }
 
+.footer-input-button input:focus {
+  outline: 2px solid var(--orange);
+}
+
 .footer-input-button input::placeholder {
   color: white;
   font-weight: 200;
@@ -107,12 +111,13 @@ h4 {
   color: var(--blue);
   border: none;
   background-color: var(--orange);
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 5px 20px;
   transition: all ease-in-out 250ms;
 }
 
-.subscribe-button:hover {
+.subscribe-button:hover,
+.subscribe-button:focus {
   background-color: var(--yellow);
 }
 

@@ -54,6 +54,10 @@
   color: var(--blue);
 }
 
+.singin-form input:focus {
+  outline: 2px solid var(--orange);
+}
+
 .signin-page button {
   display: block;
   margin: 0 auto;
@@ -70,7 +74,8 @@
   transition: all ease-in-out 200ms;
 }
 
-.signin-page button:hover {
+.signin-page button:hover,
+.signin-page button:focus {
   background-color: var(--orange);
   color: var(--blue);
 }
@@ -104,13 +109,18 @@
   width: 100%;
 }
 
+.social-options a {
+  text-decoration: none;
+}
+
 .social-options div {
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
 }
 
-.social-options div:hover {
+.social-options a:hover,
+.social-options a:focus {
   background-color: var(--orange);
   cursor: pointer;
 }

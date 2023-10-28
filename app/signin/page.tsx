@@ -60,14 +60,18 @@ const SigninPage = () => {
         <button>Create account</button>
       </div>
       <div className="social-options">
-        <div className="signin-facebook-div">
-          <p>Continue with Facebook</p>
-          <FiChevronRight />
-        </div>
-        <div>
-          <p>Continue with Google</p>
-          <FiChevronRight />
-        </div>
+        <Link href="/">
+          <div className="signin-facebook-div">
+            <p>Continue with Facebook</p>
+            <FiChevronRight />
+          </div>
+        </Link>
+        <Link href="/">
+          <div>
+            <p>Continue with Google</p>
+            <FiChevronRight />
+          </div>
+        </Link>
       </div>
     </div>
   );
