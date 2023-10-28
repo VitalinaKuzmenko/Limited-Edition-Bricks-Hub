@@ -1,0 +1,124 @@
+.register-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 25px;
+  background-image: url("/other/about-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.register-section {
+  background-color: var(--yellow);
+  padding: 20px 10px;
+  border-radius: 5px;
+  color: var(--blue);
+  min-width: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* header */
+.register-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.register-header h3 {
+  font-size: 30px;
+}
+
+.register-header a {
+  color: blue;
+}
+
+/* form */
+.register-section form fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: none;
+}
+
+.register-section form div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.register-section form input {
+  background-color: transparent;
+  padding: 5px;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  color: var(--blue);
+}
+
+.register-section form input:focus {
+  outline: 2px solid var(--orange);
+}
+
+.register-section form select {
+  background-color: transparent;
+  padding: 5px;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  color: var(--blue);
+}
+
+.register-section form select:focus {
+  outline: 2px solid var(--orange); /* Example focus style */
+}
+
+.register-section button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 250px;
+  padding: 8px 20px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.register-section button:hover,
+.register-section button:focus {
+  background-color: var(--orange);
+  color: var(--blue);
+}
+
+.register-section .error {
+  color: red;
+  font-size: 13px;
+}
+
+@media only screen and (min-width: 768px) {
+  .singin-form,
+  .register-section,
+  .social-options {
+    width: 600px;
+  }
+
+  .singin-form,
+  .register-section {
+    padding: 20px 30px;
+  }
+
+  .register-section {
+    width: 600px;
+    padding: 20px 30px;
+  }
+}

@@ -39,12 +39,12 @@ const Footer = () => {
       </div>
 
       <form className="footer-subscribe-container" onSubmit={handleSubmit}>
-        <label htmlFor="email">Join Our Mailing List</label>
+        <label htmlFor="footer-email">Join Our Mailing List</label>
         <div className="footer-input-button">
           <input
             type="email"
-            id="email"
-            name="email"
+            id="footer-email"
+            name="footer-email"
             value={email}
             placeholder="Enter your email here*"
             onChange={(event) => {
