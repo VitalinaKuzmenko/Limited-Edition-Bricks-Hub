@@ -1,4 +1,4 @@
-import { db } from "../server/firebaseAdmin.js";
+import { db } from "../firebaseAdmin.js";
 
 const resolvers = {
   Query: {

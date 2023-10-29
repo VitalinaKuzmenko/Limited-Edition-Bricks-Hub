@@ -4,6 +4,13 @@ import ShopItems from "./components/ShopItems/ShopItems";
 import SideBar from "./components/SideBar/SideBar";
 import "./shop.css";
 import { useState, useEffect, ChangeEvent } from "react";
+import { ApolloClient, gql } from "@apollo/client";
+import { cache } from "../../apollo-client/cache";
+
+const client = new ApolloClient({
+  cache,
+  uri: "http://localhost:4000/graphql",
+});
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useState<boolean>(false);

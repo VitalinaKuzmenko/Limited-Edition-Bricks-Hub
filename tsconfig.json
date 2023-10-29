@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -29,7 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "server/server.js",
-    "graphql/resolvers.js",
+    "server/graphql/resolvers.js",
     "server/firebaseAdmin.ts",
     "server/server.js"
   ],
