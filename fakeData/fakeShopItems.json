@@ -31,5 +31,16 @@
     "age": 3,
     "pieces": 5,
     "category": "Other"
+  },
+  {
+    "id": 4,
+    "imagePath": "./shop-items/Austronat_1.webp",
+    "alternativeText": "austronat",
+    "name": "Austronat",
+    "price": "50.15",
+    "stars": 5,
+    "age": 3,
+    "pieces": 8,
+    "category": "People"
   }
 ]

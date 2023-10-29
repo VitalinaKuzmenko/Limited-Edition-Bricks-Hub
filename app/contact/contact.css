@@ -1,6 +1,7 @@
 .contact-us-page {
   padding: 20px 0;
-  background-image: url("/other/about-background.jpg");
+  background-image: url("/other/lego-background.webp");
+  background-size: cover;
   color: var(--blue);
 }
 

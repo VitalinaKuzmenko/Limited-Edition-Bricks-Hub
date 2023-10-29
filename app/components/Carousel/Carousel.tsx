@@ -8,8 +8,8 @@ import Link from "next/link";
 
 const Carousel = () => {
   const carouselImages: string[] = [
-    "/carousel-images/lego-carousel_1.jpeg",
-    "/carousel-images/lego-carousel_2.jpeg",
+    "/carousel-images/lego-carousel_1.webp",
+    "/carousel-images/lego-carousel_2.webp",
     "/carousel-images/lego-carousel_3.webp",
   ];
 
@@ -31,7 +31,7 @@ const Carousel = () => {
                 <div className="slide-container">
                   <div className="carousel-cloud-container">
                     <img
-                      src="/other/carousel_cloud_with_text.png"
+                      src="/other/carousel_cloud_with_text.webp"
                       alt="cloud"
                     />
                   </div>

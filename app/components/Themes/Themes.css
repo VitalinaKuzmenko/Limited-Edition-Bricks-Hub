@@ -7,7 +7,7 @@
       rgba(0, 0, 0, 0) 100px,
       #472603 -100px
     ),
-    url("/other/theme-background_2.png");
+    url("/other/theme-background.webp");
   background-position: top 0 right 0, top 0 right 0;
   background-repeat: no-repeat;
   background-size: 100vw 100px, cover;
