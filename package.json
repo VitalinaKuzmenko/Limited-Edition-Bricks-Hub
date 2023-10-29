@@ -25,5 +25,8 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "encoding": "^0.1.13"
   }
 }
