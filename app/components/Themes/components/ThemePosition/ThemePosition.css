@@ -5,6 +5,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  height: 260px;
 }
 
 .theme-container p {

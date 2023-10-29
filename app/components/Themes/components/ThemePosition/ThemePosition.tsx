@@ -12,7 +12,7 @@ const ThemePosition: React.FC<ThemePositionProps> = ({ theme }) => {
     <div className="theme-container">
       <p>{name}</p>
       <Image
-        className={name !== "People" ? "big-container" : ""}
+        className={name !== "People" ? "big-container" : "small-container"}
         src={imagePath}
         width={1000}
         height={1000}
