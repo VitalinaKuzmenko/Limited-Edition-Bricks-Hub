@@ -1,6 +1,9 @@
 .shop-page {
   padding: 30px 10px;
   color: var(--blue);
+  max-width: 1600px;
+  display: block;
+  margin: 0 auto;
 }
 
 .shop-page h2 {
