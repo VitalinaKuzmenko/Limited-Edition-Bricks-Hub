@@ -2,6 +2,9 @@
 import "./register.css";
 import Link from "next/link";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebaseConfig";
+import { useRouter } from "next/navigation";
 
 interface RegisterForm {
   firstName: string;
@@ -51,6 +54,8 @@ const RegisterPage = () => {
     "Other",
   ];
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleTogglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -114,7 +119,7 @@ const RegisterPage = () => {
     validateForm({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     validateForm(formData);
 
@@ -123,8 +128,21 @@ const RegisterPage = () => {
     if (errorsExist) {
       console.log("Form has validation errors, please correct them.");
     } else {
-      // Form is valid, you can submit the data here
-      console.log("Form submitted:", formData);
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        const user = userCredential.user;
+        console.log("user", user);
+        router.push("/signin");
+      } catch (error: any) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(error.message);
+        console.error(errorCode, errorMessage);
+      }
     }
   };
 
@@ -139,7 +157,7 @@ const RegisterPage = () => {
           </h2>
           <h3>Create your adult account</h3>
           <p className="small-text">Already have an account?</p>
-          <Link href="/signing">Sign in</Link>
+          <Link href="/signin">Sign in</Link>
         </div>
         <form onSubmit={handleSubmit}>
           <fieldset>
@@ -244,7 +262,7 @@ const RegisterPage = () => {
               )}
             </div>
           </fieldset>
-
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <button type="submit">Yes, create account!</button>
         </form>
       </div>

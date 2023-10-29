@@ -22,6 +22,10 @@
   gap: 40px;
 }
 
+.register-section a {
+  text-decoration: none;
+}
+
 /* header */
 .register-header {
   display: flex;

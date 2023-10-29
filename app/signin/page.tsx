@@ -2,15 +2,26 @@
 import "./signin.css";
 import { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import { auth } from "@/firebaseConfig";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const SigninPage = () => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState<string>("");
+  const router = useRouter();
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,10 +32,59 @@ const SigninPage = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleSignIn = () => {
-    //TODO Handle sign-in logic here, e.g., send data to a server
-    console.log("Username:", username);
-    console.log("Password:", password);
+  const handleSignIn = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("user", user);
+      router.push("/dashboard");
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(error.message);
+      console.error(errorCode, errorMessage);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+      if (user && user.email) {
+        const email = user.email;
+        console.log("email");
+      }
+      router.push("/dashboard");
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(error.message);
+      console.error(errorCode, errorMessage);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+      if (user && user.email) {
+        const email = user.email;
+        console.log("email");
+      }
+      router.push("/dashboard");
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(error.message);
+      console.error(errorCode, errorMessage);
+    }
   };
 
   return (
@@ -37,15 +97,16 @@ const SigninPage = () => {
             Bricks Hub
           </h2>
           <h3>Sign in</h3>
+          {msg && <p style={{ color: "red" }}>{msg}</p>}
         </div>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            placeholder="username"
-            onChange={handleUsernameChange}
+            type="email"
+            id="email"
+            value={email}
+            placeholder="email"
+            onChange={handleEmailChange}
           />
         </div>
         <div>
@@ -66,25 +127,25 @@ const SigninPage = () => {
             </p>
           </div>
         </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <button type="submit">Sign In</button>
       </form>
       <div className="register-section">
         <h3> New user</h3>
-        <button>Create account</button>
+        <Link href="/register">
+          <button>Create account</button>
+        </Link>
       </div>
       <div className="social-options">
-        <Link href="/">
-          <div className="signin-facebook-div">
-            <p>Continue with Facebook</p>
-            <FiChevronRight />
-          </div>
-        </Link>
-        <Link href="/">
-          <div>
-            <p>Continue with Google</p>
-            <FiChevronRight />
-          </div>
-        </Link>
+        <div className="signin-facebook-div" onClick={handleFacebookSignIn}>
+          <p>Continue with Facebook</p>
+          <FiChevronRight />
+        </div>
+
+        <div onClick={handleGoogleSignIn}>
+          <p>Continue with Google</p>
+          <FiChevronRight />
+        </div>
       </div>
     </div>
   );

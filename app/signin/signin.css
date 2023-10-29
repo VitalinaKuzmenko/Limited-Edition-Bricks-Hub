@@ -109,18 +109,14 @@
   width: 100%;
 }
 
-.social-options a {
-  text-decoration: none;
-}
-
 .social-options div {
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
 }
 
-.social-options a:hover,
-.social-options a:focus {
+.social-options div:hover,
+.social-options div:focus {
   background-color: var(--orange);
   cursor: pointer;
 }
@@ -146,6 +142,7 @@
 .password-toggle-button:hover,
 .password-toggle-button:focus {
   color: var(--orange);
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {
