@@ -8,7 +8,10 @@ const ShopItems = () => {
 
   return (
     <div className="shop-items">
-      {shopItems && shopItems.map((item) => <ShopItem shopItem={item} />)}
+      {shopItems &&
+        shopItems.map((item, index) => (
+          <ShopItem key={index} shopItem={item} />
+        ))}
     </div>
   );
 };

@@ -39,7 +39,9 @@ const Themes = () => {
     <section className="themes-container">
       <div className="themes-flex-container">
         {themesPosition &&
-          themesPosition.map((theme) => <ThemePosition theme={theme} />)}
+          themesPosition.map((theme, index) => (
+            <ThemePosition key={index} theme={theme} />
+          ))}
       </div>
     </section>
   );

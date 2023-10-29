@@ -1,5 +1,6 @@
 import "./ThemePosition.css";
 import { ThemePositionObject } from "../../Themes";
+import Image from "next/image";
 
 interface ThemePositionProps {
   theme: ThemePositionObject;
@@ -10,9 +11,11 @@ const ThemePosition: React.FC<ThemePositionProps> = ({ theme }) => {
   return (
     <div className="theme-container">
       <p>{name}</p>
-      <img
+      <Image
         className={name !== "People" ? "big-container" : ""}
         src={imagePath}
+        width={1000}
+        height={1000}
         alt={altText}
       />
     </div>

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "imagePath": "./shop-items/Dog_1.webp",
+    "imagePath": "/shop-items/Dog_1.webp",
     "alternativeText": "dog",
     "name": "Dog",
     "price": "32.45",
@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "imagePath": "./shop-items/Parrot_1.webp",
+    "imagePath": "/shop-items/Parrot_1.webp",
     "alternativeText": "parrot",
     "name": "Parrot",
     "price": "22.35",
@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "imagePath": "./shop-items/Robot_1.webp",
+    "imagePath": "/shop-items/Robot_1.webp",
     "alternativeText": "robot",
     "name": "Robot",
     "price": "44.05",
@@ -34,7 +34,7 @@
   },
   {
     "id": 4,
-    "imagePath": "./shop-items/Austronat_1.webp",
+    "imagePath": "/shop-items/Austronat_1.webp",
     "alternativeText": "austronat",
     "name": "Austronat",
     "price": "50.15",

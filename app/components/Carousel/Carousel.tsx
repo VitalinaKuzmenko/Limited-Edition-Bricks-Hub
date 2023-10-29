@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.css"; // this has to be after the css imports above to override the defaults
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
+import Image from "next/image";
 
 const Carousel = () => {
   const carouselImages: string[] = [
@@ -28,15 +29,22 @@ const Carousel = () => {
           carouselImages.map((imageLink, index) => {
             if (index === 0) {
               return (
-                <div className="slide-container">
+                <div key={index} className="slide-container">
                   <div className="carousel-cloud-container">
-                    <img
-                      src="/other/carousel_cloud_with_text.webp"
+                    <Image
+                      src={"/other/carousel_cloud_with_text.webp"}
+                      width={1000}
+                      height={1000}
                       alt="cloud"
                     />
                   </div>
                   <div className="slide-image-container">
-                    <img src={imageLink} alt={`Carousel image ${index}`} />
+                    <Image
+                      src={imageLink}
+                      width={2000}
+                      height={2000}
+                      alt={`Carousel image ${index}`}
+                    />
                   </div>
                   <Link href="/shop">
                     <button className="carousel-shop-button">
@@ -47,9 +55,14 @@ const Carousel = () => {
               );
             } else {
               return (
-                <div className="slide-container">
+                <div key={index} className="slide-container">
                   <div className="slide-image-container">
-                    <img src={imageLink} alt={`Carousel image ${index}`} />
+                    <Image
+                      src={imageLink}
+                      width={2000}
+                      height={2000}
+                      alt={`Carousel image ${index}`}
+                    />
                   </div>
                 </div>
               );

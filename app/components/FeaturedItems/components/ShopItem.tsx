@@ -1,5 +1,6 @@
 import "./ShopItem.css";
 import { ShopItemObject } from "../FeaturedItems";
+import Image from "next/image";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
@@ -32,7 +33,12 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
   return (
     <div className="shop-item-container">
       <div className="image-container">
-        <img src={imagePath} alt={alternativeText} />
+        <Image
+          src={imagePath}
+          width={1000}
+          height={1000}
+          alt={alternativeText}
+        />
         <img
           className="like-icon"
           src="/icons/empty-heart-icon.svg"
