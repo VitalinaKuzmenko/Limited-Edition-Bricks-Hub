@@ -1,5 +1,4 @@
 "use client";
-import Line from "@/app/components/Line/Line";
 import "./SideBar.css";
 import { useState } from "react";
 import Link from "next/link";

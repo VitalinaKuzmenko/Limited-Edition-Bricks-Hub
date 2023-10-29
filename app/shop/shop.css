@@ -44,6 +44,15 @@
   color: var(--orange);
 }
 
+.sidebar-items-container .shop-items {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 10px;
+  font-family: var(--font);
+  width: 100%;
+}
+
 @media only screen and (min-width: 768px) {
   .shop-page {
     padding: 40px 25px;
@@ -81,4 +90,12 @@
   .shop-page-header .number-of-products {
     margin: 0;
   }
+
+  /* sidebar filter and shop items */
+  .sidebar-items-container {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
 }

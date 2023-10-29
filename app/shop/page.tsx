@@ -1,5 +1,6 @@
 "use client";
 import Line from "../components/Line/Line";
+import ShopItems from "./components/ShopItems/ShopItems";
 import SideBar from "./components/SideBar/SideBar";
 import "./shop.css";
 import { useState, useEffect, ChangeEvent } from "react";
@@ -96,7 +97,7 @@ const ShopPage = () => {
 
   return (
     <div className="shop-page">
-      <h2>Shop Limited Edition</h2>
+      <h2>Pre-order Limited Edition</h2>
       <div className="shop-page-header">
         <p className="number-of-products">Showing 10 products</p>
         <div className="sort-select">
@@ -130,9 +131,11 @@ const ShopPage = () => {
         </div>
       </div>
       <Line />
-      <div className="shop-section">
-        <SideBar mobileSize={mobileSize} isFilterOpen={isFilterOpen} />
-        <div className="shop-items"></div>
+      <div className="sidebar-items-container">
+        <div className="shop-section">
+          <SideBar mobileSize={mobileSize} isFilterOpen={isFilterOpen} />
+        </div>
+        <ShopItems />
       </div>
     </div>
   );
