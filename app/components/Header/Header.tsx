@@ -84,6 +84,7 @@ const Header = () => {
     }, 1000); // Wait for the animation to complete before removing the classes
   };
 
+  //handle searchClickOutside
   useEffect(() => {
     const handleSearchClickOutside = (event: MouseEvent) => {
       const target = event.target;

@@ -1,0 +1,84 @@
+.shop-page {
+  padding: 30px 10px;
+  color: var(--blue);
+}
+
+.shop-page h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.shop-page-header .number-of-products {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.shop-page-header .select-opened {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--yellow);
+  z-index: 4;
+  min-width: 240px;
+  padding: 15px 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 9999px #000000b0;
+}
+
+.shop-page-header .select-closed {
+  display: none;
+}
+
+.shop-page-header .sort-select {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shop-page-header .sort-select p {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shop-page-header .sort-select p:hover,
+.shop-page-header .sort-select p:focus {
+  color: var(--orange);
+}
+
+@media only screen and (min-width: 768px) {
+  .shop-page {
+    padding: 40px 25px;
+  }
+
+  .shop-page .sort-select {
+    position: relative;
+  }
+
+  .shop-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .shop-page-header select {
+    width: 250px;
+    text-align: right;
+  }
+
+  .shop-page-header .sort-select p {
+    position: absolute;
+    top: 2px;
+    left: 5px;
+  }
+
+  .shop-page-header .select-visible {
+    border-radius: 5px;
+    color: var(--blue);
+    border-color: var(--blue);
+    height: 25px;
+    font-size: 15px;
+  }
+
+  .shop-page-header .number-of-products {
+    margin: 0;
+  }
+}

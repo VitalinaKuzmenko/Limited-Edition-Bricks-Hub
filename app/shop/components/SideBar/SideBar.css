@@ -1,0 +1,66 @@
+.shop-section .sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.shop-section .sidebar-section .sidebar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shop-section .sidebar-section .sidebar-item ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.shop-section .sidebar-section .sidebar-item ul li input {
+  margin-right: 7px;
+}
+
+.shop-section .sidebar-section .sidebar-item .main-label {
+  font-weight: 600;
+}
+
+.shop-section .sidebar-hidden {
+  display: none;
+}
+
+.shop-section .sidebar-open {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--yellow);
+  z-index: 4;
+  min-width: 240px;
+  padding: 20px 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 9999px #000000b0;
+}
+
+.sidebar-show-button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 250px;
+  padding: 8px 20px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.register-section button:hover,
+.register-section button:focus {
+  background-color: var(--orange);
+  color: var(--blue);
+}
