@@ -1,0 +1,23 @@
+import { db } from "../server/firebaseAdmin.js";
+
+const resolvers = {
+  Query: {
+    getShopItem: async (_, args) => {
+      const itemRef = db.collection("shop_items").doc(args.id);
+      const itemSnapshot = await itemRef.get();
+      const item = itemSnapshot.data();
+      return { id: itemSnapshot.id, ...item };
+    },
+    getAllShopItems: async () => {
+      const itemsRef = db.collection("shop_items");
+      const itemsSnapshot = await itemsRef.get();
+      const items = itemsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return items;
+    },
+  },
+};
+
+export default resolvers;
