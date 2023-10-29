@@ -2,6 +2,7 @@
 import "./Questions.css";
 import { FiChevronRight, FiChevronDown } from "react-icons/fi";
 import { useState } from "react";
+import Line from "../Line/Line";
 
 interface questionAndAnswer {
   question: string;
@@ -39,6 +40,8 @@ const Questions = () => {
 
   return (
     <section className="faq-container">
+      <h2>FAQ</h2>
+      <Line />
       {questionsAndAnswers.map((item, index) => (
         <>
           <div className="faq-item" onClick={() => toggleItem(index)}>
