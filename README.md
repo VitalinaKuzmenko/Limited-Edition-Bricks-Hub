@@ -4,20 +4,22 @@ Your gateway to exclusive LEGO sets, where you can explore and pre-order unique 
 
 ## 📡 Technologies used
 
-Next.js, React, TypeScript, CSS, Node.js, Express.js, Apollo Server, Apollo Client, GraphQL, Firebase: Authentication, Database, Storage
+**Next.js**, **React**, **TypeScript**, **CSS**, Node.js, Express.js, Apollo Server, Apollo Client, **GraphQL**, 
+<br />
+**Firebase**: Authentication, Database, Storage
 
 ## ⭐️ Features
 
-- Product Listings: Discover limited-edition LEGO sets with details like names, piece counts, themes, and availability.
-- Sort and Filter: Find specific LEGO sets with ease using sorting and filtering options.
-- Product Categories: Organize sets by category, age, price, and piece count.
-- Top Picks: Discover the most popular three items right on the homepage.
-- Authentication: Sign in with your custom email and password, or use Google and Facebook.
-- User Profiles: Create accounts with personal information, avatars, and preferences.
-- User Wishlists: Keep track of items you desire.
-- Shopping Cart: Easily add items, review your selection, and proceed to checkout.
-- Checkout Page: See all your chosen items before finalizing your order.
-- User Reviews: Share your thoughts and rate products to assist fellow shoppers.
+- **Product Listings**: Discover limited-edition LEGO sets with details like names, piece counts, themes, and availability.
+- **Sort and Filter**: Find specific LEGO sets with ease using sorting and filtering options.
+- **Product Categories**: Organize sets by category, age, price, and piece count.
+- **Top Picks**: Discover the most popular three items right on the homepage.
+- **Authentication**: Sign in with your custom email and password, or use Google and Facebook.
+- **User Profiles**: Create accounts with personal information, avatars, and preferences.
+- **User Wishlists**: Keep track of items you desire.
+- **Shopping Cart**: Easily add items, review your selection, and proceed to checkout.
+- **Checkout Page**: See all your chosen items before finalizing your order.
+- **User Reviews**: Share your thoughts and rate products to assist fellow shoppers.
 
 
 ## 🚀 Deployed Website
