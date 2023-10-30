@@ -4,7 +4,7 @@ Your gateway to exclusive LEGO sets, where you can explore and pre-order unique 
 
 ## 📡 Technologies used
 
-**Next.js**, **React**, **TypeScript**, **CSS**, Node.js, Express.js, Apollo Server, Apollo Client, **GraphQL**, 
+**Next.js**, **React**, **TypeScript**, **CSS**, Figma, Node.js, Express.js, Apollo Server, Apollo Client, **GraphQL**, 
 <br />
 **Firebase**: Authentication, Database, Storage
 
