@@ -21,6 +21,7 @@ Your gateway to exclusive LEGO sets, where you can explore and pre-order unique 
 - **Checkout Page**: See all your chosen items before finalizing your order.
 - **User Reviews**: Share your thoughts and rate products to assist fellow shoppers.
 
+Please note that some features are in progress, while others are planned for future updates.
 
 ## 🚀 Deployed Website
 
