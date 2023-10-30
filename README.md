@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Limited Edition Bricks Hub
 
-## Getting Started
+Your gateway to exclusive LEGO sets, where you can explore and pre-order unique LEGO creations. This page was created for educational purposes.
 
-First, run the development server:
+## 📡 Technologies used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Next.js, React, TypeScript, CSS, Node.js, Express.js, Apollo Server, Apollo Client, GraphQL, Firebase: Authentication, Database, Storage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⭐️ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Product Listings: Discover limited-edition LEGO sets with details like names, piece counts, themes, and availability.
+- Sort and Filter: Find specific LEGO sets with ease using sorting and filtering options.
+- Product Categories: Organize sets by category, age, price, and piece count.
+- Top Picks: Discover the most popular three items right on the homepage.
+- Authentication: Sign in with your custom email and password, or use Google and Facebook.
+- User Profiles: Create accounts with personal information, avatars, and preferences.
+- User Wishlists: Keep track of items you desire.
+- Shopping Cart: Easily add items, review your selection, and proceed to checkout.
+- Checkout Page: See all your chosen items before finalizing your order.
+- User Reviews: Share your thoughts and rate products to assist fellow shoppers.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## 🚀 Deployed Website
 
-To learn more about Next.js, take a look at the following resources:
+[https://vitalina-chat-next.vercel.app/](https://limited-edition-bricks-hub.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 💻 Screenshots
 
-## Deploy on Vercel
+![App Screenshot](https://www.dropbox.com/scl/fi/n2z31wby8uslcn8xvha4v/limited_edition_1.jpg?rlkey=d7ja70cd0syix6ppnw355608p&raw=1)
+![App Screenshot](https://www.dropbox.com/scl/fi/drork9pfsneesj1ge7r19/limited_edition_2.jpg?rlkey=l8xztug4xwrk4df36zu0pvfv4&raw=1)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome.
