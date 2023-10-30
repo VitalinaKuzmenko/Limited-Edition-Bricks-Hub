@@ -67,7 +67,7 @@
 
 .contact-us-form-submit:hover {
   background-color: var(--yellow);
-  color: var(--orange);
+  color: var(--blue);
 }
 
 .contact-us-form-submit.disabled {

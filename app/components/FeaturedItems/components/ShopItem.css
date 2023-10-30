@@ -107,6 +107,6 @@
 
 .add-to-bag-button:hover,
 .add-to-bag-button:focus {
-  color: var(--orange);
+  color: var(--blue);
   background-color: var(--yellow);
 }
