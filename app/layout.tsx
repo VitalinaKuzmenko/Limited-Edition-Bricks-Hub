@@ -1,10 +1,11 @@
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import "./globals.css";
+import { ApolloWrapper } from "./ApolloWrapper";
 
 export const metadata = {
   title: "Limited Edition Bricks Hub",
-  description: "A website for preordering Limited Edition Bricks",
+  description: "A website for pre-ordering Limited Edition Bricks",
 };
 
 export default function RootLayout({
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <main>{children}</main>
+        <main>
+          <ApolloWrapper>{children}</ApolloWrapper>
+        </main>
         <Footer />
       </body>
     </html>

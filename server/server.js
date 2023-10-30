@@ -21,9 +21,6 @@ await server.start();
 
 app.use(cors(), bodyParser.json(), expressMiddleware(server));
 
-console.log("typeDefs", typeDefs);
-console.log("resolvers", resolvers);
-
 const port = process.env.PORT || 4000;
 await new Promise((resolve) => httpServer.listen({ port: port }, resolve));
 console.log(`🚀 Server ready at http://localhost:4000`);
