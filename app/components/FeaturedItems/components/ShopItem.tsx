@@ -55,12 +55,15 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
   return (
     <div className="shop-item-container">
       <div className="image-container">
-        <Image
-          src={imageUrl}
-          width={1000}
-          height={1000}
-          alt={alternativeText}
-        />
+        {imageUrl.length > 0 && (
+          <Image
+            src={imageUrl}
+            width={1000}
+            height={1000}
+            alt={alternativeText}
+          />
+        )}
+
         <img
           className="like-icon"
           src="/icons/empty-heart-icon.svg"

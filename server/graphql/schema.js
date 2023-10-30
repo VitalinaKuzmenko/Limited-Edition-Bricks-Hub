@@ -6,7 +6,7 @@ const typeDefs = gql`
     imagePath: String!
     alternativeText: String!
     name: String!
-    price: String!
+    price: Float!
     stars: Int!
     age: Int!
     pieces: Int!

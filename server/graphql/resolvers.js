@@ -18,7 +18,6 @@ const resolvers = {
       return items;
     },
     getTopRatedShopItems: async (_, { limit }) => {
-      console.log("Querying top-rated shop items with limit:", limit);
       const itemsRef = db.collection("shop_items");
       const query = itemsRef.orderBy("stars", "desc").limit(limit);
       const itemsSnapshot = await query.get();
@@ -27,8 +26,6 @@ const resolvers = {
         id: doc.id,
         ...doc.data(),
       }));
-
-      console.log("Found top-rated shop items:", items);
 
       return items;
     },

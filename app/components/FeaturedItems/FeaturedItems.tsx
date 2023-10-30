@@ -26,7 +26,7 @@ export interface ShopItemObject {
   imagePath: string;
   alternativeText: string;
   name: string;
-  price: string;
+  price: number;
   stars: number;
   age: number;
   pieces: number;
