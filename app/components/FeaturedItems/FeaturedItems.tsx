@@ -1,7 +1,6 @@
 "use client";
 import "./FeaturedItems.css";
 import ShopItem from "./components/ShopItem";
-import fakeShopData from "../../../fakeData/fakeShopFeaturedItems.json";
 import Line from "../Line/Line";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";

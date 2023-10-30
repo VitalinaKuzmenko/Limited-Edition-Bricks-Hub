@@ -1,12 +1,18 @@
+"use client";
+import { useState } from "react";
 import "./ShopItem.css";
 import { ShopItemObject } from "../FeaturedItems";
 import Image from "next/image";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "@/firebaseConfig";
+import { useEffect } from "react";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
 }
 
 const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
+  const [imageUrl, setImageUrl] = useState<string>("");
   const {
     name,
     price,
@@ -29,12 +35,28 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
       );
     }
   }
+  //download image from firebase storage
+  useEffect(() => {
+    const downloadImage = async () => {
+      try {
+        const url = await getDownloadURL(ref(storage, imagePath));
+        setImageUrl(url);
+        console.log("imageurl", imageUrl);
+        return imageUrl;
+      } catch (error) {
+        console.error("Error downloading image:", error);
+        return "";
+      }
+    };
+
+    downloadImage();
+  }, [imagePath]);
 
   return (
     <div className="shop-item-container">
       <div className="image-container">
         <Image
-          src={imagePath}
+          src={imageUrl}
           width={1000}
           height={1000}
           alt={alternativeText}

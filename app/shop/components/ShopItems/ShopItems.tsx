@@ -22,7 +22,6 @@ const GET_ALL_SHOP_ITEMS = gql`
 
 const ShopItems = () => {
   const { loading, error, data } = useQuery(GET_ALL_SHOP_ITEMS);
-
   if (loading) return "Loading...";
   if (error) return `Error: ${error.message}`;
 
