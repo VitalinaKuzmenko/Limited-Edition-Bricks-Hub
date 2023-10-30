@@ -1,6 +1,6 @@
 # Limited Edition Bricks Hub
 
-Your gateway to exclusive LEGO sets, where you can explore and pre-order unique LEGO creations. This page was created for educational purposes.
+Your gateway to exclusive LEGO sets, where you can explore and pre-order unique LEGO creations. This is a full-stack project created for educational purposes and driven by a passion for LEGO.
 
 ## 📡 Technologies used
 
