@@ -16,6 +16,7 @@ const typeDefs = gql`
   type Query {
     getShopItem(name: String!): ShopItem
     getAllShopItems: [ShopItem]
+    getTopRatedShopItems(limit: Int): [ShopItem]
   }
 `;
 
