@@ -13,9 +13,24 @@ const typeDefs = gql`
     category: String!
   }
 
+  input PriceRangeInput {
+    minPrice: Float
+    maxPrice: Float
+  }
+
+  input PieceRangeInput {
+    minPieces: Int
+    maxPieces: Int
+  }
+
   type Query {
     getShopItem(name: String!): ShopItem
-    getAllShopItems: [ShopItem]
+    getAllShopItems(
+      category: [String]
+      age: [Int]
+      priceRange: [PriceRangeInput]
+      pieceRange: [PieceRangeInput]
+    ): [ShopItem]
     getTopRatedShopItems(limit: Int): [ShopItem]
   }
 `;

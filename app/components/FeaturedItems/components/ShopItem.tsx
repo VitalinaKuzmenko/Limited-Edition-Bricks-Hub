@@ -41,7 +41,6 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
       try {
         const url = await getDownloadURL(ref(storage, imagePath));
         setImageUrl(url);
-        console.log("imageurl", imageUrl);
         return imageUrl;
       } catch (error) {
         console.error("Error downloading image:", error);

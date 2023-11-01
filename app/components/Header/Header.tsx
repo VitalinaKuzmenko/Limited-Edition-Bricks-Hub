@@ -34,10 +34,6 @@ const Header = () => {
     useState<boolean>(false);
   const searchFormRef = useRef<HTMLFormElement | null>(null);
 
-  useEffect(() => {
-    console.log("mobileSearchExpanded", mobileSearchExpanded);
-  }, [mobileSearchExpanded]);
-
   const handleSearchClick = () => {
     const form = document.querySelector(".search");
     const searchInput = document.querySelector(".search__input");

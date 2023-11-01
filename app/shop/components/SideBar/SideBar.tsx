@@ -1,11 +1,34 @@
 "use client";
 import "./SideBar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { filterOptionsState } from "@/app/recoil/atoms";
+import {
+  createPriceRangeFromString,
+  createPiecesRangeFromString,
+} from "@/app/utils/utils";
 
 interface SideBarProps {
   mobileSize: boolean;
   isFilterOpen: boolean;
+}
+
+export interface PriceRange {
+  minPrice: number;
+  maxPrice: number;
+}
+
+export interface PiecesRange {
+  minPieces: number;
+  maxPieces: number;
+}
+
+export interface FilterOptions {
+  category: string[];
+  age: number[];
+  priceRange: PriceRange[];
+  piecesRange: PiecesRange[];
 }
 
 const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
@@ -13,13 +36,15 @@ const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
   const [selectedAges, setSelectedAges] = useState<string[]>([]);
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [selectedPieceCounts, setSelectedPieceCounts] = useState<string[]>([]);
+  const [_, setFilterOptions] =
+    useRecoilState<FilterOptions>(filterOptionsState);
 
   const categories: string[] = [
-    "animals",
-    "fantasy",
-    "birds",
-    "people",
-    "other",
+    "Animals",
+    "Fantasy",
+    "Birds",
+    "People",
+    "Other",
   ];
   const ages: string[] = ["2+", "6+", "10+", "12+", "15+"];
   const prices: string[] = ["£10-£50", "£50-£100", "£100+"];
@@ -58,6 +83,28 @@ const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
       setSelectedPieceCounts([...selectedPieceCounts, pieceCount]);
     }
   };
+
+  //set filterOptions for backEnd
+  useEffect(() => {
+    const arrayWithNumAge = selectedAges.map((age) => Number(age.slice(0, -1)));
+    const priceRangeArray: PriceRange[] = selectedPrices
+      .map((price) => createPriceRangeFromString(price))
+      .filter((priceObject): priceObject is PriceRange => priceObject !== null);
+    const piecesRangeArray: PiecesRange[] = selectedPieceCounts
+      .map((piece) => createPiecesRangeFromString(piece))
+      .filter(
+        (piecesObject): piecesObject is PiecesRange => piecesObject !== null
+      );
+
+    const newOption: FilterOptions = {
+      category: selectedCategories,
+      age: arrayWithNumAge,
+      priceRange: priceRangeArray,
+      piecesRange: piecesRangeArray,
+    };
+    setFilterOptions(newOption);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategories, selectedAges, selectedPrices, selectedPieceCounts]);
 
   return (
     <div

@@ -2,6 +2,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import "./globals.css";
 import { ApolloWrapper } from "./ApolloWrapper";
+import RecoilRootWrapper from "./RecoilRootWrapper";
 
 export const metadata = {
   title: "Limited Edition Bricks Hub",
@@ -18,7 +19,9 @@ export default function RootLayout({
       <body>
         <Header />
         <main>
-          <ApolloWrapper>{children}</ApolloWrapper>
+          <ApolloWrapper>
+            <RecoilRootWrapper>{children}</RecoilRootWrapper>
+          </ApolloWrapper>
         </main>
         <Footer />
       </body>

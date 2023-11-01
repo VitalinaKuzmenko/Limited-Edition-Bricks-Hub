@@ -1,9 +1,11 @@
 "use client";
+import { useRecoilValue } from "recoil";
 import Line from "../components/Line/Line";
 import ShopItems from "./components/ShopItems/ShopItems";
 import SideBar from "./components/SideBar/SideBar";
 import "./shop.css";
 import { useState, useEffect, ChangeEvent } from "react";
+import { productsNumberState } from "../recoil/atoms";
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useState<boolean>(false);
@@ -16,6 +18,7 @@ const ShopPage = () => {
   const [selectedValue, setSelectedValue] = useState<string>(sortOptions[0]); // Initialize with the default value
   const [isSortOptionsOpen, setIsSortOptionsOpen] = useState<boolean>(false);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const numberOfShopItems = useRecoilValue(productsNumberState);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(event.target.value);
@@ -99,7 +102,9 @@ const ShopPage = () => {
     <div className="shop-page">
       <h2>Pre-order Limited Edition</h2>
       <div className="shop-page-header">
-        <p className="number-of-products">Showing 10 products</p>
+        <p className="number-of-products">
+          Showing {numberOfShopItems} products
+        </p>
         <div className="sort-select">
           <p className="select-label" onClick={handleMobileSortClick}>
             Sort by
