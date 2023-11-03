@@ -1,27 +1,28 @@
 "use client";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Line from "../components/Line/Line";
 import ShopItems from "./components/ShopItems/ShopItems";
 import SideBar from "./components/SideBar/SideBar";
 import "./shop.css";
 import { useState, useEffect, ChangeEvent } from "react";
-import { productsNumberState } from "../recoil/atoms";
+import { productsNumberState, sortOptionValueState } from "../recoil/atoms";
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useState<boolean>(false);
   const sortOptions: string[] = [
+    "Rating",
     "Price low to high",
     "Price high to low",
-    "Rating",
     "A-Z",
   ];
-  const [selectedValue, setSelectedValue] = useState<string>(sortOptions[0]); // Initialize with the default value
+  const [sortOptionValue, setSortOptionValue] =
+    useRecoilState(sortOptionValueState);
   const [isSortOptionsOpen, setIsSortOptionsOpen] = useState<boolean>(false);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const numberOfShopItems = useRecoilValue(productsNumberState);
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
+  const handleSortOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSortOptionValue(event.target.value);
   };
 
   const handleMobileSortClick = () => {
@@ -112,7 +113,7 @@ const ShopPage = () => {
           <select
             id="sort"
             name="sort"
-            value={selectedValue}
+            value={sortOptionValue}
             className={
               !mobileSize
                 ? "select-visible"
@@ -120,7 +121,7 @@ const ShopPage = () => {
                 ? "select-opened"
                 : "select-closed"
             }
-            onChange={handleSelectChange}
+            onChange={handleSortOptionChange}
           >
             {sortOptions.map((option, index) => (
               <option key={index} value={option}>

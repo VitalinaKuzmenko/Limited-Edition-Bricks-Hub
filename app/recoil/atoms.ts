@@ -16,3 +16,8 @@ export const filterOptionsState = atom<FilterOptions>({
     piecesRange: [],
   },
 });
+
+export const sortOptionValueState = atom<string>({
+  key: "sortOptionValueState",
+  default: "Rating",
+});

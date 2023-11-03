@@ -4,7 +4,11 @@ import ShopItem from "@/app/components/FeaturedItems/components/ShopItem";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { filterOptionsState, productsNumberState } from "@/app/recoil/atoms";
+import {
+  filterOptionsState,
+  productsNumberState,
+  sortOptionValueState,
+} from "@/app/recoil/atoms";
 import { use, useEffect, useState } from "react";
 import { PriceRange, PiecesRange } from "../SideBar/SideBar";
 import { FilterOptions } from "../SideBar/SideBar";
@@ -36,10 +40,13 @@ const ShopItems = () => {
   const [_, setProductsNumber] = useRecoilState<number>(productsNumberState);
   const { loading, error, data } = useQuery(GET_ALL_SHOP_ITEMS);
   const filterOptions: FilterOptions = useRecoilValue(filterOptionsState);
+  const sortOption: string = useRecoilValue(sortOptionValueState);
 
+  //filter and sort the list
   useEffect(() => {
     if (serverShopItems && serverShopItems.length > 0) {
-      let filteredItems = serverShopItems;
+      let filteredItems = [...serverShopItems];
+
       if (filterOptions.category.length > 0) {
         filteredItems = filteredItems.filter((item) => {
           const categoryFilter = filterOptions.category.includes(item.category);
@@ -69,11 +76,29 @@ const ShopItems = () => {
           return piecesFilter;
         });
       }
+      if (
+        filterOptions.category.length === 0 &&
+        filterOptions.age.length === 0 &&
+        filterOptions.priceRange.length === 0 &&
+        filterOptions.piecesRange.length === 0
+      ) {
+      }
+
+      // Sort the filtered items based on the selected sorting option
+      if (sortOption === "Price low to high") {
+        filteredItems.sort((a, b) => a.price - b.price);
+      } else if (sortOption === "Price high to low") {
+        filteredItems.sort((a, b) => b.price - a.price);
+      } else if (sortOption === "Rating") {
+        filteredItems.sort((a, b) => b.stars - a.stars);
+      } else if (sortOption === "A-Z") {
+        filteredItems.sort((a, b) => a.name.localeCompare(b.name));
+      }
 
       setShopItems(filteredItems);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterOptions]);
+  }, [filterOptions, sortOption]);
 
   //fetch shop items from db
   useEffect(() => {
@@ -85,7 +110,22 @@ const ShopItems = () => {
 
   //set shopItems array which we display
   useEffect(() => {
-    setShopItems(serverShopItems);
+    if (serverShopItems && serverShopItems.length > 0) {
+      let sortedItems = [...serverShopItems];
+
+      // Sort the filtered items based on the selected sorting option
+      if (sortOption === "Price low to high") {
+        sortedItems.sort((a, b) => a.price - b.price);
+      } else if (sortOption === "Price high to low") {
+        sortedItems.sort((a, b) => b.price - a.price);
+      } else if (sortOption === "Rating") {
+        sortedItems.sort((a, b) => b.stars - a.stars);
+      } else if (sortOption === "A-Z") {
+        sortedItems.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      setShopItems(sortedItems);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serverShopItems]);
 
   //set number of products
