@@ -47,7 +47,7 @@ const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
     "Other",
   ];
   const ages: string[] = ["2+", "6+", "10+", "12+", "15+"];
-  const prices: string[] = ["£10-£50", "£50-£100", "£100+"];
+  const prices: string[] = ["£10-£49", "£50-£99", "£100+"];
   const pieceCounts: string[] = ["3-99", "100-499", "500-999", "1000+"];
 
   const handleCategoryChange = (category: string) => {
