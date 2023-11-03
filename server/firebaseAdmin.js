@@ -2,7 +2,7 @@ import admin from "firebase-admin";
 import "./server-config.js";
 
 const serviceAccount = {
-  type: process.env.FIREBASE_TYPE,
+  type: process.env.NEXT_PUBLIC_FIREBASE_TYPE,
   project_id: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   private_key: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
   private_key_id: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY_ID,
