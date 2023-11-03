@@ -1,5 +1,7 @@
 import admin from "firebase-admin";
-import "./server-config.js";
+import { config } from "dotenv";
+
+config();
 
 const serviceAccount = {
   type: process.env.NEXT_PUBLIC_FIREBASE_TYPE,
