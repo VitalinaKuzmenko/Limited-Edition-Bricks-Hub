@@ -9,35 +9,9 @@ import { useEffect, useState } from "react";
 import { PriceRange, PiecesRange } from "../SideBar/SideBar";
 import { FilterOptions } from "../SideBar/SideBar";
 
-// const GET_ALL_SHOP_ITEMS = gql`
-//   query GetAllShopItems {
-//     getAllShopItems {
-//       id
-//       imagePath
-//       alternativeText
-//       name
-//       price
-//       stars
-//       age
-//       pieces
-//       category
-//     }
-//   }
-// `;
-
-const GET_SHOP_ITEMS = gql`
-  query GetAllShopItems(
-    $category: [String]
-    $age: [Int]
-    $priceRange: [PriceRangeInput]
-    $pieceRange: [PieceRangeInput]
-  ) {
-    getAllShopItems(
-      category: $category
-      age: $age
-      priceRange: $priceRange
-      pieceRange: $pieceRange
-    ) {
+const GET_ALL_SHOP_ITEMS = gql`
+  query GetAllShopItems {
+    getAllShopItems {
       id
       imagePath
       alternativeText
@@ -55,17 +29,8 @@ const ShopItems = () => {
   const [shopItems, setShopItems] = useState<ShopItemObject[] | undefined>(
     undefined
   );
-  const filterOptions = useRecoilValue<FilterOptions>(filterOptionsState);
   const [_, setProductsNumber] = useRecoilState<number>(productsNumberState);
-  // const { loading, error, data } = useQuery(GET_SHOP_ITEMS);
-  const { loading, error, data } = useQuery(GET_SHOP_ITEMS, {
-    variables: {
-      category: filterOptions.category,
-      age: filterOptions.age,
-      priceRange: filterOptions.priceRange,
-      pieceRange: filterOptions.piecesRange,
-    },
-  });
+  const { loading, error, data } = useQuery(GET_ALL_SHOP_ITEMS);
 
   useEffect(() => {
     if (!loading && !error && data) {
