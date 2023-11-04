@@ -22,12 +22,22 @@
   aspect-ratio: 1 / 1;
 }
 
-.image-container .like-icon {
+.image-container .like-icon-container {
   position: absolute;
-  width: 25px;
-  height: 25px;
   top: 10px;
   left: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: #fdc920b4;
+  padding: 5px;
+  border-radius: 50px;
+}
+
+.image-container .like-icon {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .image-container .like-icon:hover,
