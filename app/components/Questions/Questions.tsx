@@ -9,7 +9,9 @@ interface questionAndAnswer {
   answer: string;
 }
 const Questions = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [openQuestions, setOpenQuestions] = useState<boolean[]>(
+    new Array(3).fill(false)
+  );
   const questionsAndAnswers: questionAndAnswer[] = [
     {
       question:
@@ -31,11 +33,9 @@ const Questions = () => {
   ];
 
   const toggleItem = (index: number) => {
-    if (index === activeIndex) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
+    const newOpenQuestions = [...openQuestions];
+    newOpenQuestions[index] = !openQuestions[index];
+    setOpenQuestions(newOpenQuestions);
   };
 
   return (
@@ -43,11 +43,11 @@ const Questions = () => {
       <h2>FAQ</h2>
       <Line />
       {questionsAndAnswers.map((item, index) => (
-        <>
+        <div key={index}>
           <div className="faq-item" onClick={() => toggleItem(index)}>
             <div className="faq-question">{item.question}</div>
             <div className="icon-container">
-              {index === activeIndex ? (
+              {openQuestions[index] ? (
                 <FiChevronDown className="faq-icon" />
               ) : (
                 <FiChevronRight className="faq-icon" />
@@ -55,16 +55,14 @@ const Questions = () => {
             </div>
           </div>
           <div
-            className={`faq-answer ${index === activeIndex ? "active" : ""}`}
+            className={`faq-answer ${openQuestions[index] ? "active" : ""}`}
             style={
-              index === activeIndex
-                ? { maxHeight: "700px" }
-                : { maxHeight: "0" }
+              openQuestions[index] ? { maxHeight: "700px" } : { maxHeight: "0" }
             }
           >
             <p>{item.answer}</p>
           </div>
-        </>
+        </div>
       ))}
     </section>
   );

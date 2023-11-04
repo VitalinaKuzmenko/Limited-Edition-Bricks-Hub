@@ -35,8 +35,9 @@
 .faq-answer {
   font-size: 18px;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
   text-align: center;
+  padding: 0px 10px;
+  transition: all ease-in-out 200ms;
 }
 
 .faq-answer.active {
