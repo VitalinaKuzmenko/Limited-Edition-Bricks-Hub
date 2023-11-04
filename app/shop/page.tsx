@@ -5,10 +5,15 @@ import ShopItems from "./components/ShopItems/ShopItems";
 import SideBar from "./components/SideBar/SideBar";
 import "./shop.css";
 import { useState, useEffect, ChangeEvent } from "react";
-import { productsNumberState, sortOptionValueState } from "../recoil/atoms";
+import {
+  isFilterOpenState,
+  mobileSizeState,
+  productsNumberState,
+  sortOptionValueState,
+} from "../recoil/atoms";
 
 const ShopPage = () => {
-  const [mobileSize, setMobileSize] = useState<boolean>(false);
+  const [mobileSize, setMobileSize] = useRecoilState(mobileSizeState);
   const sortOptions: string[] = [
     "Rating",
     "Price low to high",
@@ -18,11 +23,12 @@ const ShopPage = () => {
   const [sortOptionValue, setSortOptionValue] =
     useRecoilState(sortOptionValueState);
   const [isSortOptionsOpen, setIsSortOptionsOpen] = useState<boolean>(false);
-  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useRecoilState(isFilterOpenState);
   const numberOfShopItems = useRecoilValue(productsNumberState);
 
   const handleSortOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortOptionValue(event.target.value);
+    setIsSortOptionsOpen(false);
   };
 
   const handleMobileSortClick = () => {
@@ -139,7 +145,7 @@ const ShopPage = () => {
       <Line />
       <div className="sidebar-items-container">
         <div className="shop-section">
-          <SideBar mobileSize={mobileSize} isFilterOpen={isFilterOpen} />
+          <SideBar />
         </div>
         <ShopItems />
       </div>

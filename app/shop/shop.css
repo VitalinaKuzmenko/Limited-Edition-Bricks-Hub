@@ -39,7 +39,7 @@
 
 .shop-page-header .sort-select p {
   font-weight: 600;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .shop-page-header .sort-select p:hover,
@@ -74,6 +74,7 @@
   .shop-page-header select {
     width: 250px;
     text-align: right;
+    cursor: pointer;
   }
 
   .shop-page-header .sort-select p {
@@ -97,6 +98,11 @@
   /* sidebar filter and shop items */
   .sidebar-items-container {
     display: flex;
+  }
+
+  .shop-page-header .sort-select p:hover,
+  .shop-page-header .sort-select p:focus {
+    color: var(--blue);
   }
 }
 

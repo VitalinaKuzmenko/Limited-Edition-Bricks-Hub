@@ -1,18 +1,16 @@
 "use client";
 import "./SideBar.css";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRecoilState } from "recoil";
-import { filterOptionsState } from "@/app/recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  filterOptionsState,
+  isFilterOpenState,
+  mobileSizeState,
+} from "@/app/recoil/atoms";
 import {
   createPriceRangeFromString,
   createPiecesRangeFromString,
 } from "@/app/utils/utils";
-
-interface SideBarProps {
-  mobileSize: boolean;
-  isFilterOpen: boolean;
-}
 
 export interface PriceRange {
   minPrice: number;
@@ -31,7 +29,9 @@ export interface FilterOptions {
   piecesRange: PiecesRange[];
 }
 
-const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
+const SideBar = () => {
+  const mobileSize = useRecoilValue(mobileSizeState);
+  const [isFilterOpen, setIsFilterOpen] = useRecoilState(isFilterOpenState);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedAges, setSelectedAges] = useState<string[]>([]);
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
@@ -82,6 +82,10 @@ const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
     } else {
       setSelectedPieceCounts([...selectedPieceCounts, pieceCount]);
     }
+  };
+
+  const onMobileCategoryClick = () => {
+    setIsFilterOpen(false);
   };
 
   //set filterOptions for backEnd
@@ -201,9 +205,9 @@ const SideBar: React.FC<SideBarProps> = ({ mobileSize, isFilterOpen }) => {
         </ul>
       </div>
       {mobileSize && (
-        <Link href="/">
-          <button className="sidebar-show-button">Show products</button>
-        </Link>
+        <button className="sidebar-show-button" onClick={onMobileCategoryClick}>
+          Show products
+        </button>
       )}
     </div>
   );
