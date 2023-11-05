@@ -9,10 +9,8 @@ import {
   productsNumberState,
   sortOptionValueState,
 } from "@/app/recoil/atoms";
-import { use, useEffect, useState } from "react";
-import { PriceRange, PiecesRange } from "../SideBar/SideBar";
+import { useEffect, useState } from "react";
 import { FilterOptions } from "../SideBar/SideBar";
-import { createPriceRangeFromString } from "@/app/utils/utils";
 
 const GET_ALL_SHOP_ITEMS = gql`
   query GetAllShopItems {
@@ -37,6 +35,7 @@ const ShopItems = () => {
   const [shopItems, setShopItems] = useState<ShopItemObject[] | undefined>(
     undefined
   );
+  const [shopError, setShopError] = useState<string>("");
   const [_, setProductsNumber] = useRecoilState<number>(productsNumberState);
   const { loading, error, data } = useQuery(GET_ALL_SHOP_ITEMS);
   const filterOptions: FilterOptions = useRecoilValue(filterOptionsState);
@@ -130,8 +129,10 @@ const ShopItems = () => {
 
   //set number of products
   useEffect(() => {
-    if (shopItems && shopItems?.length > 0)
-      setProductsNumber(shopItems?.length);
+    if (shopItems) setProductsNumber(shopItems?.length);
+    shopItems?.length === 0
+      ? setShopError("Sorry, no items were found")
+      : setShopError("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopItems]);
 
@@ -144,6 +145,7 @@ const ShopItems = () => {
         shopItems.map((item, index) => (
           <ShopItem key={index} shopItem={item} />
         ))}
+      {shopError.length > 0 && <p>{shopError}</p>}
     </div>
   );
 };
