@@ -27,6 +27,7 @@ export const mobileSizeState = atom<boolean>({
   key: "mobileSizeState",
   default: false,
 });
+
 export const isFilterOpenState = atom<boolean>({
   key: "isFilterOpenState",
   default: false,
