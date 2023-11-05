@@ -98,6 +98,7 @@
   /* sidebar filter and shop items */
   .sidebar-items-container {
     display: flex;
+    gap: 15px;
   }
 
   .shop-page-header .sort-select p:hover,

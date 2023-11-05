@@ -61,7 +61,30 @@
 }
 
 .register-section button:hover,
-.register-section button:focus {
+.register-section button:focus,
+.clear-filters-button:hover,
+.clear-filters-button:focus {
   background-color: var(--orange);
   color: var(--blue);
+}
+
+.clear-filters-button {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+  padding: 8px 20px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+@media only screen and (min-width: 768px) {
+  .clear-filters-button {
+    width: 150px;
+  }
 }

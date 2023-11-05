@@ -36,8 +36,9 @@ const SideBar = () => {
   const [selectedAges, setSelectedAges] = useState<string[]>([]);
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [selectedPieceCounts, setSelectedPieceCounts] = useState<string[]>([]);
-  const [_, setFilterOptions] =
+  const [filterOptions, setFilterOptions] =
     useRecoilState<FilterOptions>(filterOptionsState);
+  const [areSelectedFilters, setAreSelectedFilters] = useState<boolean>(false);
 
   const categories: string[] = [
     "Animals",
@@ -88,6 +89,20 @@ const SideBar = () => {
     setIsFilterOpen(false);
   };
 
+  const handleClearFilters = () => {
+    const newOption: FilterOptions = {
+      category: [],
+      age: [],
+      priceRange: [],
+      piecesRange: [],
+    };
+    setSelectedCategories([]);
+    setSelectedAges([]);
+    setSelectedPrices([]);
+    setSelectedPieceCounts([]);
+    setFilterOptions(newOption);
+  };
+
   //set filterOptions for backEnd
   useEffect(() => {
     const arrayWithNumAge = selectedAges.map((age) => Number(age.slice(0, -1)));
@@ -107,6 +122,11 @@ const SideBar = () => {
       piecesRange: piecesRangeArray,
     };
     setFilterOptions(newOption);
+
+    //check if any filters were chosen
+    const allEmpty = Object.values(newOption).every((arr) => arr.length === 0);
+    allEmpty ? setAreSelectedFilters(false) : setAreSelectedFilters(true);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategories, selectedAges, selectedPrices, selectedPieceCounts]);
 
@@ -119,6 +139,13 @@ const SideBar = () => {
             (isFilterOpen ? "sidebar-open" : "sidebar-closed")
       }
     >
+      {areSelectedFilters && (
+        <div className="sidebar-item">
+          <button className="clear-filters-button" onClick={handleClearFilters}>
+            Clear all filters
+          </button>
+        </div>
+      )}
       <div className="sidebar-item">
         <label htmlFor="category" className="main-label">
           Category
