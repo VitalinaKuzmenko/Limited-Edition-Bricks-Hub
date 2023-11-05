@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./ShopItems.css";
 import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
 import ShopItem from "@/app/components/FeaturedItems/components/ShopItem";
@@ -11,6 +12,7 @@ import {
 } from "@/app/recoil/atoms";
 import { useEffect, useState } from "react";
 import { FilterOptions } from "../SideBar/SideBar";
+import ReactLoading from "react-loading";
 
 const GET_ALL_SHOP_ITEMS = gql`
   query GetAllShopItems {
@@ -40,6 +42,7 @@ const ShopItems = () => {
   const { loading, error, data } = useQuery(GET_ALL_SHOP_ITEMS);
   const filterOptions: FilterOptions = useRecoilValue(filterOptionsState);
   const sortOption: string = useRecoilValue(sortOptionValueState);
+  const [shopLoading, setShopLoading] = useState<boolean>(false);
 
   //filter and sort the list
   useEffect(() => {
@@ -136,15 +139,26 @@ const ShopItems = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shopItems]);
 
-  if (loading) return "Loading...";
+  useEffect(() => {
+    setShopLoading(loading);
+  }, [loading]);
+
   if (error) return `Error: ${error.message}`;
 
   return (
-    <div className="shop-items">
-      {shopItems &&
-        shopItems.map((item, index) => (
-          <ShopItem key={index} shopItem={item} />
-        ))}
+    <div
+      className={shopLoading ? "shop-items shop-items-loading" : "shop-items"}
+    >
+      {shopItems && !shopLoading ? (
+        shopItems.map((item, index) => <ShopItem key={index} shopItem={item} />)
+      ) : (
+        <ReactLoading
+          type="bubbles"
+          color="var(--blue)"
+          height={100}
+          width={100}
+        />
+      )}
       {shopError.length > 0 && <p>{shopError}</p>}
     </div>
   );
