@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import "./FeaturedItems.css";
 import ShopItem from "./components/ShopItem";
@@ -37,27 +38,33 @@ export interface ShopItemObject {
 
 const FeaturedItems = () => {
   const [shopLoading, setShopLoading] = useState<boolean>(false);
+  const [featuredShopItems, setFeaturesShopItems] = useState<
+    ShopItemObject[] | undefined
+  >(undefined);
 
   const limit = 3;
   const { loading, error, data } = useQuery(GET_TOP_RATED_SHOP_ITEMS, {
     variables: { limit },
   });
 
+  //fetch shop items from db
   useEffect(() => {
+    if (!loading && !error && data) {
+      const products: ShopItemObject[] = data.getTopRatedShopItems;
+      setFeaturesShopItems(products);
+    }
     setShopLoading(loading);
-  }, [loading]);
+  }, [loading, error, data]);
 
   if (error) return `Error: ${error.message}`;
-
-  const shopItems: ShopItemObject[] = data.getTopRatedShopItems;
 
   return (
     <section className="featured-items">
       <h2>Featured items</h2>
       <Line />
       <div className="featured-items-container">
-        {shopItems && !shopLoading ? (
-          shopItems.map((shopItem) => (
+        {featuredShopItems && !shopLoading ? (
+          featuredShopItems.map((shopItem) => (
             <ShopItem key={shopItem.id} shopItem={shopItem} />
           ))
         ) : (
