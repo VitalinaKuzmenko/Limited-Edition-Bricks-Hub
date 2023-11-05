@@ -120,13 +120,13 @@ const Header = () => {
       setCurrentInfoIndex((prevIndex) =>
         prevIndex === infoTexts.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 4000);
 
     return () => {
       // Clean up the interval on unmount
       clearInterval(interval);
     };
-  }, [infoTexts]);
+  }, [infoTexts.length]);
 
   //define which size of screen is now
   useEffect(() => {
@@ -145,6 +145,7 @@ const Header = () => {
       closeNavbar();
       setIsNavigationClosing(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //handle resize of screen
@@ -172,6 +173,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //TODO: on login click - to check if user is logged in, if yes => open account page, if not - open modal window => sign in or register

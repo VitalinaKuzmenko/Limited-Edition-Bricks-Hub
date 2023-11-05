@@ -1,7 +1,3 @@
-header {
-  /* background-color: var(--orange); */
-}
-
 /* top part of header */
 .header-change-info {
   height: 30px;
@@ -57,6 +53,7 @@ header nav li {
   align-items: center;
   height: 80px;
   background-color: var(--orange);
+  max-width: 1600px;
 }
 
 .header-logo-container {
