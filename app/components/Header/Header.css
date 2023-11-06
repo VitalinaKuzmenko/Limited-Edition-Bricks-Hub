@@ -45,6 +45,11 @@ header nav li {
   overflow: hidden;
 }
 
+.header-container {
+  width: 100vw;
+  background-color: var(--orange);
+}
+
 .header-subcontainer {
   position: relative;
   padding: 0 15px 0 5px;
@@ -54,6 +59,7 @@ header nav li {
   height: 80px;
   background-color: var(--orange);
   max-width: 1600px;
+  margin: 0 auto;
 }
 
 .header-logo-container {
@@ -169,8 +175,7 @@ header nav li {
   outline: none;
   font-size: 14px;
 }
-
-.search__input {
+header-container .search__input {
   width: 0;
 }
 
