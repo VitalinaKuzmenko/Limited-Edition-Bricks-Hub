@@ -11,6 +11,7 @@ import {
   productsNumberState,
   sortOptionValueState,
 } from "../recoil/atoms";
+import PopupSignin from "../components/PopupSignin/PopupSignin";
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useRecoilState(mobileSizeState);
@@ -149,6 +150,7 @@ const ShopPage = () => {
         </div>
         <ShopItems />
       </div>
+      <PopupSignin />
     </div>
   );
 };

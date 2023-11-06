@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import "./signin.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
 import {
   GoogleAuthProvider,
@@ -11,6 +12,8 @@ import {
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { isSigninPopupOpenState } from "../recoil/atoms";
 
 const SigninPage = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,6 +22,7 @@ const SigninPage = () => {
   const [error, setError] = useState("");
   const [msg, setMsg] = useState<string>("");
   const router = useRouter();
+  const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -50,6 +54,10 @@ const SigninPage = () => {
       console.error(errorCode, errorMessage);
     }
   };
+
+  useEffect(() => {
+    setIsSigninPopupOpenState(false);
+  }, []);
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();

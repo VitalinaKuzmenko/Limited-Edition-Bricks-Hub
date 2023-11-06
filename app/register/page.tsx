@@ -5,6 +5,9 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { isSigninPopupOpenState } from "../recoil/atoms";
+import { useEffect } from "react";
 
 interface RegisterForm {
   firstName: string;
@@ -56,6 +59,7 @@ const RegisterPage = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
 
   const handleTogglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -118,6 +122,10 @@ const RegisterPage = () => {
     // Real-time validation for the changed field
     validateForm({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    setIsSigninPopupOpenState(false);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isSigninPopupOpenState, isUserLoginState } from "@/app/recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface NavLink {
   id: number;
@@ -33,6 +35,8 @@ const Header = () => {
   const [mobileSearchExpanded, setMobileSearchExpanded] =
     useState<boolean>(false);
   const searchFormRef = useRef<HTMLFormElement | null>(null);
+  const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
+  const isUserLogin = useRecoilValue(isUserLoginState);
 
   const handleSearchClick = () => {
     const form = document.querySelector(".search");
@@ -78,6 +82,14 @@ const Header = () => {
     setTimeout(() => {
       setIsNavigationClosing(false);
     }, 1000); // Wait for the animation to complete before removing the classes
+  };
+
+  const handleLogin = () => {
+    if (isUserLogin) {
+      //navigate to dashboard
+    } else {
+      setIsSigninPopupOpenState(true);
+    }
   };
 
   //handle searchClickOutside
@@ -248,7 +260,7 @@ const Header = () => {
               />
             </button>
           </form>
-          <div className="login-link-container">
+          <div className="login-link-container" onClick={handleLogin}>
             <img src="/icons/login-icon.svg" alt="login" />
             <p className={mobileSize ? "hidden" : ""}>Login</p>
           </div>

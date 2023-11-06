@@ -1,3 +1,4 @@
+import PopupSignin from "../components/PopupSignin/PopupSignin";
 import "./about.css";
 import Link from "next/link";
 
@@ -38,6 +39,7 @@ const AboutPage = () => {
           <button className="about-pre-order-button">Pre-order now</button>
         </Link>
       </section>
+      <PopupSignin />
     </div>
   );
 };

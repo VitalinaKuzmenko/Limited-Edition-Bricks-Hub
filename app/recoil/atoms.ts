@@ -32,3 +32,14 @@ export const isFilterOpenState = atom<boolean>({
   key: "isFilterOpenState",
   default: false,
 });
+
+//signin popup
+export const isSigninPopupOpenState = atom<boolean>({
+  key: "isSigninPopupOpenState",
+  default: false,
+});
+
+export const isUserLoginState = atom<boolean>({
+  key: "isUserLoginState",
+  default: false,
+});

@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>
-          <ApolloWrapper>
-            <RecoilRootWrapper>{children}</RecoilRootWrapper>
-          </ApolloWrapper>
-        </main>
-        <Footer />
+        <ApolloWrapper>
+          <RecoilRootWrapper>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </RecoilRootWrapper>
+        </ApolloWrapper>
       </body>
     </html>
   );
