@@ -21,6 +21,10 @@ body {
   font-family: var(--font);
 }
 
+main {
+  min-height: 60vh;
+}
+
 .home-page {
   display: flex;
   flex-direction: column;

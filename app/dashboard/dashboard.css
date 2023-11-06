@@ -2,6 +2,7 @@
   max-width: 1600px;
   color: var(--blue);
   padding: 15px;
+  margin: 0 auto;
 }
 
 .dashboard-header h1 {

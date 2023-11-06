@@ -6,7 +6,8 @@ import { useRecoilState } from "recoil";
 import { wishlistItemsState } from "../recoil/atoms";
 import { useEffect, useState, ChangeEvent } from "react";
 import items from "../../fakeData/fakeShopFeaturedItems.json";
-import ShopItemBag from "./components/ShopItemBag";
+import ShopItemBag from "./components/ShopItemBag/ShopItemBag";
+import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 
 const Dashboard = () => {
   const [wishlistItems, setWishListItems] = useRecoilState(wishlistItemsState);
@@ -93,7 +94,7 @@ const Dashboard = () => {
 
         <div className="wishlist-container">
           {selectedDesktopOption === 0 ? (
-            <div>Details</div>
+            <PersonalDetails />
           ) : selectedDesktopOption === 1 ? (
             wishlistItems &&
             wishlistItems.map((item, index) => (

@@ -1,0 +1,33 @@
+.personal-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: space-between;
+}
+
+.personal-details .details-container {
+  width: 150px;
+}
+
+.details-small-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.details-small-container .name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.details-small-container .change {
+  color: var(--orange);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all ease-in-out 150ms;
+}
+
+.details-small-container .change:hover,
+.details-small-container .change:focus {
+  color: var(--blue);
+}
