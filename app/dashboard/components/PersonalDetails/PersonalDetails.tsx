@@ -73,14 +73,16 @@ const PersonalDetails = () => {
 
   const renderField = (field: keyof PersonalDetails) => {
     return isEditing[field] ? (
-      <div>
+      <div className="input-field">
         <input
           type="text"
           value={initialUser[field]}
           onChange={(e) => handleInputChange(field, e)}
         />
-        <button onClick={() => handleCancelClick(field)}>Cancel</button>
-        <button onClick={() => handleDoneClick(field)}>Done</button>
+        <div className="input-buttons">
+          <button onClick={() => handleCancelClick(field)}>Cancel</button>
+          <button onClick={() => handleDoneClick(field)}>Done</button>
+        </div>
       </div>
     ) : (
       <p>{user[field]}</p>
