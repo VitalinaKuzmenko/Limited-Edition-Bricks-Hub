@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import "./SideBar.css";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  categoryFromThemeState,
   filterOptionsState,
   isFilterOpenState,
   mobileSizeState,
@@ -39,6 +41,9 @@ const SideBar = () => {
   const [filterOptions, setFilterOptions] =
     useRecoilState<FilterOptions>(filterOptionsState);
   const [areSelectedFilters, setAreSelectedFilters] = useState<boolean>(false);
+  const [categoryFromTheme, setCategoryFromTheme] = useRecoilState(
+    categoryFromThemeState
+  );
 
   const categories: string[] = [
     "Animals",
@@ -102,6 +107,13 @@ const SideBar = () => {
     setSelectedPieceCounts([]);
     setFilterOptions(newOption);
   };
+
+  useEffect(() => {
+    if (categoryFromTheme.length > 0) {
+      handleCategoryChange(categoryFromTheme);
+      setCategoryFromTheme("");
+    }
+  }, []);
 
   //set filterOptions for backEnd
   useEffect(() => {

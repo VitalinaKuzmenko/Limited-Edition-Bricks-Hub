@@ -43,3 +43,9 @@ export const isUserLoginState = atom<boolean>({
   key: "isUserLoginState",
   default: false,
 });
+
+//home page
+export const categoryFromThemeState = atom<string>({
+  key: "categoryFromThemeState",
+  default: "",
+});

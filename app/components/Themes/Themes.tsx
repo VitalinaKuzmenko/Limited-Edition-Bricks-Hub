@@ -35,6 +35,7 @@ const Themes = () => {
       altText: "other",
     },
   ];
+
   return (
     <section className="themes-container">
       <div className="themes-flex-container">
