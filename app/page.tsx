@@ -1,5 +1,6 @@
 import Carousel from "./components/Carousel/Carousel";
 import FeaturedItems from "./components/FeaturedItems/FeaturedItems";
+import PopupSignin from "./components/PopupSignin/PopupSignin";
 import Questions from "./components/Questions/Questions";
 import Themes from "./components/Themes/Themes";
 
@@ -10,6 +11,7 @@ const HomePage = () => {
       <FeaturedItems />
       <Themes />
       <Questions />
+      <PopupSignin />
     </div>
   );
 };
