@@ -1,0 +1,81 @@
+.dashboard-page {
+  max-width: 1600px;
+  color: var(--blue);
+  padding: 15px;
+}
+
+.dashboard-header h1 {
+  text-align: center;
+  padding: 20px 0 10px 0;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dashboard-left-mobile select {
+  width: 100%;
+  padding: 5px;
+  color: var(--blue);
+  border-radius: 5px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 18px;
+}
+
+.dashboard-left-mobile option {
+  color: var(--blue);
+}
+
+/* desktop */
+.dashboard-left-desktop {
+  width: 200px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.dashboard-left-desktop p {
+  padding: 5px;
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all ease-in-out 150ms;
+  margin-bottom: 5px;
+}
+
+.dashboard-left-desktop p:hover,
+.dashboard-left-desktop p:focus {
+  color: var(--yellow);
+  background-color: var(--blue);
+}
+
+.dashboard-left-desktop .active-account-option {
+  color: var(--yellow);
+  background-color: var(--blue);
+}
+
+.wishlist-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 10px;
+  font-family: var(--font);
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .dashboard-page {
+    padding: 25px;
+  }
+
+  .dashboard-main {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .wishlist-container {
+    grid-gap: 20px;
+  }
+}
