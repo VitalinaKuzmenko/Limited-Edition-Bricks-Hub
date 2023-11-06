@@ -1,0 +1,30 @@
+.logout-container {
+  border: 1px solid var(--blue);
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+}
+
+.logout-container h1 {
+  font-size: 20px;
+}
+
+.logout-container .logout-button {
+  /* width: 100%; */
+  margin-top: 15px;
+  padding: 8px 40px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.logout-container .logout-button:hover,
+.logout-container .logout-button:focus {
+  color: var(--blue);
+  background-color: var(--yellow);
+}
