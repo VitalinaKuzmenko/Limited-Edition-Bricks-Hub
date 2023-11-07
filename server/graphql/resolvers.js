@@ -32,6 +32,21 @@ const resolvers = {
       return items;
     },
   },
+  Mutation: {
+    addUser: async (_, { input }) => {
+      try {
+        const userRef = db.collection("users").doc();
+        const newUser = { ...input };
+        newUser.id = userRef.id;
+
+        await userRef.set(newUser);
+
+        return newUser;
+      } catch (error) {
+        throw new Error("Unable to add new user");
+      }
+    },
+  },
 };
 
 export default resolvers;

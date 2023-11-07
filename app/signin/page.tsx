@@ -14,6 +14,21 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { isSigninPopupOpenState } from "../recoil/atoms";
+import { gql } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
+
+const ADD_NEW_USER = gql`
+  mutation addUser($input: PersonalDetailsInput!) {
+    addUser(input: $input) {
+      id
+      uid
+      name
+      surname
+      email
+      avatarPath
+    }
+  }
+`;
 
 const SigninPage = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,6 +38,7 @@ const SigninPage = () => {
   const [msg, setMsg] = useState<string>("");
   const router = useRouter();
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
+  const client = useApolloClient();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -64,9 +80,35 @@ const SigninPage = () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       const user = userCredential.user;
-      if (user && user.email) {
-        const email = user.email;
-        console.log("email");
+      if (user) {
+        let name = "";
+        let surname = "";
+        if (user.displayName !== null) {
+          const nameParts = user.displayName.split(" ");
+          name = nameParts[0];
+          surname = nameParts[1];
+        }
+
+        console.log("user", user);
+        const input = {
+          uid: user.uid,
+          name: name,
+          surname: surname,
+          email: user.email,
+          avatarPath: "avatar",
+        };
+
+        client
+          .mutate({
+            mutation: ADD_NEW_USER,
+            variables: { input },
+          })
+          .then((result) => {
+            console.log("New User was Added:", result.data.addUser);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       }
       router.push("/dashboard");
     } catch (error: any) {

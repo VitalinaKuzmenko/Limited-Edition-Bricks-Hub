@@ -18,6 +18,27 @@ const typeDefs = gql`
     getAllShopItems: [ShopItem]
     getTopRatedShopItems(limit: Int): [ShopItem]
   }
+
+  input PersonalDetailsInput {
+    uid: String!
+    name: String!
+    surname: String!
+    email: String!
+    avatarPath: String!
+  }
+
+  type User {
+    id: ID!
+    uid: String!
+    name: String!
+    surname: String!
+    email: String!
+    avatarPath: String!
+  }
+
+  type Mutation {
+    addUser(input: PersonalDetailsInput!): User
+  }
 `;
 
 export default typeDefs;
