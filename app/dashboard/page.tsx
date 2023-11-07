@@ -65,7 +65,7 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className="dashboard-page">
+      <main className="dashboard-page">
         <div className="dashboard-header">
           {currentUser && (
             <h1>{`Welcome, ${currentUser.name} ${currentUser.surname}!`}</h1>
@@ -117,7 +117,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
       <PopupSignin />
     </>

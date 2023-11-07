@@ -231,7 +231,7 @@ const SigninPage = () => {
   };
 
   return (
-    <div className="signin-page">
+    <main className="signin-page">
       <form className="singin-form" onSubmit={handleSignIn}>
         <div className="signin-header">
           <h2>
@@ -290,7 +290,7 @@ const SigninPage = () => {
           <FiChevronRight />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

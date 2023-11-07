@@ -8,15 +8,17 @@ import Themes from "./components/Themes/Themes";
 
 const HomePage = () => {
   return (
-    <div className="home-page">
+    <>
       <Header />
-      <Carousel />
-      <FeaturedItems />
-      <Themes />
-      <Questions />
-      <PopupSignin />
+      <main className="home-page">
+        <Carousel />
+        <FeaturedItems />
+        <Themes />
+        <Questions />
+        <PopupSignin />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 

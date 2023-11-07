@@ -111,7 +111,7 @@ const ShopPage = () => {
   return (
     <>
       <Header />
-      <div className="shop-page">
+      <main className="shop-page">
         <h2>Pre-order Limited Edition</h2>
         <div className="shop-page-header">
           <p className="number-of-products">
@@ -155,7 +155,7 @@ const ShopPage = () => {
           <ShopItems />
         </div>
         <PopupSignin />
-      </div>
+      </main>
       <Footer />
     </>
   );

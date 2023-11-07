@@ -9,11 +9,11 @@ const ContactPage = () => {
   return (
     <>
       <Header />
-      <div className="contact-us-page">
+      <main className="contact-us-page">
         <ContactUsSection />
         <VisitUsSection />
         <PopupSignin />
-      </div>
+      </main>
       <Footer />
     </>
   );

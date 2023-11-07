@@ -155,7 +155,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-page">
+    <main className="register-page">
       <div className="register-section">
         <div className="register-header">
           <h2>
@@ -274,7 +274,7 @@ const RegisterPage = () => {
           <button type="submit">Yes, create account!</button>
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 

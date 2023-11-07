@@ -16,9 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ApolloWrapper>
-          <RecoilRootWrapper>
-            <main>{children}</main>
-          </RecoilRootWrapper>
+          <RecoilRootWrapper>{children}</RecoilRootWrapper>
         </ApolloWrapper>
       </body>
     </html>
