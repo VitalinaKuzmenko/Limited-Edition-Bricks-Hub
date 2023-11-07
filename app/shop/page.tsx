@@ -12,6 +12,8 @@ import {
   sortOptionValueState,
 } from "../recoil/atoms";
 import PopupSignin from "../components/PopupSignin/PopupSignin";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useRecoilState(mobileSizeState);
@@ -107,51 +109,55 @@ const ShopPage = () => {
   }, []);
 
   return (
-    <div className="shop-page">
-      <h2>Pre-order Limited Edition</h2>
-      <div className="shop-page-header">
-        <p className="number-of-products">
-          Showing {numberOfShopItems} products
-        </p>
-        <div className="sort-select">
-          <p className="select-label" onClick={handleMobileSortClick}>
-            Sort by
+    <>
+      <Header />
+      <div className="shop-page">
+        <h2>Pre-order Limited Edition</h2>
+        <div className="shop-page-header">
+          <p className="number-of-products">
+            Showing {numberOfShopItems} products
           </p>
-          <select
-            id="sort"
-            name="sort"
-            value={sortOptionValue}
-            className={
-              !mobileSize
-                ? "select-visible"
-                : isSortOptionsOpen
-                ? "select-opened"
-                : "select-closed"
-            }
-            onChange={handleSortOptionChange}
-          >
-            {sortOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {mobileSize && (
-            <p className="filter-label" onClick={handleMobileFilterClick}>
-              Filter
+          <div className="sort-select">
+            <p className="select-label" onClick={handleMobileSortClick}>
+              Sort by
             </p>
-          )}
+            <select
+              id="sort"
+              name="sort"
+              value={sortOptionValue}
+              className={
+                !mobileSize
+                  ? "select-visible"
+                  : isSortOptionsOpen
+                  ? "select-opened"
+                  : "select-closed"
+              }
+              onChange={handleSortOptionChange}
+            >
+              {sortOptions.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            {mobileSize && (
+              <p className="filter-label" onClick={handleMobileFilterClick}>
+                Filter
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <Line />
-      <div className="sidebar-items-container">
-        <div className="shop-section">
-          <SideBar />
+        <Line />
+        <div className="sidebar-items-container">
+          <div className="shop-section">
+            <SideBar />
+          </div>
+          <ShopItems />
         </div>
-        <ShopItems />
+        <PopupSignin />
       </div>
-      <PopupSignin />
-    </div>
+      <Footer />
+    </>
   );
 };
 

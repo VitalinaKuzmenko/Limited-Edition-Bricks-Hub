@@ -2,13 +2,16 @@
 "use client";
 import Line from "../components/Line/Line";
 import "./dashboard.css";
-import { useRecoilState } from "recoil";
-import { wishlistItemsState } from "../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currentUserState, wishlistItemsState } from "../recoil/atoms";
 import { useEffect, useState, ChangeEvent } from "react";
 import items from "../../fakeData/fakeShopFeaturedItems.json";
 import ShopItemBag from "./components/ShopItemBag/ShopItemBag";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import LogOut from "./components/LogOut/LogOut";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import PopupSignin from "../components/PopupSignin/PopupSignin";
 
 const Dashboard = () => {
   const [wishlistItems, setWishListItems] = useRecoilState(wishlistItemsState);
@@ -20,6 +23,7 @@ const Dashboard = () => {
     "Wishlist",
     "Log out",
   ];
+  const currentUser = useRecoilValue(currentUserState);
 
   const handleMobileOptions = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -59,54 +63,64 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-page">
-      <div className="dashboard-header">
-        <h1>Welcome, Vitalina!</h1>
-        <Line />
-      </div>
-      <div className="dashboard-main">
-        {mobileSize ? (
-          <div className="dashboard-left-mobile">
-            <select
-              className="account-menu"
-              onChange={handleMobileOptions}
-              value={selectedOption}
-            >
-              <option value="personal-details">Personal details</option>
-              <option value="wishlist">Wishlist</option>
-              <option value="logout">Log out</option>
-            </select>
-          </div>
-        ) : (
-          <div className="dashboard-left-desktop">
-            {dashboardOptions.map((option, index) => (
-              <p
-                key={index}
-                onClick={() => handleOptionClick(index)}
-                className={
-                  index === selectedDesktopOption ? "active-account-option" : ""
-                }
-              >
-                {option}
-              </p>
-            ))}
-          </div>
-        )}
-
-        <div className="wishlist-container">
-          {selectedDesktopOption === 0 ? (
-            <PersonalDetails />
-          ) : selectedDesktopOption === 1 ? (
-            wishlistItems &&
-            wishlistItems.map((item, index) => (
-              <ShopItemBag key={index} item={item} />
-            ))
-          ) : (
-            <LogOut />
+    <>
+      <Header />
+      <div className="dashboard-page">
+        <div className="dashboard-header">
+          {currentUser && (
+            <h1>{`Welcome, ${currentUser.name} ${currentUser.surname}!`}</h1>
           )}
+
+          <Line />
+        </div>
+        <div className="dashboard-main">
+          {mobileSize ? (
+            <div className="dashboard-left-mobile">
+              <select
+                className="account-menu"
+                onChange={handleMobileOptions}
+                value={selectedOption}
+              >
+                <option value="personal-details">Personal details</option>
+                <option value="wishlist">Wishlist</option>
+                <option value="logout">Log out</option>
+              </select>
+            </div>
+          ) : (
+            <div className="dashboard-left-desktop">
+              {dashboardOptions.map((option, index) => (
+                <p
+                  key={index}
+                  onClick={() => handleOptionClick(index)}
+                  className={
+                    index === selectedDesktopOption
+                      ? "active-account-option"
+                      : ""
+                  }
+                >
+                  {option}
+                </p>
+              ))}
+            </div>
+          )}
+
+          <div className="wishlist-container">
+            {selectedDesktopOption === 0 ? (
+              <PersonalDetails />
+            ) : selectedDesktopOption === 1 ? (
+              wishlistItems &&
+              wishlistItems.map((item, index) => (
+                <ShopItemBag key={index} item={item} />
+              ))
+            ) : (
+              <LogOut />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+      <PopupSignin />
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { FilterOptions } from "../shop/components/SideBar/SideBar";
 import { ShopItemObject } from "../components/FeaturedItems/FeaturedItems";
+import { User } from "../dashboard/components/PersonalDetails/PersonalDetails";
 
 //shop page
 export const productsNumberState = atom<number>({
@@ -54,5 +55,11 @@ export const categoryFromThemeState = atom<string>({
 //dashboard
 export const wishlistItemsState = atom<ShopItemObject[] | undefined>({
   key: "wishlistItemsState",
+  default: undefined,
+});
+
+//sign in
+export const currentUserState = atom<User | undefined>({
+  key: "currentUserState",
   default: undefined,
 });

@@ -4,8 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { isSigninPopupOpenState, isUserLoginState } from "@/app/recoil/atoms";
+import {
+  currentUserState,
+  isSigninPopupOpenState,
+  isUserLoginState,
+} from "@/app/recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useRouter } from "next/navigation";
+import { auth } from "@/firebaseConfig";
 
 interface NavLink {
   id: number;
@@ -36,7 +42,9 @@ const Header = () => {
     useState<boolean>(false);
   const searchFormRef = useRef<HTMLFormElement | null>(null);
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
-  const isUserLogin = useRecoilValue(isUserLoginState);
+  const [isUserLogin, setIsUserLogin] = useRecoilState(isUserLoginState);
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const router = useRouter();
 
   const handleSearchClick = () => {
     const form = document.querySelector(".search");
@@ -86,7 +94,7 @@ const Header = () => {
 
   const handleLogin = () => {
     if (isUserLogin) {
-      //navigate to dashboard
+      router.push("/dashboard");
     } else {
       setIsSigninPopupOpenState(true);
     }
@@ -188,7 +196,38 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //TODO: on login click - to check if user is logged in, if yes => open account page, if not - open modal window => sign in or register
+  //check if user is logged in
+  useEffect(() => {
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        console.log("user logged in", user);
+        console.log("uid", user.uid);
+        setIsUserLogin(true);
+
+        if (user && user.email) {
+          let name = "";
+          let surname = "";
+          if (user.displayName !== null) {
+            const nameParts = user.displayName.split(" ");
+            name = nameParts[0];
+            surname = nameParts[1];
+          }
+
+          const input = {
+            uid: user.uid,
+            name: name,
+            surname: surname,
+            email: user.email,
+            avatarPath: "avatar",
+          };
+          setCurrentUser(input);
+        }
+      } else {
+        setIsUserLogin(false);
+        console.log("there is no user");
+      }
+    });
+  }, []);
 
   return (
     <header>
@@ -266,7 +305,10 @@ const Header = () => {
             </form>
             <div className="login-link-container" onClick={handleLogin}>
               <img src="/icons/login-icon.svg" alt="login" />
-              <p className={mobileSize ? "hidden" : ""}>Login</p>
+
+              <p className={mobileSize ? "hidden" : ""}>
+                {isUserLogin ? currentUser?.name : "Log in"}
+              </p>
             </div>
             <div className="wishlist-header-icon">
               <img src="/icons/empty-heart-icon.svg" alt="wishlist" />
