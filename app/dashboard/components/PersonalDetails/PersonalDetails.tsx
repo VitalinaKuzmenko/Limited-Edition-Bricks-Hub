@@ -6,7 +6,6 @@ export interface PersonalDetails {
   name: string;
   surname: string;
   email: string;
-  password: string;
   avatarPath: string;
 }
 
@@ -14,7 +13,6 @@ const fakeUser: PersonalDetails = {
   name: "Vitalina",
   surname: "Kuzmenko",
   email: "pyshokvi@gmail.com",
-  password: "********",
   avatarPath: "avatar.svg",
 };
 
@@ -22,7 +20,6 @@ interface EditingStatus {
   name: boolean;
   surname: boolean;
   email: boolean;
-  password: boolean;
   avatarPath: boolean;
 }
 
@@ -33,7 +30,6 @@ const PersonalDetails = () => {
     name: false,
     surname: false,
     email: false,
-    password: false,
     avatarPath: false,
   });
 
@@ -89,6 +85,8 @@ const PersonalDetails = () => {
     );
   };
 
+  const resetPassword = () => {};
+
   return (
     <div className="personal-details">
       <div className="details-container">
@@ -121,11 +119,10 @@ const PersonalDetails = () => {
       <div className="details-container">
         <div className="details-small-container">
           <p className="name">Password</p>
-          <p className="change" onClick={() => handleEditClick("password")}>
-            Change
-          </p>
         </div>
-        {renderField("password")}
+        <p className="reset-password" onClick={resetPassword}>
+          Reset a password
+        </p>
       </div>
       <div className="details-container">
         <div className="details-small-container">

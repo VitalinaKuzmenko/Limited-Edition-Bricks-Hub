@@ -65,3 +65,15 @@
   color: var(--blue);
   background-color: var(--yellow);
 }
+
+.reset-password {
+  color: var(--orange);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all ease-in-out 150ms;
+}
+
+.reset-password:hover,
+.reset-password:focus {
+  color: var(--blue);
+}
