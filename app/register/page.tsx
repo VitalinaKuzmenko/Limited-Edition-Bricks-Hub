@@ -8,6 +8,10 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { isSigninPopupOpenState } from "../recoil/atoms";
 import { useEffect } from "react";
+import { gql } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
+import { updateProfile } from "firebase/auth";
+import { GET_USER_BY_UID, ADD_NEW_USER } from "../signin/page";
 
 interface RegisterForm {
   firstName: string;
@@ -60,9 +64,29 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
+  const client = useApolloClient();
 
   const handleTogglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const fetchUser = async (uid: string) => {
+    try {
+      const { data } = await client.query({
+        query: GET_USER_BY_UID,
+        variables: {
+          uid: uid,
+        },
+      });
+
+      const userExists = data.getUserByUid;
+
+      if (userExists) {
+        return true;
+      }
+    } catch (error) {
+      console.error("Error querying user by UID:", error);
+    }
   };
 
   const validateForm = (data: typeof formData) => {
@@ -137,13 +161,52 @@ const RegisterPage = () => {
       console.log("Form has validation errors, please correct them.");
     } else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(
+        await createUserWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
         );
-        const user = userCredential.user;
-        console.log("user", user);
+        if (auth.currentUser) {
+          await updateProfile(auth.currentUser, {
+            displayName: `${formData.firstName} ${formData.lastName}`,
+          });
+
+          const user = auth.currentUser;
+          if (user && user.email) {
+            let name = "";
+            let surname = "";
+            if (user.displayName !== null) {
+              const nameParts = user.displayName.split(" ");
+              name = nameParts[0];
+              surname = nameParts[1];
+            }
+
+            const input = {
+              uid: user.uid,
+              name: name,
+              surname: surname,
+              email: user.email,
+              avatarPath: "avatar",
+            };
+
+            const userExists = await fetchUser(input.uid);
+
+            if (!userExists) {
+              client
+                .mutate({
+                  mutation: ADD_NEW_USER,
+                  variables: { input },
+                })
+                .then((result) => {
+                  console.log("New User was Added:", result.data.addUser);
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            }
+          }
+        }
+
         router.push("/signin");
       } catch (error: any) {
         const errorCode = error.code;

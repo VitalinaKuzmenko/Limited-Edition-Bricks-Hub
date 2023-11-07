@@ -13,11 +13,9 @@ import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { currentUserState, isSigninPopupOpenState } from "../recoil/atoms";
+import { isSigninPopupOpenState } from "../recoil/atoms";
 import { gql } from "@apollo/client";
 import { useApolloClient } from "@apollo/client";
-import { User } from "../dashboard/components/PersonalDetails/PersonalDetails";
-import { useQuery } from "@apollo/client";
 
 export const ADD_NEW_USER = gql`
   mutation addUser($input: PersonalDetailsInput!) {
