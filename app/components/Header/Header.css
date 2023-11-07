@@ -175,8 +175,10 @@ header nav li {
   outline: none;
   font-size: 14px;
 }
-header-container .search__input {
+
+.search__input {
   width: 0;
+  transition: width 0.5s;
 }
 
 .mobile-search .search__input {
@@ -370,8 +372,7 @@ header-container .search__input {
   }
 
   .search__input {
-    width: 0;
-    transition: width 0.5s;
+    width: 180px;
   }
 
   .search:focus-within input {
