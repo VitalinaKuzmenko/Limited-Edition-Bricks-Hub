@@ -55,15 +55,24 @@ const resolvers = {
   Mutation: {
     addUser: async (_, { input }) => {
       try {
-        const userRef = db.collection("users").doc();
+        const userRef = db.collection("users").doc(input.uid);
         const newUser = { ...input };
         newUser.id = userRef.id;
 
         await userRef.set(newUser);
 
+        const wishlistData = {};
+        const bagData = {};
+
+        const wishlistRef = userRef.collection("wishlist").doc();
+        const bagRef = userRef.collection("bag").doc();
+
+        await wishlistRef.set(wishlistData);
+        await bagRef.set(bagData);
+
         return newUser;
       } catch (error) {
-        throw new Error("Unable to add new user");
+        throw new Error("Unable to add a new user or create collections");
       }
     },
   },
