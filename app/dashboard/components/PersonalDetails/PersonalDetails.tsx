@@ -3,6 +3,7 @@ import "./PersonalDetails.css";
 import { useState } from "react";
 
 export interface PersonalDetails {
+  uid: string;
   name: string;
   surname: string;
   email: string;
@@ -10,6 +11,7 @@ export interface PersonalDetails {
 }
 
 const fakeUser: PersonalDetails = {
+  uid: "ouQvjAEIsAZdQdWgJqpxGQLb93N2",
   name: "Vitalina",
   surname: "Kuzmenko",
   email: "pyshokvi@gmail.com",
@@ -33,13 +35,13 @@ const PersonalDetails = () => {
     avatarPath: false,
   });
 
-  const handleEditClick = (field: keyof PersonalDetails) => {
+  const handleEditClick = (field: keyof EditingStatus) => {
     const updatedEditing = { ...isEditing };
     updatedEditing[field] = true;
     setIsEditing(updatedEditing);
   };
 
-  const handleCancelClick = (field: keyof PersonalDetails) => {
+  const handleCancelClick = (field: keyof EditingStatus) => {
     const updatedEditing = { ...isEditing };
     updatedEditing[field] = false;
     setIsEditing(updatedEditing);
@@ -49,7 +51,7 @@ const PersonalDetails = () => {
     setInitialUser(updatedUser);
   };
 
-  const handleDoneClick = (field: keyof PersonalDetails) => {
+  const handleDoneClick = (field: keyof EditingStatus) => {
     const updatedEditing = { ...isEditing };
     updatedEditing[field] = false;
     setIsEditing(updatedEditing);
@@ -67,7 +69,7 @@ const PersonalDetails = () => {
     setInitialUser(updatedUser);
   };
 
-  const renderField = (field: keyof PersonalDetails) => {
+  const renderField = (field: keyof EditingStatus) => {
     return isEditing[field] ? (
       <div className="input-field">
         <input
