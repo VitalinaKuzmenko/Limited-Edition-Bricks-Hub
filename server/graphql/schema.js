@@ -38,6 +38,16 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(input: PersonalDetailsInput!): User
+    updateUserByUid(
+      uid: String!
+      name: String
+      surname: String
+      avatarPath: String
+    ): User
+  }
+
+  type Query {
+    getUserByUid(uid: String!): User
   }
 `;
 

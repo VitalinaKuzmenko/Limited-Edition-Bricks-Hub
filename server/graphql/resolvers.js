@@ -31,7 +31,27 @@ const resolvers = {
 
       return items;
     },
+    getUserByUid: async (_, { uid }) => {
+      try {
+        const userRef = db.collection("users").where("uid", "==", uid);
+        const snapshot = await userRef.get();
+
+        if (snapshot.empty) {
+          throw new Error("User not found");
+        }
+
+        let user = null;
+        snapshot.forEach((doc) => {
+          user = doc.data();
+        });
+
+        return user;
+      } catch (error) {
+        throw new Error(`Unable to fetch user information: ${error.message}`);
+      }
+    },
   },
+
   Mutation: {
     addUser: async (_, { input }) => {
       try {
@@ -47,6 +67,34 @@ const resolvers = {
       }
     },
   },
+  // updateUserByUid: async (_, { uid, name, surname, avatarPath }) => {
+  //   try {
+  //     const userRef = db.collection("users").where("uid", "==", uid);
+  //     const snapshot = await userRef.get();
+
+  //     if (snapshot.empty) {
+  //       throw new Error("User not found");
+  //     }
+
+  //     let updatedUser = null;
+  //     snapshot.forEach((doc) => {
+  //       const user = doc.data();
+  //       if (name) user.name = name;
+  //       if (surname) user.surname = surname;
+  //       if (avatarPath) user.avatarPath = avatarPath;
+  //       updatedUser = user;
+  //       doc.ref.update({
+  //         name: name || user.name,
+  //         surname: surname || user.surname,
+  //         avatarPath: avatarPath || user.avatarPath,
+  //       });
+  //     });
+
+  //     return updatedUser;
+  //   } catch (error) {
+  //     throw new Error(`Unable to update user information: ${error.message}`);
+  //   }
+  // },
 };
 
 export default resolvers;
