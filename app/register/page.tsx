@@ -8,10 +8,9 @@ import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { isSigninPopupOpenState } from "../recoil/atoms";
 import { useEffect } from "react";
-import { gql } from "@apollo/client";
 import { useApolloClient } from "@apollo/client";
 import { updateProfile } from "firebase/auth";
-import { GET_USER_BY_UID, ADD_NEW_USER } from "../signin/page";
+import { GET_USER_BY_UID, ADD_NEW_USER } from "../graphql/frontendSchema";
 
 interface RegisterForm {
   firstName: string;
