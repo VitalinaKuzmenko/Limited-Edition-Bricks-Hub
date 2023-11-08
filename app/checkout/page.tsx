@@ -4,13 +4,15 @@ import Header from "../components/Header/Header";
 import { useState, useEffect } from "react";
 import BagItem from "./components/BagItem/BagItem";
 import "./checkout.css";
-import { useRecoilState } from "recoil";
-import { bagItemsState } from "../recoil/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { bagItemsState, isPopupPreorderOpenState } from "../recoil/atoms";
+import PopupPreorder from "./components/PopupPreorder/PopupPreorder";
 
 const Checkout = () => {
   const [bagItems, setBagItems] = useRecoilState(bagItemsState);
   const [totalQuantity, setTotalQuantity] = useState<number>(0);
   const [totalCost, setTotalCost] = useState<number>(0);
+  const setIsPopupPreorderOpen = useSetRecoilState(isPopupPreorderOpenState);
 
   const handleIncrement = (itemId: string) => {
     setBagItems((prevBagItems) => {
@@ -53,6 +55,14 @@ const Checkout = () => {
     );
   };
 
+  const handlePreorder = () => {
+    setIsPopupPreorderOpen(true);
+    setTimeout(function () {
+      setIsPopupPreorderOpen(false);
+      setBagItems(undefined);
+    }, 7000);
+  };
+
   useEffect(() => {
     const quantity = calculateTotalQuantity(bagItems);
     const cost = Number(calculateTotalCost(bagItems).toFixed(2));
@@ -69,7 +79,7 @@ const Checkout = () => {
           <div className="summary-container">
             <p>Subtotal: £{totalCost}</p>
             <p>Amount: {totalQuantity} items</p>
-            <button>Pre-order items</button>
+            <button onClick={handlePreorder}>Pre-order items</button>
           </div>
         )}
 
@@ -87,6 +97,7 @@ const Checkout = () => {
             <p className="bag-error">There are no items in your bag.</p>
           )}
         </div>
+        <PopupPreorder />
       </main>
       <Footer />
     </>

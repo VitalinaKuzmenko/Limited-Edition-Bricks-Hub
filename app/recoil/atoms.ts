@@ -78,3 +78,9 @@ export const bagItemsState = atom<BagItem[] | undefined>({
   key: "bagItemsState",
   default: undefined,
 });
+
+//checkout
+export const isPopupPreorderOpenState = atom<boolean>({
+  key: "isPopupPreorderOpenState",
+  default: false,
+});
