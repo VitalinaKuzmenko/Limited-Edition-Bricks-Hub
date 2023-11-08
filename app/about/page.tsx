@@ -12,7 +12,7 @@ const AboutPage = () => {
         <section className="about-page-section">
           <h2>About Limited Edition Bricks Hub</h2>
           <p>
-            Welcome to LimitedEdition Bricks Hub, your premier destination for
+            Welcome to Limited Edition Bricks Hub, your premier destination for
             the most exclusive and sought-after LEGO collectibles. We&apos;re
             passionate about bringing the rarest and most limited-edition LEGO
             sets right to your fingertips.
@@ -21,7 +21,7 @@ const AboutPage = () => {
         <section className="about-page-section">
           <h2>Preorder Your LEGO Dreams</h2>
           <p>
-            At LimitedEdition Bricks Hub, we believe in celebrating the essence
+            At Limited Edition Bricks Hub, we believe in celebrating the essence
             of LEGO&apos;s artistry and innovation. That&apos;s why we offer you
             the opportunity to preorder the most coveted LEGO collectibles
             before they hit the shelves. By preordering, you secure your piece
@@ -36,8 +36,8 @@ const AboutPage = () => {
           </p>
           <p>
             Explore our catalog, embark on your LEGO journey, and preorder your
-            next masterpiece today. Thank you for choosing LimitedEdition Bricks
-            Hub to be a part of your LEGO adventure.
+            next masterpiece today. Thank you for choosing Limited Edition
+            Bricks Hub to be a part of your LEGO adventure.
           </p>
           <Link href="/shop">
             <button className="about-pre-order-button">Pre-order now</button>
