@@ -72,15 +72,13 @@
   }
 
   .shop-page-header select {
-    width: 250px;
+    width: 150px;
     text-align: right;
     cursor: pointer;
   }
 
   .shop-page-header .sort-select p {
-    position: absolute;
-    top: 2px;
-    left: 5px;
+    margin-right: 5px;
   }
 
   .shop-page-header .select-visible {
