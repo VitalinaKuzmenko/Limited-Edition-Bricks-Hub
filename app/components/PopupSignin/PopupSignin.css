@@ -63,6 +63,11 @@
   justify-content: space-between;
 }
 
+.popup-signin .logo_x h2 {
+  text-align: start;
+  padding: 0;
+}
+
 .popup-signin .logo_x img {
   /* blue */
   filter: invert(15%) sepia(58%) saturate(3268%) hue-rotate(205deg)
