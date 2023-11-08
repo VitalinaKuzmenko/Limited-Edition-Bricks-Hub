@@ -55,7 +55,7 @@ const Checkout = () => {
           <button>Pre-order items</button>
         </div>
         <div className="bag-items-container">
-          {bagItems &&
+          {bagItems && bagItems.length > 0 ? (
             bagItems.map((item, index) => (
               <BagItem
                 key={index}
@@ -63,7 +63,10 @@ const Checkout = () => {
                 onIncrement={handleIncrement}
                 onDecrement={handleDecrement}
               />
-            ))}
+            ))
+          ) : (
+            <p className="bag-error">There are no items in you bag.</p>
+          )}
         </div>
       </main>
       <Footer />
