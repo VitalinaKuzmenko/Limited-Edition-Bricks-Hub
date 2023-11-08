@@ -27,6 +27,7 @@
   width: 35px;
   height: 35px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .bag-items-container .remove-icon {
@@ -38,7 +39,7 @@
     brightness(88%) contrast(101%);
 }
 
-.bag-items-container.remove-icon:hover,
+.bag-items-container .remove-icon:hover,
 .bag-items-container .remove-icon:focus {
   /* orange */
   filter: invert(56%) sepia(72%) saturate(3479%) hue-rotate(351deg)

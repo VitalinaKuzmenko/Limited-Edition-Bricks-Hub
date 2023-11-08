@@ -6,6 +6,9 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
 import { useEffect } from "react";
 import { BagItem } from "@/app/components/FeaturedItems/FeaturedItems";
+import { useRecoilState } from "recoil";
+import { bagItemsState } from "@/app/recoil/atoms";
+import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
 
 interface ShopItemBagProps {
   item: BagItem;
@@ -19,6 +22,7 @@ const BagItem: React.FC<ShopItemBagProps> = ({
   onDecrement,
 }) => {
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [bagItems, setBagItems] = useRecoilState(bagItemsState);
 
   const {
     id,
@@ -43,6 +47,19 @@ const BagItem: React.FC<ShopItemBagProps> = ({
       );
     }
   }
+
+  const removeFromBag = (shopItem: ShopItemObject) => {
+    setBagItems((prevBagItems) => {
+      if (!prevBagItems) return prevBagItems;
+
+      const updatedBagItems: BagItem[] = prevBagItems.filter(
+        (item) => item.item.id !== shopItem.id
+      );
+
+      return updatedBagItems.length > 0 ? updatedBagItems : undefined;
+    });
+  };
+
   //download image from firebase storage
   useEffect(() => {
     const downloadImage = async () => {
@@ -111,7 +128,10 @@ const BagItem: React.FC<ShopItemBagProps> = ({
         </div>
       </div>
 
-      <div className="remove-icon-container">
+      <div
+        className="remove-icon-container"
+        onClick={() => removeFromBag(item.item)}
+      >
         <Image
           className="remove-icon"
           src="/icons/trash-icon.svg"

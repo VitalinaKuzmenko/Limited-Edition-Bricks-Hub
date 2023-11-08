@@ -155,33 +155,6 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
     });
   };
 
-  // const removeFromBag = (shopItem: ShopItemObject) => {
-  //   setBagItems((prevBagItems) => {
-  //     if (!prevBagItems) return prevBagItems;
-
-  //     const updatedBagItems: BagItem[] = [...prevBagItems];
-  //     const existingItemIndex = updatedBagItems.findIndex((item) => item.item.id === shopItem.id);
-
-  //     if (existingItemIndex !== -1 && updatedBagItems[existingItemIndex].quantity > 0) {
-  //       // Create a new object with the updated quantity
-  //       const updatedItem = {
-  //         ...updatedBagItems[existingItemIndex],
-  //         quantity: updatedBagItems[existingItemIndex].quantity - 1,
-  //       };
-
-  //       // Replace the existing item with the updated one
-  //       updatedBagItems[existingItemIndex] = updatedItem;
-
-  //       // Remove the item from the bag if quantity becomes 0
-  //       if (updatedBagItems[existingItemIndex].quantity === 0) {
-  //         updatedBagItems.splice(existingItemIndex, 1);
-  //       }
-  //     }
-
-  //     return updatedBagItems.length > 0 ? updatedBagItems : undefined;
-  //   });
-  // };
-
   //define what items are liked
   useEffect(() => {
     if (wishlistItems) {

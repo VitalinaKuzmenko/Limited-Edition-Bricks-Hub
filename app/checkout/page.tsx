@@ -11,6 +11,8 @@ import { bagItemsState } from "../recoil/atoms";
 
 const Checkout = () => {
   const [bagItems, setBagItems] = useRecoilState(bagItemsState);
+  const [totalQuantity, setTotalQuantity] = useState<number>(0);
+  const [totalCost, setTotalCost] = useState<number>(0);
 
   const handleIncrement = (itemId: string) => {
     setBagItems((prevBagItems) => {
@@ -38,6 +40,28 @@ const Checkout = () => {
     });
   };
 
+  const calculateTotalQuantity = (bagItems: BagItem[] | undefined): number => {
+    if (!bagItems) return 0;
+
+    return bagItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const calculateTotalCost = (bagItems: BagItem[] | undefined): number => {
+    if (!bagItems) return 0;
+
+    return bagItems.reduce(
+      (total, item) => total + item.item.price * item.quantity,
+      0
+    );
+  };
+
+  useEffect(() => {
+    const quantity = calculateTotalQuantity(bagItems);
+    const cost = Number(calculateTotalCost(bagItems).toFixed(2));
+    setTotalQuantity(quantity);
+    setTotalCost(cost);
+  }, [bagItems]);
+
   useEffect(() => {
     // setBagItems(items);
   }, []);
@@ -50,8 +74,8 @@ const Checkout = () => {
       <main className="checkout-container">
         <h2>My bag</h2>
         <div className="summary-container">
-          <p>Subtotal: £123.95</p>
-          <p>Amount: 5 items</p>
+          <p>Subtotal: £{totalCost}</p>
+          <p>Amount: {totalQuantity} items</p>
           <button>Pre-order items</button>
         </div>
         <div className="bag-items-container">
@@ -65,7 +89,7 @@ const Checkout = () => {
               />
             ))
           ) : (
-            <p className="bag-error">There are no items in you bag.</p>
+            <p className="bag-error">There are no items in your bag.</p>
           )}
         </div>
       </main>
