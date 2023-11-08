@@ -1,5 +1,6 @@
 import Carousel from "./components/Carousel/Carousel";
 import FeaturedItems from "./components/FeaturedItems/FeaturedItems";
+import PopupBag from "./components/FeaturedItems/components/PopupBag/PopupBag";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import PopupSignin from "./components/PopupSignin/PopupSignin";
@@ -16,6 +17,7 @@ const HomePage = () => {
         <Themes />
         <Questions />
         <PopupSignin />
+        <PopupBag />
       </main>
       <Footer />
     </>

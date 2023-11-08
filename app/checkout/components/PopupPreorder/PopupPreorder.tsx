@@ -1,7 +1,5 @@
 "use client";
-import Link from "next/link";
 import "./PopupPreorder.css";
-import Image from "next/image";
 import { useRecoilState } from "recoil";
 import { isPopupPreorderOpenState } from "@/app/recoil/atoms";
 
@@ -9,10 +7,6 @@ const PopupPreorder = () => {
   const [isPopupPreorderOpen, setIsPopupPreorderOpen] = useRecoilState<boolean>(
     isPopupPreorderOpenState
   );
-
-  const handleClosePopup = () => {
-    setIsPopupPreorderOpen(false);
-  };
 
   return (
     <>

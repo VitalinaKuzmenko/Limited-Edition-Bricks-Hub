@@ -84,3 +84,15 @@ export const isPopupPreorderOpenState = atom<boolean>({
   key: "isPopupPreorderOpenState",
   default: false,
 });
+
+//register
+export const isPopupRegisterOpenState = atom<boolean>({
+  key: "isPopupRegisterOpenState",
+  default: false,
+});
+
+//home and shop
+export const isPopupBagOpenState = atom<boolean>({
+  key: "isPopupBagOpenState",
+  default: false,
+});

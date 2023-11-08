@@ -14,6 +14,7 @@ import {
 import PopupSignin from "../components/PopupSignin/PopupSignin";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import PopupBag from "../components/FeaturedItems/components/PopupBag/PopupBag";
 
 const ShopPage = () => {
   const [mobileSize, setMobileSize] = useRecoilState(mobileSizeState);
@@ -155,6 +156,7 @@ const ShopPage = () => {
           <ShopItems />
         </div>
         <PopupSignin />
+        <PopupBag />
       </main>
       <Footer />
     </>

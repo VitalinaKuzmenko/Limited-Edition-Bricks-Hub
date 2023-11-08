@@ -12,10 +12,11 @@ import {
   DefaultContext,
   ApolloCache,
 } from "@apollo/client";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   bagItemsState,
   currentUserState,
+  isPopupBagOpenState,
   isSigninPopupOpenState,
   wishlistItemsState,
 } from "@/app/recoil/atoms";
@@ -57,6 +58,7 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
   const [__, setIsSigninPopupOpenState] = useRecoilState(
     isSigninPopupOpenState
   );
+  const setIsPopupBagOpen = useSetRecoilState(isPopupBagOpenState);
 
   const {
     id,
@@ -161,6 +163,7 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
 
         return updatedBagItems;
       });
+      setIsPopupBagOpen(true);
     } else {
       setIsSigninPopupOpenState(true);
     }

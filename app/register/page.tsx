@@ -5,12 +5,16 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
-import { useRecoilState } from "recoil";
-import { isSigninPopupOpenState } from "../recoil/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  isPopupRegisterOpenState,
+  isSigninPopupOpenState,
+} from "../recoil/atoms";
 import { useEffect } from "react";
 import { useApolloClient } from "@apollo/client";
 import { updateProfile } from "firebase/auth";
 import { GET_USER_BY_UID, ADD_NEW_USER } from "../graphql/frontendSchema";
+import PopupRegister from "./components/PopupRegister/PopupRegister";
 
 interface RegisterForm {
   firstName: string;
@@ -63,6 +67,7 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
+  const setIsPopupRegisterOpen = useSetRecoilState(isPopupRegisterOpenState);
   const client = useApolloClient();
 
   const handleTogglePasswordVisibility = () => {
@@ -205,8 +210,11 @@ const RegisterPage = () => {
             }
           }
         }
-
-        router.push("/signin");
+        setIsPopupRegisterOpen(true);
+        setTimeout(function () {
+          setIsPopupRegisterOpen(false);
+          router.push("/signin");
+        }, 6000);
       } catch (error: any) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -225,7 +233,7 @@ const RegisterPage = () => {
             <br />
             Bricks Hub
           </h2>
-          <h3>Create your adult account</h3>
+          <h3>Create your account</h3>
           <p className="small-text">Already have an account?</p>
           <Link href="/signin">Sign in</Link>
         </div>
@@ -318,7 +326,7 @@ const RegisterPage = () => {
               )}
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="birthdate">Birthdate:</label>
               <input
                 type="date"
@@ -330,12 +338,13 @@ const RegisterPage = () => {
               {errorMessages.age && (
                 <div className="error">{errorMessages.age}</div>
               )}
-            </div>
+            </div> */}
           </fieldset>
           {error && <p style={{ color: "red" }}>{error}</p>}
           <button type="submit">Yes, create account!</button>
         </form>
       </div>
+      <PopupRegister />
     </main>
   );
 };

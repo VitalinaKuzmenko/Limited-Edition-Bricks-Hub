@@ -1,0 +1,100 @@
+.popup-signin {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 0 9999px #000000b0;
+  z-index: 2;
+  min-width: 290px;
+  gap: 15px;
+  color: var(--blue);
+}
+
+.popup-signin a {
+  text-decoration: none;
+  color: white;
+}
+
+.popup-signin a:hover,
+.popup-signin a:focus {
+  color: var(--blue);
+}
+
+.popup-signin button {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  padding: 8px 20px;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: var(--font);
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+}
+
+.popup-signin button:hover,
+.popup-signin button:focus {
+  background-color: var(--orange);
+  color: var(--blue);
+}
+
+.popup-signin .small-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-signin .small-text a {
+  text-decoration: none;
+  margin-left: 15px;
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.popup-signin .small-text a:hover,
+.popup-signin .small-text a:focus {
+  color: var(--blue);
+}
+
+.popup-signin .logo_x {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-signin .logo_x h2 {
+  text-align: start;
+  padding: 0;
+}
+
+.popup-signin .logo_x img {
+  /* blue */
+  filter: invert(15%) sepia(58%) saturate(3268%) hue-rotate(205deg)
+    brightness(84%) contrast(109%);
+  cursor: pointer;
+}
+
+.popup-signin .logo_x img:hover,
+.popup-signin .logo_x img:focus {
+  /* orange */
+  filter: invert(53%) sepia(55%) saturate(4602%) hue-rotate(353deg)
+    brightness(107%) contrast(97%);
+}
+
+.popup-signin .bag-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup-signin {
+    max-width: 400px;
+  }
+}
