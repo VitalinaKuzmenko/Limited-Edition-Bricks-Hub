@@ -4,6 +4,7 @@ import { auth } from "@/firebaseConfig";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   bagItemsState,
+  currentUserState,
   isUserLoginState,
   selectedDesktopOptionState,
   wishlistItemsState,
@@ -17,6 +18,7 @@ const LogOut = () => {
   const setSelectedDesktopOption = useSetRecoilState(
     selectedDesktopOptionState
   );
+  const setCurrentUser = useSetRecoilState(currentUserState);
   const router = useRouter();
 
   const handleLogOut = () => {
@@ -25,6 +27,7 @@ const LogOut = () => {
     setWishListItems(undefined);
     setBagItems(undefined);
     setSelectedDesktopOption(0);
+    setCurrentUser(undefined);
     router.push("/");
   };
 
