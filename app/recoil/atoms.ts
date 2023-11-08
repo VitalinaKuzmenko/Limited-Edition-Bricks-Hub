@@ -53,13 +53,25 @@ export const categoryFromThemeState = atom<string>({
 });
 
 //dashboard
-export const wishlistItemsState = atom<ShopItemObject[] | undefined>({
-  key: "wishlistItemsState",
-  default: undefined,
+export const selectedDesktopOptionState = atom<number>({
+  key: "selectedDesktopOptionState",
+  default: 0,
 });
 
 //sign in
 export const currentUserState = atom<User | undefined>({
   key: "currentUserState",
+  default: undefined,
+});
+
+//dashboard and featured items and shop
+export const wishlistItemsState = atom<ShopItemObject[] | undefined>({
+  key: "wishlistItemsState",
+  default: undefined,
+});
+
+//checkout
+export const bagItemsState = atom<ShopItemObject[] | undefined>({
+  key: "bagItemsState",
   default: undefined,
 });

@@ -3,7 +3,11 @@
 import Line from "../components/Line/Line";
 import "./dashboard.css";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { currentUserState, wishlistItemsState } from "../recoil/atoms";
+import {
+  currentUserState,
+  selectedDesktopOptionState,
+  wishlistItemsState,
+} from "../recoil/atoms";
 import { useEffect, useState, ChangeEvent } from "react";
 import items from "../../fakeData/fakeShopFeaturedItems.json";
 import ShopItemBag from "./components/ShopItemBag/ShopItemBag";
@@ -17,7 +21,9 @@ const Dashboard = () => {
   const [wishlistItems, setWishListItems] = useRecoilState(wishlistItemsState);
   const [mobileSize, setMobileSize] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [selectedDesktopOption, setSelectedDesktopOption] = useState<number>(0);
+  const [selectedDesktopOption, setSelectedDesktopOption] = useRecoilState(
+    selectedDesktopOptionState
+  );
   const dashboardOptions: string[] = [
     "Personal details",
     "Wishlist",

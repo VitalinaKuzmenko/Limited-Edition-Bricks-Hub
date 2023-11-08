@@ -9,6 +9,7 @@ import {
   currentUserState,
   isSigninPopupOpenState,
   isUserLoginState,
+  selectedDesktopOptionState,
 } from "@/app/recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/navigation";
@@ -45,6 +46,9 @@ const Header = () => {
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
   const [isUserLogin, setIsUserLogin] = useRecoilState(isUserLoginState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
+  const [selectedDesktopOption, setSelectedDesktopOption] = useRecoilState(
+    selectedDesktopOptionState
+  );
   const router = useRouter();
 
   const handleSearchClick = () => {
@@ -95,7 +99,25 @@ const Header = () => {
 
   const handleLogin = () => {
     if (isUserLogin) {
+      setSelectedDesktopOption(0);
       router.push("/dashboard");
+    } else {
+      setIsSigninPopupOpenState(true);
+    }
+  };
+
+  const handleWishListClick = () => {
+    if (isUserLogin) {
+      setSelectedDesktopOption(1);
+      router.push("/dashboard");
+    } else {
+      setIsSigninPopupOpenState(true);
+    }
+  };
+
+  const handleCartClick = () => {
+    if (isUserLogin) {
+      router.push("/checkout");
     } else {
       setIsSigninPopupOpenState(true);
     }
@@ -311,10 +333,10 @@ const Header = () => {
                 {isUserLogin ? currentUser?.name : "Log in"}
               </p>
             </div>
-            <div className="wishlist-header-icon">
+            <div className="wishlist-header-icon" onClick={handleWishListClick}>
               <img src="/icons/empty-heart-icon.svg" alt="wishlist" />
             </div>
-            <div className="cart-header-icon">
+            <div className="cart-header-icon" onClick={handleCartClick}>
               <img src="/icons/cart-icon.svg" alt="cart" />
               <p>(0)</p>
             </div>
