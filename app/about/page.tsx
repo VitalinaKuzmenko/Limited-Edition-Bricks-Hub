@@ -10,7 +10,7 @@ const AboutPage = () => {
       <Header />
       <main className="about-page">
         <section className="about-page-section">
-          <h2>About LimitedEdition Bricks Hub</h2>
+          <h2>About Limited Edition Bricks Hub</h2>
           <p>
             Welcome to LimitedEdition Bricks Hub, your premier destination for
             the most exclusive and sought-after LEGO collectibles. We&apos;re
