@@ -5,16 +5,23 @@ import Image from "next/image";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
 import { useEffect } from "react";
-import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
+import { BagItem } from "@/app/components/FeaturedItems/FeaturedItems";
 
 interface ShopItemBagProps {
-  item: ShopItemObject;
+  item: BagItem;
+  onIncrement: (itemId: string) => void;
+  onDecrement: (itemId: string) => void;
 }
 
-const BagItem: React.FC<ShopItemBagProps> = ({ item }) => {
+const BagItem: React.FC<ShopItemBagProps> = ({
+  item,
+  onIncrement,
+  onDecrement,
+}) => {
   const [imageUrl, setImageUrl] = useState<string>("");
 
   const {
+    id,
     name,
     price,
     stars,
@@ -23,7 +30,7 @@ const BagItem: React.FC<ShopItemBagProps> = ({ item }) => {
     imagePath,
     alternativeText,
     category,
-  } = item;
+  } = item.item;
 
   const starsArray = [];
 
@@ -89,9 +96,17 @@ const BagItem: React.FC<ShopItemBagProps> = ({ item }) => {
           </div>
 
           <div className="amount-container">
-            <button className="sign">-</button>
-            <p className="number">1</p>
-            <button className="sign">+</button>
+            <button
+              className="sign"
+              onClick={() => onDecrement(id)}
+              disabled={item.quantity === 1}
+            >
+              -
+            </button>
+            <p className="number">{item.quantity}</p>
+            <button className="sign" onClick={() => onIncrement(id)}>
+              +
+            </button>
           </div>
         </div>
       </div>
