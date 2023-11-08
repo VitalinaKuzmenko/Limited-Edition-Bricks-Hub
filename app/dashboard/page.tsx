@@ -112,10 +112,16 @@ const Dashboard = () => {
             {selectedDesktopOption === 0 ? (
               <PersonalDetails />
             ) : selectedDesktopOption === 1 ? (
-              wishlistItems &&
-              wishlistItems.map((item, index) => (
-                <ShopItemBag key={index} item={item} />
-              ))
+              wishlistItems && wishlistItems.length > 0 ? (
+                wishlistItems.map((item, index) => (
+                  <ShopItemBag key={index} item={item} />
+                ))
+              ) : (
+                <div className="wishlist-error">
+                  <p>Currently there are no items in your wishlist.</p>
+                  <p>Click on heart icon on image to add item to a wishlist.</p>
+                </div>
+              )
             ) : (
               <LogOut />
             )}
