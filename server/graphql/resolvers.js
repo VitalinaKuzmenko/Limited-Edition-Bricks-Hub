@@ -50,6 +50,32 @@ const resolvers = {
         throw new Error(`Unable to fetch user information: ${error.message}`);
       }
     },
+    getWishlistItems: async (_, { userId }) => {
+      try {
+        const userRef = db
+          .collection("users")
+          .doc(userId)
+          .collection("wishlist");
+        const snapshot = await userRef.get();
+
+        const wishlistItems = [];
+        snapshot.forEach((doc) => {
+          const shopItemData = doc.data();
+          // Map the document data to your ShopItem type
+          const shopItem = {
+            id: doc.id,
+            ...shopItemData,
+          };
+          wishlistItems.push(shopItem);
+        });
+
+        console.log("wishlist items", wishlistItems);
+
+        return wishlistItems;
+      } catch (error) {
+        throw new Error(`Unable to fetch wishlist items: ${error.message}`);
+      }
+    },
   },
 
   Mutation: {
@@ -71,6 +97,34 @@ const resolvers = {
         await bagRef.set(bagData);
 
         return newUser;
+      } catch (error) {
+        throw new Error("Unable to add a new user or create collections");
+      }
+    },
+    addToWishlist: async (_, { userId, shopItemId }) => {
+      try {
+        const userRef = db.collection("users").doc(userId);
+        const shopItemRef = db.collection("shop_items").doc(shopItemId);
+
+        await userRef.update({
+          wishlist: admin.firestore.FieldValue.arrayUnion(shopItemRef),
+        });
+
+        return userRef.get().then((doc) => ({ id: doc.id, ...doc.data() }));
+      } catch (error) {
+        throw new Error("Unable to add a new user or create collections");
+      }
+    },
+    removeFromWishlist: async (_, { userId, shopItemId }) => {
+      try {
+        const userRef = db.collection("users").doc(userId);
+        const shopItemRef = db.collection("shop_items").doc(shopItemId);
+
+        await userRef.update({
+          wishlist: admin.firestore.FieldValue.arrayRemove(shopItemRef),
+        });
+
+        return userRef.get().then((doc) => ({ id: doc.id, ...doc.data() }));
       } catch (error) {
         throw new Error("Unable to add a new user or create collections");
       }

@@ -13,22 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { FilterOptions } from "../SideBar/SideBar";
 import ReactLoading from "react-loading";
-
-const GET_ALL_SHOP_ITEMS = gql`
-  query GetAllShopItems {
-    getAllShopItems {
-      id
-      imagePath
-      alternativeText
-      name
-      price
-      stars
-      age
-      pieces
-      category
-    }
-  }
-`;
+import { GET_ALL_SHOP_ITEMS } from "@/app/graphql/frontendSchema";
 
 const ShopItems = () => {
   const [serverShopItems, setServerShopItems] = useState<

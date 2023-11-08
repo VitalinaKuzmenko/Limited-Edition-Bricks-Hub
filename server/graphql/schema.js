@@ -13,12 +13,6 @@ const typeDefs = gql`
     category: String!
   }
 
-  type Query {
-    getShopItem(name: String!): ShopItem
-    getAllShopItems: [ShopItem]
-    getTopRatedShopItems(limit: Int): [ShopItem]
-  }
-
   input PersonalDetailsInput {
     uid: String!
     name: String!
@@ -36,6 +30,14 @@ const typeDefs = gql`
     avatarPath: String!
   }
 
+  type Query {
+    getShopItem(name: String!): ShopItem
+    getAllShopItems: [ShopItem]
+    getTopRatedShopItems(limit: Int): [ShopItem]
+    getUserByUid(uid: String!): User
+    getWishlistItems(userId: ID!): [ShopItem]
+  }
+
   type Mutation {
     addUser(input: PersonalDetailsInput!): User
     updateUserByUid(
@@ -44,10 +46,8 @@ const typeDefs = gql`
       surname: String
       avatarPath: String
     ): User
-  }
-
-  type Query {
-    getUserByUid(uid: String!): User
+    addToWishlist(userId: ID!, shopItemId: ID!): User
+    removeFromWishlist(userId: ID!, shopItemId: ID!): User
   }
 `;
 

@@ -6,14 +6,51 @@ import Image from "next/image";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
 import { useEffect } from "react";
+import {
+  MutationFunctionOptions,
+  OperationVariables,
+  DefaultContext,
+  ApolloCache,
+} from "@apollo/client";
+import { useRecoilValue } from "recoil";
+import { currentUserState } from "@/app/recoil/atoms";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
+  wishlistItems: any;
+  addToWishlist: (
+    options?:
+      | MutationFunctionOptions<
+          any,
+          OperationVariables,
+          DefaultContext,
+          ApolloCache<any>
+        >
+      | undefined
+  ) => void;
+  removeFromWishlist: (
+    options?:
+      | MutationFunctionOptions<
+          any,
+          OperationVariables,
+          DefaultContext,
+          ApolloCache<any>
+        >
+      | undefined
+  ) => void;
 }
 
-const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
+const ShopItem: React.FC<ShopItemProps> = ({
+  shopItem,
+  wishlistItems,
+  addToWishlist,
+  removeFromWishlist,
+}) => {
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const currentUser = useRecoilValue(currentUserState);
   const {
+    id,
     name,
     price,
     stars,
@@ -35,6 +72,20 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
       );
     }
   }
+
+  useEffect(() => {
+    if (wishlistItems) {
+      console.log("wishlists", wishlistItems);
+      const favorite = wishlistItems.some(
+        (favItem: ShopItemObject) => favItem.id === shopItem.id
+      );
+      setIsFavorite(favorite);
+      console.log("favorite is", favorite);
+    }
+  }, [wishlistItems]);
+
+  const handleLikeClick = () => {};
+
   //download image from firebase storage
   useEffect(() => {
     const downloadImage = async () => {
@@ -63,14 +114,30 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem }) => {
           />
         )}
 
-        <div className="like-icon-container">
-          <Image
+        <div className="like-icon-container" onClick={handleLikeClick}>
+          {currentUser && (
+            <button
+              onClick={() =>
+                isFavorite
+                  ? removeFromWishlist({
+                      variables: { userId: currentUser.uid, shopItemId: id },
+                    })
+                  : addToWishlist({
+                      variables: { userId: currentUser.uid, shopItemId: id },
+                    })
+              }
+            >
+              {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+            </button>
+          )}
+
+          {/* <Image
             className="like-icon"
             src="/icons/empty-heart-icon.svg"
             width={30}
             height={30}
             alt="empty heart"
-          />
+          /> */}
         </div>
       </div>
       <div className="shop-items-details">
