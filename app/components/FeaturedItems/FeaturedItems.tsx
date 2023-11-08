@@ -17,7 +17,7 @@ import { useRecoilState } from "recoil";
 import { currentUserState } from "@/app/recoil/atoms";
 
 export interface ShopItemObject {
-  id: number;
+  id: string;
   imagePath: string;
   alternativeText: string;
   name: string;

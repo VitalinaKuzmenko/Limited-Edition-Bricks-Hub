@@ -69,8 +69,6 @@ const resolvers = {
           wishlistItems.push(shopItem);
         });
 
-        console.log("wishlist items", wishlistItems);
-
         return wishlistItems;
       } catch (error) {
         throw new Error(`Unable to fetch wishlist items: ${error.message}`);
@@ -106,9 +104,11 @@ const resolvers = {
         const userRef = db.collection("users").doc(userId);
         const shopItemRef = db.collection("shop_items").doc(shopItemId);
 
-        await userRef.update({
+        const updated = await userRef.update({
           wishlist: admin.firestore.FieldValue.arrayUnion(shopItemRef),
         });
+
+        console.log("updated", updated);
 
         return userRef.get().then((doc) => ({ id: doc.id, ...doc.data() }));
       } catch (error) {

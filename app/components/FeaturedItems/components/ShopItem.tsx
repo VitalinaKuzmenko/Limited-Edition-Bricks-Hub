@@ -102,6 +102,14 @@ const ShopItem: React.FC<ShopItemProps> = ({
     downloadImage();
   }, [imagePath]);
 
+  const addItemToList = (userId: string, shopItemId: string) => {
+    console.log("userid", userId);
+    console.log("id", shopItemId, typeof shopItemId);
+    addToWishlist({
+      variables: { userId, shopItemId },
+    });
+  };
+
   return (
     <div className="shop-item-container">
       <div className="image-container">
@@ -122,9 +130,7 @@ const ShopItem: React.FC<ShopItemProps> = ({
                   ? removeFromWishlist({
                       variables: { userId: currentUser.uid, shopItemId: id },
                     })
-                  : addToWishlist({
-                      variables: { userId: currentUser.uid, shopItemId: id },
-                    })
+                  : addItemToList(currentUser.uid, id)
               }
             >
               {isFavorite ? "Remove from Favorites" : "Add to Favorites"}

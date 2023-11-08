@@ -78,9 +78,6 @@ export const ADD_TO_WISHLIST = gql`
   mutation AddToWishlist($userId: ID!, $shopItemId: ID!) {
     addToWishlist(userId: $userId, shopItemId: $shopItemId) {
       id
-      wishlist {
-        id
-      }
     }
   }
 `;
@@ -89,9 +86,6 @@ export const REMOVE_FROM_WISHLIST = gql`
   mutation RemoveFromWishlist($userId: ID!, $shopItemId: ID!) {
     removeFromWishlist(userId: $userId, shopItemId: $shopItemId) {
       id
-      wishlist {
-        id
-      }
     }
   }
 `;
