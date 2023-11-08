@@ -6,6 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  bagItemsState,
   currentUserState,
   isSigninPopupOpenState,
   isUserLoginState,
@@ -14,6 +15,7 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useRouter } from "next/navigation";
 import { auth } from "@/firebaseConfig";
+import { BagItem } from "../FeaturedItems/FeaturedItems";
 
 interface NavLink {
   id: number;
@@ -46,9 +48,11 @@ const Header = () => {
   const [_, setIsSigninPopupOpenState] = useRecoilState(isSigninPopupOpenState);
   const [isUserLogin, setIsUserLogin] = useRecoilState(isUserLoginState);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-  const [selectedDesktopOption, setSelectedDesktopOption] = useRecoilState(
+  const [__, setSelectedDesktopOption] = useRecoilState(
     selectedDesktopOptionState
   );
+  const [totalQuantity, setTotalQuantity] = useState<number>(0);
+  const bagItems = useRecoilValue(bagItemsState);
   const router = useRouter();
 
   const handleSearchClick = () => {
@@ -97,6 +101,12 @@ const Header = () => {
     }, 1000); // Wait for the animation to complete before removing the classes
   };
 
+  const calculateTotalQuantity = (bagItems: BagItem[] | undefined): number => {
+    if (!bagItems) return 0;
+
+    return bagItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   const handleLogin = () => {
     if (isUserLogin) {
       setSelectedDesktopOption(0);
@@ -122,6 +132,11 @@ const Header = () => {
       setIsSigninPopupOpenState(true);
     }
   };
+
+  useEffect(() => {
+    const quantity = calculateTotalQuantity(bagItems);
+    setTotalQuantity(quantity);
+  }, [bagItems]);
 
   //handle searchClickOutside
   useEffect(() => {
@@ -338,7 +353,7 @@ const Header = () => {
             </div>
             <div className="cart-header-icon" onClick={handleCartClick}>
               <img src="/icons/cart-icon.svg" alt="cart" />
-              <p>(0)</p>
+              <p>({totalQuantity})</p>
             </div>
           </div>
         </div>

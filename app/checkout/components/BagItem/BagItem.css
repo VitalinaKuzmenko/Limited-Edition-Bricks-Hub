@@ -129,6 +129,11 @@
   border: 1px solid var(--grey);
 }
 
+.amount-container .sign:disabled:hover {
+  color: var(--grey);
+  background-color: var(--grey);
+}
+
 @media only screen and (min-width: 480px) {
   .bag-items-container .shop-item-container {
     width: 460px;
