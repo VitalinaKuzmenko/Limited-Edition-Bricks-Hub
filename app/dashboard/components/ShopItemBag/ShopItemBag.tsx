@@ -6,6 +6,8 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
 import { useEffect } from "react";
 import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
+import { useRecoilState } from "recoil";
+import { wishlistItemsState } from "@/app/recoil/atoms";
 
 interface ShopItemBagProps {
   item: ShopItemObject;
@@ -13,8 +15,10 @@ interface ShopItemBagProps {
 
 const ShopItem: React.FC<ShopItemBagProps> = ({ item }) => {
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [wishlistItems, setWishlistItems] = useRecoilState(wishlistItemsState);
 
   const {
+    id,
     name,
     price,
     stars,
@@ -36,6 +40,26 @@ const ShopItem: React.FC<ShopItemBagProps> = ({ item }) => {
       );
     }
   }
+
+  const removeFromWishlist = (shopItemId: string) => {
+    if (wishlistItems) {
+      // Check if the item is in the wishlist
+      const isItemInWishlist = wishlistItems.some(
+        (item) => item.id === shopItemId
+      );
+
+      if (isItemInWishlist) {
+        // If it is, remove it from the wishlist
+        const updatedWishlist = wishlistItems.filter(
+          (item) => item.id !== shopItemId
+        );
+        setWishlistItems(updatedWishlist);
+      } else {
+        console.log("Item not found in the wishlist.");
+      }
+    }
+  };
+
   //download image from firebase storage
   useEffect(() => {
     const downloadImage = async () => {
@@ -64,7 +88,10 @@ const ShopItem: React.FC<ShopItemBagProps> = ({ item }) => {
           />
         )}
 
-        <div className="remove-icon-container">
+        <div
+          className="remove-icon-container"
+          onClick={() => removeFromWishlist(id)}
+        >
           <Image
             className="remove-icon"
             src="/icons/trash-icon.svg"

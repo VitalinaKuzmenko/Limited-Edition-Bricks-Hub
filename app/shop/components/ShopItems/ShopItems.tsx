@@ -135,7 +135,9 @@ const ShopItems = () => {
       className={shopLoading ? "shop-items shop-items-loading" : "shop-items"}
     >
       {shopItems && !shopLoading ? (
-        shopItems.map((item, index) => <ShopItem key={index} shopItem={item} />)
+        shopItems.map((item, index) => (
+          <ShopItem key={index} shopItem={item} allShopItems={shopItems} />
+        ))
       ) : (
         <ReactLoading
           type="bubbles"

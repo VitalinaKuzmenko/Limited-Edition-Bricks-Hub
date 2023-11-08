@@ -14,7 +14,7 @@ import {
   GET_WISHLIST_ITEMS,
 } from "@/app/graphql/frontendSchema";
 import { useRecoilState } from "recoil";
-import { currentUserState } from "@/app/recoil/atoms";
+import { currentUserState, wishlistItemsState } from "@/app/recoil/atoms";
 
 export interface ShopItemObject {
   id: string;
@@ -34,9 +34,7 @@ const FeaturedItems = () => {
     ShopItemObject[] | undefined
   >(undefined);
   const [currentUser, setCurrentUser] = useRecoilState(currentUserState);
-  const [wishlistItems, setWishListItems] = useState<
-    ShopItemObject[] | undefined
-  >(undefined);
+  const [wishlistItems, setWishListItems] = useRecoilState(wishlistItemsState);
 
   const limit = 3;
   const {
@@ -47,18 +45,24 @@ const FeaturedItems = () => {
     variables: { limit },
   });
 
-  const {
-    loading: wishlistLoading,
-    error: wishlistError,
-    data: wishlistData,
-  } = useQuery(GET_WISHLIST_ITEMS, {
-    variables: {
-      userId: currentUser?.uid,
-    },
-  });
+  useEffect(() => {
+    if (currentUser) {
+      //
+    }
+  }, [currentUser]);
 
-  const [addToWishlist] = useMutation(ADD_TO_WISHLIST);
-  const [removeFromWishlist] = useMutation(REMOVE_FROM_WISHLIST);
+  // const {
+  //   loading: wishlistLoading,
+  //   error: wishlistError,
+  //   data: wishlistData,
+  // } = useQuery(GET_WISHLIST_ITEMS, {
+  //   variables: {
+  //     userId: currentUser?.uid,
+  //   },
+  // });
+
+  // const [addToWishlist] = useMutation(ADD_TO_WISHLIST);
+  // const [removeFromWishlist] = useMutation(REMOVE_FROM_WISHLIST);
 
   //fetch shop items from db
   useEffect(() => {
@@ -69,15 +73,16 @@ const FeaturedItems = () => {
     setShopLoading(shopItemsLoading);
   }, [shopItemsLoading, shopItemsError, shopItemsData]);
 
-  useEffect(() => {
-    if (!wishlistLoading && !wishlistError && wishlistData) {
-      const products: ShopItemObject[] = wishlistData.getWishlistItems;
-      setWishListItems(products);
-    }
-    setShopLoading(wishlistLoading);
-  }, [wishlistLoading, shopItemsError, shopItemsData]);
+  // useEffect(() => {
+  //   if (!wishlistLoading && !wishlistError && wishlistData) {
+  //     const products: ShopItemObject[] = wishlistData.getWishlistItems;
+  //     setWishListItems(products);
+  //   }
+  //   setShopLoading(wishlistLoading);
+  // }, [wishlistLoading, shopItemsError, shopItemsData]);
 
   if (shopItemsError) return `Error: ${shopItemsError.message}`;
+  console.log("home wishlist", wishlistItems);
 
   return (
     <section className="featured-items">
@@ -89,9 +94,10 @@ const FeaturedItems = () => {
             <ShopItem
               key={index}
               shopItem={shopItem}
-              wishlistItems={wishlistItems}
-              addToWishlist={addToWishlist}
-              removeFromWishlist={removeFromWishlist}
+              allShopItems={featuredShopItems}
+              // wishlistItems={wishlistItems}
+              // addToWishlist={addToWishlist}
+              // removeFromWishlist={removeFromWishlist}
             />
           ))
         ) : (

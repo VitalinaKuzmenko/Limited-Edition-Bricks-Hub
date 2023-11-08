@@ -31,6 +31,8 @@ const Dashboard = () => {
   ];
   const currentUser = useRecoilValue(currentUserState);
 
+  console.log("dashoboard wishlist", wishlistItems);
+
   const handleMobileOptions = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "personal-details") {
@@ -45,10 +47,6 @@ const Dashboard = () => {
   const handleOptionClick = (index: number) => {
     setSelectedDesktopOption(index);
   };
-
-  useEffect(() => {
-    setWishListItems(items);
-  }, []);
 
   //define which size of screen is now
   useEffect(() => {

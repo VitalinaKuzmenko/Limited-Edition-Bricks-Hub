@@ -12,43 +12,41 @@ import {
   DefaultContext,
   ApolloCache,
 } from "@apollo/client";
-import { useRecoilValue } from "recoil";
-import { currentUserState } from "@/app/recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currentUserState, wishlistItemsState } from "@/app/recoil/atoms";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
-  wishlistItems: any;
-  addToWishlist: (
-    options?:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined
-  ) => void;
-  removeFromWishlist: (
-    options?:
-      | MutationFunctionOptions<
-          any,
-          OperationVariables,
-          DefaultContext,
-          ApolloCache<any>
-        >
-      | undefined
-  ) => void;
+  allShopItems?: ShopItemObject[] | undefined;
+  // wishlistItems: any;
+  // addToWishlist: (
+  //   options?:
+  //     | MutationFunctionOptions<
+  //         any,
+  //         OperationVariables,
+  //         DefaultContext,
+  //         ApolloCache<any>
+  //       >
+  //     | undefined
+  // ) => void;
+  // removeFromWishlist: (
+  //   options?:
+  //     | MutationFunctionOptions<
+  //         any,
+  //         OperationVariables,
+  //         DefaultContext,
+  //         ApolloCache<any>
+  //       >
+  //     | undefined
+  // ) => void;
 }
 
-const ShopItem: React.FC<ShopItemProps> = ({
-  shopItem,
-  wishlistItems,
-  addToWishlist,
-  removeFromWishlist,
-}) => {
+const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const currentUser = useRecoilValue(currentUserState);
+  const [wishlistItems, setWishlistItems] = useRecoilState(wishlistItemsState);
+
   const {
     id,
     name,
@@ -73,18 +71,68 @@ const ShopItem: React.FC<ShopItemProps> = ({
     }
   }
 
+  const addToWishlist = (shopItemId: string) => {
+    if (currentUser && allShopItems) {
+      const foundItem = allShopItems.find((item) => item.id === shopItemId);
+
+      if (foundItem) {
+        // Check if the item is already in the wishlist
+        const isItemInWishlist = wishlistItems?.some(
+          (item) => item.id === shopItemId
+        );
+
+        if (!isItemInWishlist) {
+          // If not, add it to the wishlist
+          setWishlistItems((prevItems) => [...(prevItems || []), foundItem]);
+        } else {
+          console.log("Item is already in the wishlist.");
+        }
+      } else {
+        console.error("Item not found in shop items.");
+      }
+    }
+  };
+
+  const removeFromWishlist = (shopItemId: string) => {
+    if (currentUser && wishlistItems) {
+      // Check if the item is in the wishlist
+      const isItemInWishlist = wishlistItems.some(
+        (item) => item.id === shopItemId
+      );
+
+      if (isItemInWishlist) {
+        // If it is, remove it from the wishlist
+        const updatedWishlist = wishlistItems.filter(
+          (item) => item.id !== shopItemId
+        );
+        setWishlistItems(updatedWishlist);
+      } else {
+        console.log("Item not found in the wishlist.");
+      }
+    }
+  };
+
+  const handleLikeClick = (shopItemId: string) => {
+    if (currentUser) {
+      // isFavorite
+      //   ? removeFromWishlist({
+      //       variables: { userId: currentUser.uid, shopItemId: id },
+      //     })
+      //   : addItemToList(currentUser.uid, id);
+
+      isFavorite ? removeFromWishlist(shopItemId) : addToWishlist(shopItemId);
+    }
+  };
+
+  //define what items are liked
   useEffect(() => {
     if (wishlistItems) {
-      console.log("wishlists", wishlistItems);
       const favorite = wishlistItems.some(
-        (favItem: ShopItemObject) => favItem.id === shopItem.id
+        (favItem: ShopItemObject) => favItem.id === id
       );
       setIsFavorite(favorite);
-      console.log("favorite is", favorite);
     }
   }, [wishlistItems]);
-
-  const handleLikeClick = () => {};
 
   //download image from firebase storage
   useEffect(() => {
@@ -102,14 +150,6 @@ const ShopItem: React.FC<ShopItemProps> = ({
     downloadImage();
   }, [imagePath]);
 
-  const addItemToList = (userId: string, shopItemId: string) => {
-    console.log("userid", userId);
-    console.log("id", shopItemId, typeof shopItemId);
-    addToWishlist({
-      variables: { userId, shopItemId },
-    });
-  };
-
   return (
     <div className="shop-item-container">
       <div className="image-container">
@@ -122,28 +162,27 @@ const ShopItem: React.FC<ShopItemProps> = ({
           />
         )}
 
-        <div className="like-icon-container" onClick={handleLikeClick}>
-          {currentUser && (
-            <button
-              onClick={() =>
-                isFavorite
-                  ? removeFromWishlist({
-                      variables: { userId: currentUser.uid, shopItemId: id },
-                    })
-                  : addItemToList(currentUser.uid, id)
-              }
-            >
-              {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-            </button>
+        <div
+          className="like-icon-container"
+          onClick={() => handleLikeClick(id)}
+        >
+          {isFavorite ? (
+            <Image
+              className="like-icon"
+              src="/icons/full-heart-icon.svg"
+              width={30}
+              height={30}
+              alt="empty heart"
+            />
+          ) : (
+            <Image
+              className="like-icon"
+              src="/icons/empty-heart-icon.svg"
+              width={30}
+              height={30}
+              alt="empty heart"
+            />
           )}
-
-          {/* <Image
-            className="like-icon"
-            src="/icons/empty-heart-icon.svg"
-            width={30}
-            height={30}
-            alt="empty heart"
-          /> */}
         </div>
       </div>
       <div className="shop-items-details">
