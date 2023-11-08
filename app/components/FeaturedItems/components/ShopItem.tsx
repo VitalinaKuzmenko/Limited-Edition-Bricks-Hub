@@ -13,7 +13,12 @@ import {
   ApolloCache,
 } from "@apollo/client";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { currentUserState, wishlistItemsState } from "@/app/recoil/atoms";
+import {
+  bagItemsState,
+  currentUserState,
+  wishlistItemsState,
+} from "@/app/recoil/atoms";
+import { BagItem } from "../FeaturedItems";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
@@ -46,6 +51,7 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const currentUser = useRecoilValue(currentUserState);
   const [wishlistItems, setWishlistItems] = useRecoilState(wishlistItemsState);
+  const [bagItems, setBagItems] = useRecoilState(bagItemsState);
 
   const {
     id,
@@ -122,6 +128,31 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
 
       isFavorite ? removeFromWishlist(shopItemId) : addToWishlist(shopItemId);
     }
+  };
+
+  const addToBag = (shopItem: ShopItemObject) => {
+    setBagItems((prevBagItems) => {
+      const updatedBagItems: BagItem[] = [...(prevBagItems || [])];
+      const existingItemIndex = updatedBagItems.findIndex(
+        (item) => item.item.id === shopItem.id
+      );
+
+      if (existingItemIndex !== -1) {
+        // Create a new object with the updated quantity
+        const updatedItem = {
+          ...updatedBagItems[existingItemIndex],
+          quantity: updatedBagItems[existingItemIndex].quantity + 1,
+        };
+
+        // Replace the existing item with the updated one
+        updatedBagItems[existingItemIndex] = updatedItem;
+      } else {
+        // Add a new item to the bag
+        updatedBagItems.push({ item: shopItem, quantity: 1 });
+      }
+
+      return updatedBagItems;
+    });
   };
 
   //define what items are liked
@@ -208,7 +239,9 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
           </div>
         </div>
       </div>
-      <button className="add-to-bag-button">Add to bag</button>
+      <button className="add-to-bag-button" onClick={() => addToBag(shopItem)}>
+        Add to bag
+      </button>
     </div>
   );
 };

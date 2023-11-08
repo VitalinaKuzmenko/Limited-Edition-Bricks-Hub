@@ -28,6 +28,11 @@ export interface ShopItemObject {
   category: string;
 }
 
+export interface BagItem {
+  item: ShopItemObject;
+  quantity: number;
+}
+
 const FeaturedItems = () => {
   const [shopLoading, setShopLoading] = useState<boolean>(false);
   const [featuredShopItems, setFeaturesShopItems] = useState<

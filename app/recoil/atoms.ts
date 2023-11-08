@@ -1,6 +1,9 @@
 import { atom } from "recoil";
 import { FilterOptions } from "../shop/components/SideBar/SideBar";
-import { ShopItemObject } from "../components/FeaturedItems/FeaturedItems";
+import {
+  BagItem,
+  ShopItemObject,
+} from "../components/FeaturedItems/FeaturedItems";
 import { User } from "../dashboard/components/PersonalDetails/PersonalDetails";
 
 //shop page
@@ -71,7 +74,7 @@ export const wishlistItemsState = atom<ShopItemObject[] | undefined>({
 });
 
 //checkout
-export const bagItemsState = atom<ShopItemObject[] | undefined>({
+export const bagItemsState = atom<BagItem[] | undefined>({
   key: "bagItemsState",
   default: undefined,
 });
