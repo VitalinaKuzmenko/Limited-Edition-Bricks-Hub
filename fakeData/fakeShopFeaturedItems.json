@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "imagePath": "gs://limited-edition-bricks-hub.appspot.com/shop_items/Dog_1.webp",
     "alternativeText": "dog",
     "name": "Dog",
@@ -11,7 +11,7 @@
     "category": "Animals"
   },
   {
-    "id": 2,
+    "id": "2",
     "imagePath": "gs://limited-edition-bricks-hub.appspot.com/shop_items/Parrot_1.webp",
     "alternativeText": "parrot",
     "name": "Parrot",
@@ -22,7 +22,7 @@
     "category": "Birds"
   },
   {
-    "id": 3,
+    "id": "3",
     "imagePath": "gs://limited-edition-bricks-hub.appspot.com/shop_items/Robot_1.webp",
     "alternativeText": "robot",
     "name": "Robot",

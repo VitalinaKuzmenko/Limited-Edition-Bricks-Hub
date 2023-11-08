@@ -41,7 +41,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    // setWishListItems(items);
+    setWishListItems(items);
   }, []);
 
   //define which size of screen is now
