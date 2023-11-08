@@ -16,9 +16,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   bagItemsState,
   currentUserState,
+  isSigninPopupOpenState,
   wishlistItemsState,
 } from "@/app/recoil/atoms";
 import { BagItem } from "../FeaturedItems";
+import PopupSignin from "../../PopupSignin/PopupSignin";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
@@ -51,7 +53,10 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const currentUser = useRecoilValue(currentUserState);
   const [wishlistItems, setWishlistItems] = useRecoilState(wishlistItemsState);
-  const [bagItems, setBagItems] = useRecoilState(bagItemsState);
+  const [_, setBagItems] = useRecoilState(bagItemsState);
+  const [__, setIsSigninPopupOpenState] = useRecoilState(
+    isSigninPopupOpenState
+  );
 
   const {
     id,
@@ -127,32 +132,38 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
       //   : addItemToList(currentUser.uid, id);
 
       isFavorite ? removeFromWishlist(shopItemId) : addToWishlist(shopItemId);
+    } else {
+      setIsSigninPopupOpenState(true);
     }
   };
 
   const addToBag = (shopItem: ShopItemObject) => {
-    setBagItems((prevBagItems) => {
-      const updatedBagItems: BagItem[] = [...(prevBagItems || [])];
-      const existingItemIndex = updatedBagItems.findIndex(
-        (item) => item.item.id === shopItem.id
-      );
+    if (currentUser) {
+      setBagItems((prevBagItems) => {
+        const updatedBagItems: BagItem[] = [...(prevBagItems || [])];
+        const existingItemIndex = updatedBagItems.findIndex(
+          (item) => item.item.id === shopItem.id
+        );
 
-      if (existingItemIndex !== -1) {
-        // Create a new object with the updated quantity
-        const updatedItem = {
-          ...updatedBagItems[existingItemIndex],
-          quantity: updatedBagItems[existingItemIndex].quantity + 1,
-        };
+        if (existingItemIndex !== -1) {
+          // Create a new object with the updated quantity
+          const updatedItem = {
+            ...updatedBagItems[existingItemIndex],
+            quantity: updatedBagItems[existingItemIndex].quantity + 1,
+          };
 
-        // Replace the existing item with the updated one
-        updatedBagItems[existingItemIndex] = updatedItem;
-      } else {
-        // Add a new item to the bag
-        updatedBagItems.push({ item: shopItem, quantity: 1 });
-      }
+          // Replace the existing item with the updated one
+          updatedBagItems[existingItemIndex] = updatedItem;
+        } else {
+          // Add a new item to the bag
+          updatedBagItems.push({ item: shopItem, quantity: 1 });
+        }
 
-      return updatedBagItems;
-    });
+        return updatedBagItems;
+      });
+    } else {
+      setIsSigninPopupOpenState(true);
+    }
   };
 
   //define what items are liked
