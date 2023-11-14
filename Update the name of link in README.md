@@ -25,7 +25,7 @@ Please note that some features are in progress, while others are planned for fut
 
 ## 🚀 Deployed Website
 
-[https://vitalina-chat-next.vercel.app/](https://limited-edition-bricks-hub.vercel.app/)
+[(https://limited-edition-bricks-hub.vercel.app/)](https://limited-edition-bricks-hub.vercel.app/)
 
 
 ## 💻 Screenshots
