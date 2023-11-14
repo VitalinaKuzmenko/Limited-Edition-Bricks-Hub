@@ -3,10 +3,12 @@ import { config } from "dotenv";
 
 config();
 
+const { privateKey } = JSON.parse(process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY);
+
 const serviceAccount = {
   type: process.env.NEXT_PUBLIC_FIREBASE_TYPE,
   project_id: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  private_key: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
+  private_key: privateKey,
   private_key_id: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY_ID,
   client_email: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
   client_id: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_ID,
