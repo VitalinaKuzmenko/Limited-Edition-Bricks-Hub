@@ -108,8 +108,6 @@ const resolvers = {
           wishlist: admin.firestore.FieldValue.arrayUnion(shopItemRef),
         });
 
-        console.log("updated", updated);
-
         return userRef.get().then((doc) => ({ id: doc.id, ...doc.data() }));
       } catch (error) {
         throw new Error("Unable to add a new user or create collections");

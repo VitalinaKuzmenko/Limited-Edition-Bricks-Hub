@@ -29,6 +29,4 @@ admin.initializeApp({
 // Get a Firestore instance
 const db = admin.firestore();
 
-console.log("db", db);
-
 export { db };
