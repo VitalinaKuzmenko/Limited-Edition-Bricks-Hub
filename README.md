@@ -31,7 +31,8 @@ Please note that some features are in progress, while others are planned for fut
 ## 💻 Screenshots
 
 ![App_Screenshot](https://github.com/VitalinaKuzmenko/Limited-Edition-Bricks-Hub/assets/91835307/5ec161b1-2d65-431e-aeda-3feee88e1fef)
-![App Screenshot](https://www.dropbox.com/scl/fi/drork9pfsneesj1ge7r19/limited_edition_2.jpg?rlkey=l8xztug4xwrk4df36zu0pvfv4&raw=1)
+
+![App_Screenshot](https://github.com/VitalinaKuzmenko/Limited-Edition-Bricks-Hub/assets/91835307/686a2275-1c52-45bd-9901-c0e462bde8ed)
 
 
 ## 🤝 Contributing
