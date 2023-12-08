@@ -6,12 +6,6 @@ import Image from "next/image";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "@/firebaseConfig";
 import { useEffect } from "react";
-import {
-  MutationFunctionOptions,
-  OperationVariables,
-  DefaultContext,
-  ApolloCache,
-} from "@apollo/client";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   bagItemsState,
@@ -21,32 +15,12 @@ import {
   wishlistItemsState,
 } from "@/app/recoil/atoms";
 import { BagItem } from "../FeaturedItems";
-import PopupSignin from "../../PopupSignin/PopupSignin";
+import { usePathname } from "next/navigation";
+import path from "path";
 
 interface ShopItemProps {
   shopItem: ShopItemObject;
   allShopItems?: ShopItemObject[] | undefined;
-  // wishlistItems: any;
-  // addToWishlist: (
-  //   options?:
-  //     | MutationFunctionOptions<
-  //         any,
-  //         OperationVariables,
-  //         DefaultContext,
-  //         ApolloCache<any>
-  //       >
-  //     | undefined
-  // ) => void;
-  // removeFromWishlist: (
-  //   options?:
-  //     | MutationFunctionOptions<
-  //         any,
-  //         OperationVariables,
-  //         DefaultContext,
-  //         ApolloCache<any>
-  //       >
-  //     | undefined
-  // ) => void;
 }
 
 const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
@@ -59,6 +33,8 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
     isSigninPopupOpenState
   );
   const setIsPopupBagOpen = useSetRecoilState(isPopupBagOpenState);
+  const [isDashboardPage, setIsDashboardPage] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const {
     id,
@@ -127,12 +103,6 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
 
   const handleLikeClick = (shopItemId: string) => {
     if (currentUser) {
-      // isFavorite
-      //   ? removeFromWishlist({
-      //       variables: { userId: currentUser.uid, shopItemId: id },
-      //     })
-      //   : addItemToList(currentUser.uid, id);
-
       isFavorite ? removeFromWishlist(shopItemId) : addToWishlist(shopItemId);
     } else {
       setIsSigninPopupOpenState(true);
@@ -195,6 +165,13 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
     downloadImage();
   }, [imagePath]);
 
+  //check which page is now
+  useEffect(() => {
+    pathname.includes("dashboard")
+      ? setIsDashboardPage(true)
+      : setIsDashboardPage(false);
+  }, []);
+
   return (
     <div className="shop-item-container">
       <div className="image-container">
@@ -211,22 +188,34 @@ const ShopItem: React.FC<ShopItemProps> = ({ shopItem, allShopItems }) => {
           className="like-icon-container"
           onClick={() => handleLikeClick(id)}
         >
-          {isFavorite ? (
+          {isDashboardPage ? (
             <Image
               className="like-icon"
-              src="/icons/full-heart-icon.svg"
+              src="/icons/trash-icon.svg"
               width={30}
               height={30}
-              alt="empty heart"
+              alt="remove icon"
             />
           ) : (
-            <Image
-              className="like-icon"
-              src="/icons/empty-heart-icon.svg"
-              width={30}
-              height={30}
-              alt="empty heart"
-            />
+            <>
+              {isFavorite ? (
+                <Image
+                  className="like-icon"
+                  src="/icons/full-heart-icon.svg"
+                  width={30}
+                  height={30}
+                  alt="empty heart"
+                />
+              ) : (
+                <Image
+                  className="like-icon"
+                  src="/icons/empty-heart-icon.svg"
+                  width={30}
+                  height={30}
+                  alt="empty heart"
+                />
+              )}
+            </>
           )}
         </div>
       </div>

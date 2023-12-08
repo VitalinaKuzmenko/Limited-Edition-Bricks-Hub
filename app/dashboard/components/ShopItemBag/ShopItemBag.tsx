@@ -1,132 +1,18 @@
 "use client";
-import { useState } from "react";
 import "./ShopItemBag.css";
-import Image from "next/image";
-import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from "@/firebaseConfig";
-import { useEffect } from "react";
 import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
-import { useRecoilState } from "recoil";
-import { wishlistItemsState } from "@/app/recoil/atoms";
+import ShopItem from "@/app/components/FeaturedItems/components/ShopItem";
 
 interface ShopItemBagProps {
   item: ShopItemObject;
 }
 
-const ShopItem: React.FC<ShopItemBagProps> = ({ item }) => {
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [wishlistItems, setWishlistItems] = useRecoilState(wishlistItemsState);
-
-  const {
-    id,
-    name,
-    price,
-    stars,
-    age,
-    pieces,
-    imagePath,
-    alternativeText,
-    category,
-  } = item;
-
-  const starsArray = [];
-
-  for (let i = 0; i < 5; i++) {
-    if (i < stars) {
-      starsArray.push(<img src="/icons/star-icon.svg" alt="Full Star" />);
-    } else {
-      starsArray.push(
-        <img src="/icons/empty-star-icon.svg" alt="Empty Star" />
-      );
-    }
-  }
-
-  const removeFromWishlist = (shopItemId: string) => {
-    if (wishlistItems) {
-      // Check if the item is in the wishlist
-      const isItemInWishlist = wishlistItems.some(
-        (item) => item.id === shopItemId
-      );
-
-      if (isItemInWishlist) {
-        // If it is, remove it from the wishlist
-        const updatedWishlist = wishlistItems.filter(
-          (item) => item.id !== shopItemId
-        );
-        setWishlistItems(updatedWishlist);
-      } else {
-        console.log("Item not found in the wishlist.");
-      }
-    }
-  };
-
-  //download image from firebase storage
-  useEffect(() => {
-    const downloadImage = async () => {
-      try {
-        const url = await getDownloadURL(ref(storage, imagePath));
-        setImageUrl(url);
-        return imageUrl;
-      } catch (error) {
-        console.error("Error downloading image:", error);
-        return "";
-      }
-    };
-
-    downloadImage();
-  }, [imagePath]);
-
+const ShopItemBag: React.FC<ShopItemBagProps> = ({ item }) => {
   return (
-    <div className="shop-item-container">
-      <div className="image-container">
-        {imageUrl.length > 0 && (
-          <Image
-            src={imageUrl}
-            width={1000}
-            height={1000}
-            alt={alternativeText}
-          />
-        )}
-
-        <div
-          className="remove-icon-container"
-          onClick={() => removeFromWishlist(id)}
-        >
-          <Image
-            className="remove-icon"
-            src="/icons/trash-icon.svg"
-            width={30}
-            height={30}
-            alt="remove item"
-          />
-        </div>
-      </div>
-      <div className="shop-items-details">
-        <h2 className="name">{name}</h2>
-        <p className="price">£{price}</p>
-
-        <div className="stars">
-          {starsArray.length > 0 && starsArray.map((star) => star)}
-        </div>
-
-        <div className="small-container">
-          <div className="age-container">
-            <img src="/icons/cake-icon.svg" alt="cake" />
-            <p>{age}+</p>
-          </div>
-          <div className="pieces-container">
-            <img src="/icons/puzzle-icon.svg" alt="puzzle" />
-            <p>{pieces}</p>
-          </div>
-          <div className="category-container">
-            <img src="/icons/category-icon.svg" alt="category" />
-            <p>{category}</p>
-          </div>
-        </div>
-      </div>
-      <button className="add-to-bag-button">Add to bag</button>
-    </div>
+    <>
+      <ShopItem shopItem={item} />
+    </>
   );
 };
 
-export default ShopItem;
+export default ShopItemBag;
