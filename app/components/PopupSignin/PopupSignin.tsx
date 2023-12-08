@@ -39,10 +39,6 @@ const PopupSignin = () => {
             <button>Sign In</button>
           </Link>
           <div className="small-text">
-            {/* <p>
-            To create or access a wish list, please sign in to your Limited
-            Edition Bricks Hub account
-          </p> */}
             <p>
               Don&apos;t have an account?
               <Link href="/register">Register</Link>

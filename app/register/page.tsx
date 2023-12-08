@@ -325,20 +325,6 @@ const RegisterPage = () => {
                 <div className="error">{errorMessages.country}</div>
               )}
             </div>
-
-            {/* <div>
-              <label htmlFor="birthdate">Birthdate:</label>
-              <input
-                type="date"
-                id="birthdate"
-                name="birthdate"
-                value={formData.birthdate}
-                onChange={handleChange}
-              />
-              {errorMessages.age && (
-                <div className="error">{errorMessages.age}</div>
-              )}
-            </div> */}
           </fieldset>
           {error && <p style={{ color: "red" }}>{error}</p>}
           <button type="submit">Yes, create account!</button>

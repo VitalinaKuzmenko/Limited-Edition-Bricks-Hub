@@ -2,7 +2,6 @@
 import "./PopupBag.css";
 import { useRecoilState } from "recoil";
 import { isPopupBagOpenState } from "@/app/recoil/atoms";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const PopupBag = () => {

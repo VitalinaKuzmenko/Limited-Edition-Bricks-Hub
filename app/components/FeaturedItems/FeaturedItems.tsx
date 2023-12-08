@@ -4,15 +4,9 @@ import "./FeaturedItems.css";
 import ShopItem from "./components/ShopItem";
 import Line from "../Line/Line";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
-import { useMutation } from "@apollo/client";
 import ReactLoading from "react-loading";
 import { useState, useEffect } from "react";
-import {
-  GET_TOP_RATED_SHOP_ITEMS,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
-  GET_WISHLIST_ITEMS,
-} from "@/app/graphql/frontendSchema";
+import { GET_TOP_RATED_SHOP_ITEMS } from "@/app/graphql/frontendSchema";
 import { useRecoilState } from "recoil";
 import { currentUserState, wishlistItemsState } from "@/app/recoil/atoms";
 
@@ -56,19 +50,6 @@ const FeaturedItems = () => {
     }
   }, [currentUser]);
 
-  // const {
-  //   loading: wishlistLoading,
-  //   error: wishlistError,
-  //   data: wishlistData,
-  // } = useQuery(GET_WISHLIST_ITEMS, {
-  //   variables: {
-  //     userId: currentUser?.uid,
-  //   },
-  // });
-
-  // const [addToWishlist] = useMutation(ADD_TO_WISHLIST);
-  // const [removeFromWishlist] = useMutation(REMOVE_FROM_WISHLIST);
-
   //fetch shop items from db
   useEffect(() => {
     if (!shopItemsLoading && !shopItemsError && shopItemsData) {
@@ -77,14 +58,6 @@ const FeaturedItems = () => {
     }
     setShopLoading(shopItemsLoading);
   }, [shopItemsLoading, shopItemsError, shopItemsData]);
-
-  // useEffect(() => {
-  //   if (!wishlistLoading && !wishlistError && wishlistData) {
-  //     const products: ShopItemObject[] = wishlistData.getWishlistItems;
-  //     setWishListItems(products);
-  //   }
-  //   setShopLoading(wishlistLoading);
-  // }, [wishlistLoading, shopItemsError, shopItemsData]);
 
   if (shopItemsError) return `Error: ${shopItemsError.message}`;
   console.log("home wishlist", wishlistItems);
@@ -100,9 +73,6 @@ const FeaturedItems = () => {
               key={index}
               shopItem={shopItem}
               allShopItems={featuredShopItems}
-              // wishlistItems={wishlistItems}
-              // addToWishlist={addToWishlist}
-              // removeFromWishlist={removeFromWishlist}
             />
           ))
         ) : (

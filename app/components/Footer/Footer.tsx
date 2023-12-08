@@ -62,7 +62,7 @@ const Footer = () => {
       </form>
       <p className="footer-bottom-text">
         Made with 💙
-        <br></br> This website was created for strictly educational purposes.
+        <br /> This website was created for strictly educational purposes.
       </p>
     </footer>
   );

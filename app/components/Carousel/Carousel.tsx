@@ -2,7 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Carousel.css"; // this has to be after the css imports above to override the defaults
+import "./Carousel.css";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image";

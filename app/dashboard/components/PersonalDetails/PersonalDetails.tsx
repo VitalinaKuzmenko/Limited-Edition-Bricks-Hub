@@ -1,35 +1,9 @@
 "use client";
 import "./PersonalDetails.css";
 import { useEffect, useState } from "react";
-import { gql } from "@apollo/client";
-import { useApolloClient } from "@apollo/client";
 import { useRecoilState } from "recoil";
 import { currentUserState } from "@/app/recoil/atoms";
 import { auth } from "@/firebaseConfig";
-import { useQuery } from "@apollo/client";
-
-export const UPDATE_USER_BY_UID = gql`
-  mutation updateUserByUid(
-    $uid: String!
-    $name: String
-    $surname: String
-    $avatarPath: String
-  ) {
-    updateUserByUid(
-      uid: $uid
-      name: $name
-      surname: $surname
-      avatarPath: $avatarPath
-    ) {
-      id
-      uid
-      name
-      surname
-      email
-      avatarPath
-    }
-  }
-`;
 
 export interface User {
   uid: string;
@@ -63,7 +37,6 @@ const PersonalDetails = () => {
     email: false,
     avatarPath: false,
   });
-  const client = useApolloClient();
 
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
@@ -75,12 +48,6 @@ const PersonalDetails = () => {
       }
     });
   }, []);
-
-  const handleEditClick = (field: keyof EditingStatus) => {
-    const updatedEditing = { ...isEditing };
-    updatedEditing[field] = true;
-    setIsEditing(updatedEditing);
-  };
 
   const handleCancelClick = (field: keyof EditingStatus) => {
     const updatedEditing = { ...isEditing };
@@ -99,25 +66,6 @@ const PersonalDetails = () => {
     const updatedEditing = { ...isEditing };
     updatedEditing[field] = false;
     setIsEditing(updatedEditing);
-
-    // if (user) {
-    //   const updatedUser = { ...user };
-    //   updatedUser[field] = initialUser[field];
-    //   setUser(updatedUser);
-
-    //   //update field client
-    //   client
-    //     .mutate({
-    //       mutation: UPDATE_USER_BY_UID,
-    //       variables: { [field]: initialUser[field] },
-    //     })
-    //     .then((result) => {
-    //       console.log("value was updated.");
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //     });
-    // }
   };
 
   const handleInputChange = (
@@ -157,18 +105,12 @@ const PersonalDetails = () => {
       <div className="details-container">
         <div className="details-small-container">
           <p className="name">Name</p>
-          {/* <p className="change" onClick={() => handleEditClick("name")}>
-            Change
-          </p> */}
         </div>
         {renderField("name")}
       </div>
       <div className="details-container">
         <div className="details-small-container">
           <p className="name">Surname</p>
-          {/* <p className="change" onClick={() => handleEditClick("surname")}>
-            Change
-          </p> */}
         </div>
         {renderField("surname")}
       </div>
@@ -186,15 +128,6 @@ const PersonalDetails = () => {
           Reset a password
         </p>
       </div>
-      {/* <div className="details-container">
-        <div className="details-small-container">
-          <p className="name">Avatar</p>
-          <p className="change" onClick={() => handleEditClick("avatarPath")}>
-            Change
-          </p>
-        </div>
-        {renderField("avatarPath")}
-      </div> */}
     </div>
   );
 };

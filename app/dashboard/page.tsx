@@ -9,7 +9,6 @@ import {
   wishlistItemsState,
 } from "../recoil/atoms";
 import { useEffect, useState, ChangeEvent } from "react";
-import items from "../../fakeData/fakeShopFeaturedItems.json";
 import ShopItemBag from "./components/ShopItemBag/ShopItemBag";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import LogOut from "./components/LogOut/LogOut";

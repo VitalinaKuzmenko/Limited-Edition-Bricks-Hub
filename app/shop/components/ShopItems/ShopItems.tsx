@@ -2,7 +2,6 @@
 import "./ShopItems.css";
 import { ShopItemObject } from "@/app/components/FeaturedItems/FeaturedItems";
 import ShopItem from "@/app/components/FeaturedItems/components/ShopItem";
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
