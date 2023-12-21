@@ -17,7 +17,7 @@ const ContactUsForm = () => {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setResult("Sending");
-    setIsSubmitting(true); // Disable the submit button
+    setIsSubmitting(true);
 
     //TODO: do something with data from form
     if (formRef.current) {
